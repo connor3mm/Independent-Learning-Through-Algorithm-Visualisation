@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { apiTester, apiTesterAddOne } from "./api/ApiEndpoints";
+import { apiTester, apiTesterAddOne, bubbleSort } from "./api/ApiEndpoints";
 import WeatherForecast from "./models/WeatherForecast";
 
 function App() {
   const [count, setCount] = useState(0);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [weatherForecast, setWeatherForecast] = useState<WeatherForecast[]>([]);
+  const [bubbleData, setBubbleData] = useState<number[]>([]);
+  const origin = window.location.origin;
+  
   
   useEffect(() => {
  
@@ -24,7 +27,23 @@ function App() {
       }
     }
     fetchData();
-  }, []);
+  
+  
+  
+  async function fetchBubbleData() {
+    try {
+      await bubbleSort()
+      .then((data) => {
+        setBubbleData(data); 
+        setLoading(false);
+        console.log(data);
+      });
+    } catch (error) {
+       setLoading(false);
+    }
+  }
+  fetchBubbleData();
+}, []);
 
   async function addOne(count: number) {
     try {
@@ -41,6 +60,7 @@ function App() {
       ) : (
         <>
           <div>
+          <p>Origin: {origin}</p>
             <a href="https://vitejs.dev" target="_blank">
               <img src={viteLogo} className="logo" alt="Vite logo" />
             </a>
