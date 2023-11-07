@@ -1294,11 +1294,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\conno\\Documents\\University Dissertation\\BackEnd\\API-University-Dissertation\\API-University-Dissertation.csproj",
+      "projectUniqueName": "C:\\Users\\conno\\OneDrive - University of Strathclyde\\Fourth Year\\CS408 - Individual project\\University Dissertation\\BackEnd\\API-University-Dissertation\\API-University-Dissertation.csproj",
       "projectName": "API-University-Dissertation",
-      "projectPath": "C:\\Users\\conno\\Documents\\University Dissertation\\BackEnd\\API-University-Dissertation\\API-University-Dissertation.csproj",
+      "projectPath": "C:\\Users\\conno\\OneDrive - University of Strathclyde\\Fourth Year\\CS408 - Individual project\\University Dissertation\\BackEnd\\API-University-Dissertation\\API-University-Dissertation.csproj",
       "packagesPath": "C:\\Users\\conno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\conno\\Documents\\University Dissertation\\BackEnd\\API-University-Dissertation\\obj\\",
+      "outputPath": "C:\\Users\\conno\\OneDrive - University of Strathclyde\\Fourth Year\\CS408 - Individual project\\University Dissertation\\BackEnd\\API-University-Dissertation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\conno\\AppData\\Roaming\\NuGet\\NuGet.Config"
