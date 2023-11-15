@@ -1,4 +1,7 @@
 using API_University_Dissertation.Data;
+using API_University_Dissertation.Interfaces;
+using API_University_Dissertation.Services;
+using API_University_Dissertation.Strategies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAuthentication();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<DataContext>();
 
@@ -26,6 +30,10 @@ builder.Services.AddCors(options =>
                 .AllowAnyMethod();
         });
 });
+
+builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
+builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
+builder.Services.AddScoped<SortingAlgorithmService>();
 
 var app = builder.Build();
 app.UseRouting();
