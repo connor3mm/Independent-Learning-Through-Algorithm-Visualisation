@@ -23,7 +23,7 @@ public class SortingAlgorithmController : ControllerBase
     {
         try
         {
-            arr = new int[] { 9, 5, 2, 7, 1 };
+            arr = new int[] { 1, 2, 3 , 4, 5 };
             return Ok(_sortingService.SortingAlgorithm(SortingStrategy.BubbleSort, arr));
         }
         catch (Exception ex)

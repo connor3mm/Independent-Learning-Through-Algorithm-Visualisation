@@ -33,7 +33,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
 builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
-builder.Services.AddScoped<SortingAlgorithmService>();
+builder.Services.AddScoped<ISortingAlgorithmService, SortingAlgorithmService>();
 
 var app = builder.Build();
 app.UseRouting();
