@@ -14,6 +14,7 @@ public class SortingAlgorithmService(IEnumerable<ISortingStrategy> strategies) :
     {
         var selectedStrategy =
             strategies.FirstOrDefault(strategy => strategy.GetType().Name == sortingStrategy.ToString());
+        
         if (selectedStrategy == null)
         {
             throw new ArgumentException("Invalid strategy");

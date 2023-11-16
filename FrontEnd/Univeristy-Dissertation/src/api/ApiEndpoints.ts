@@ -17,9 +17,9 @@ export const apiTesterAddOne = async (count: number) => {
   return count + 1;
 };
 
-export const bubbleSort = async () => {
+export const bubbleSort = async (data: number[]) => {
   try {
-    const response = await api.get(`sortingAlgorithm/bubblesort`);
+    const response = await api.post(`sortingAlgorithm/bubblesort/`, data);
     return response;
   } catch (error: any) {
     console.log(error.message);
