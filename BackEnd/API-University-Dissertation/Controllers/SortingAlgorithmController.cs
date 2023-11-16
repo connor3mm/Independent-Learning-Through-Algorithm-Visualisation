@@ -9,21 +9,22 @@ namespace API_University_Dissertation.Controllers;
 public class SortingAlgorithmController : ControllerBase
 {
     private readonly ILogger<SortingAlgorithmController> _logger;
-    private readonly SortingAlgorithmService _sortingService;
+    private readonly ISortingAlgorithmService _sortingService;
 
     public SortingAlgorithmController(ILogger<SortingAlgorithmController> logger,
-        SortingAlgorithmService sortingService)
+        ISortingAlgorithmService sortingService)
     {
         _logger = logger;
         _sortingService = sortingService;
     }
 
-    [HttpGet("bubblesort", Name = "bubbleSort")]
-    public IActionResult BubbleSort()
+    [HttpPost("bubblesort", Name = "bubbleSort")]
+    public IActionResult BubbleSort(int[] arr)
     {
         try
         {
-            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.BubbleSort));
+            arr = new int[] { 9, 5, 2, 7, 1 };
+            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.BubbleSort, arr));
         }
         catch (Exception ex)
         {
@@ -31,12 +32,13 @@ public class SortingAlgorithmController : ControllerBase
         }
     }
 
-    [HttpGet("selectionsort", Name = "selectionsort")]
-    public IActionResult SelectionSort()
+    [HttpPost("selectionsort", Name = "selectionsort")]
+    public IActionResult SelectionSort(int[] arr)
     {
         try
         {
-            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.SelectionSort));
+            arr = new int[] { 9, 5, 2, 7, 1 };
+            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.SelectionSort, arr));
         }
         catch (Exception ex)
         {

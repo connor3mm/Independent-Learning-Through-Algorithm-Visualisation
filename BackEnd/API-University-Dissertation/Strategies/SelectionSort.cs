@@ -5,9 +5,9 @@ namespace API_University_Dissertation.Strategies;
 
 public class SelectionSort : ISortingStrategy
 {
-    public IEnumerable<int> Sort()
+    public IEnumerable<int[]> Sort(int[] arr)
     {
-        int[] selectionSort = { 2 };
+        var selectionSort = new List<int[]> { new []{1} };
         return selectionSort;
     }
 }

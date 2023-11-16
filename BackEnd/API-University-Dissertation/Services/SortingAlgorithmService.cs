@@ -6,17 +6,17 @@ namespace API_University_Dissertation.Services;
 
 public interface ISortingAlgorithmService
 {
-    IEnumerable<int> SortingAlgorithm(SortingStrategy sortingStrategy);
+    IEnumerable<int[]> SortingAlgorithm(SortingStrategy sortingStrategy, int[] arr);
 }
 
 public class SortingAlgorithmService(IEnumerable<ISortingStrategy> strategies) : ISortingAlgorithmService
 {
-    public IEnumerable<int> SortingAlgorithm(SortingStrategy sortingStrategy)
+    public IEnumerable<int[]> SortingAlgorithm(SortingStrategy sortingStrategy, int[] arr)
     {
         var selectedStrategy = strategies.FirstOrDefault(strategy => strategy.GetType().Name == sortingStrategy.ToString());
         CheckValidStrategy(selectedStrategy);
 
-        return selectedStrategy.Sort();
+        return selectedStrategy.Sort(arr);
     }
 
     private void CheckValidStrategy(ISortingStrategy selectedStrategy)
