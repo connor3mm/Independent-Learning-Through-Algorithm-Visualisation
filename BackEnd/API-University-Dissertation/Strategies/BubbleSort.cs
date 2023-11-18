@@ -4,13 +4,13 @@ namespace API_University_Dissertation.Strategies;
 
 public class BubbleSort : ISortingStrategy
 {
-    public IEnumerable<int[]> Sort(int[] arr)
+    public IEnumerable<int[]> Sort(int[] unsortedList)
     {
-        var arrayLength = arr.Length;
+        var arrayLength = unsortedList.Length;
         var currentArray = new int[arrayLength];
-        Array.Copy(arr, currentArray, arrayLength);
+        Array.Copy(unsortedList, currentArray, arrayLength);
 
-        yield return arr;
+        yield return unsortedList;
 
         for (var i = 0; i < arrayLength - 1; i++)
         {

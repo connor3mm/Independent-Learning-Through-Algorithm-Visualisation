@@ -1,59 +1,37 @@
 import { useEffect, useState } from "react";
 import viteLogo from "/vite.svg";
-import { apiTester, apiTesterAddOne, bubbleSort } from "../../api/ApiEndpoints";
-import WeatherForecast from "../../models/WeatherForecast";
+import { bubbleSort } from "../../api/ApiEndpoints";
 import { useNavigate } from "react-router-dom";
+import BubbleSortAnimation from "./BubbleSort/BubbleSort";
 
 
 function SortingVisualiser() {
-  const [count, setCount] = useState(0);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [weatherForecast, setWeatherForecast] = useState<WeatherForecast[]>([]);
-  const [bubbleData, setBubbleData] = useState<number[]>([]);
+  const [bubbleData, setBubbleData] = useState<number[][]>([]);
   const origin = window.location.origin;
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        await apiTester().then((data) => {
-          setWeatherForecast(data);
-          console.log(data);
-        });
-      } catch (error) {}
-    }
-
-    fetchData();
-    setLoading(false);
-
-    async function fetchBubbleData() {
-        const numbers = [5, 2, 9, 1, 5, 6];
-      setLoading(true);
-      try {
-        await bubbleSort(numbers).then((data) => {
-          setBubbleData(data);
-          console.log(data);
-        });
-      } catch (error) {}
-    }
-
-    fetchBubbleData();
-    setLoading(false);
+    setLoading(false)
+    handleBubbleSort()
   }, []);
 
-  async function addOne(count: number) {
+
+const handleBubbleSort = () => {
+    async function fetchBubbleData() {
+      const numbers = [5, 2, 9, 1, 5, 6];
+    setLoading(true);
     try {
-      setCount(await apiTesterAddOne(count));
-    } catch (error) {
-      setLoading(false);
-    }
+      await bubbleSort(numbers).then((data) => {
+        setBubbleData(data);
+      });
+    } catch (error) {}
   }
 
-  const navigate2 = () => {
-    // Navigate to another page
-    navigate('/sortingVisualiser'); // Replace '/another-page' with the path of the page you want to navigate to
+  fetchBubbleData();
+  setLoading(false);
   };
+
 
   return (
     <>
@@ -70,25 +48,9 @@ function SortingVisualiser() {
           </div>
           <h1>Vite + React</h1>
           <div className="card">
-          <button onClick={navigate2}>Go to Another Page</button>
+          <BubbleSortAnimation states={bubbleData} />
+         
           </div>
-
-          <ul>
-            {weatherForecast.map((item, index) => (
-              <li key={index}>
-                <strong>Date:</strong> {item.date}
-                <br />
-                <strong>summary:</strong> {item.summary}
-                <br />
-                <strong>temperatureC:</strong> {item.temperatureC}
-                <br />
-                <strong>temperatureF:</strong> {item.temperatureF}
-                <br />
-                <br />
-                <br />
-              </li>
-            ))}
-          </ul>
         </>
       )}
     </>

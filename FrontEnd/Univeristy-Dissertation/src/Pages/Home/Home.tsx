@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import viteLogo from "/vite.svg";
 import "./Home.css";
-import { apiTester, apiTesterAddOne, bubbleSort } from "../../api/ApiEndpoints";
+import { apiTester, bubbleSort } from "../../api/ApiEndpoints";
 import WeatherForecast from "../../models/WeatherForecast";
 import { useNavigate } from "react-router-dom";
 
 
 function Home() {
-  const [count, setCount] = useState(0);
+
   const [isLoading, setLoading] = useState<boolean>(true);
   const [weatherForecast, setWeatherForecast] = useState<WeatherForecast[]>([]);
   const [bubbleData, setBubbleData] = useState<number[]>([]);
@@ -43,13 +43,6 @@ function Home() {
     setLoading(false);
   }, []);
 
-  async function addOne(count: number) {
-    try {
-      setCount(await apiTesterAddOne(count));
-    } catch (error) {
-      setLoading(false);
-    }
-  }
 
   const navigate2 = () => {
     // Navigate to another page
