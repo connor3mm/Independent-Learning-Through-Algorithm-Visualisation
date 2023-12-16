@@ -1,0 +1,33 @@
+/* NavigationBar.css */
+.navbar {
+  background-color: #333; /* Example background color */
+  padding: 15px 20px; /* Adjust the top and bottom padding for desired height */
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  align-items: center; /* Center items vertically */
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.navbar li:last-child {
+  margin-right: 0;
+}
+
+
+.main-content {
+  margin-top: 70px;
+}

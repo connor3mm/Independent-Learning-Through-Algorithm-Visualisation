@@ -1,53 +1,58 @@
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+
 class ApiService {
-  private baseUrl: string;
+  private axiosInstance: AxiosInstance;
 
   constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-
-  public parse = (data: any) => {
-    try {
-      return JSON.parse(data);
-    } catch (error: any) {
-      throw new Error("Error parsing response data: " + error.message);
-    }
-  };
-
-  private async handleResponse(response: Response) {
-    if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  }
-
-  private async request(method: string, endpoint: string, body?: any) {
-    const requestOptions: RequestInit = {
-      method,
+    this.axiosInstance = axios.create({
+      baseURL: baseUrl,
       headers: {
         "Content-Type": "application/json",
       },
-    };
+    });
+  }
 
-    if (body) {
-      requestOptions.body = JSON.stringify(body);
+  private handleResponse(response: AxiosResponse) {
+    return response.data;
+  }
+
+  private handleError(error: AxiosError) {
+    if (error.response) {
+      throw new Error(`Request failed with status: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Request failed: No response received");
+    } else {
+      throw new Error(`Request failed: ${error.message}`);
     }
+  }
 
-    const response = await fetch(`${this.baseUrl}${endpoint}`, requestOptions);
-    return this.handleResponse(response);
+  private async request(method: string, endpoint: string, data?: any) {
+    try {
+      const response = await this.axiosInstance.request({
+        method,
+        url: endpoint,
+        data,
+      });
+      return this.handleResponse(response);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        this.handleError(error as AxiosError);
+      } else {
+        throw error;
+      }
+    }
   }
 
   async get(endpoint: string) {
-    return this.request("GET", endpoint);
+    return this.request("get", endpoint);
   }
 
-  async post(endpoint: string, body: any) {
-    return this.request("POST", endpoint, body);
+  async post(endpoint: string, data: any) {
+    return this.request("post", endpoint, data);
   }
 
-  async put(endpoint: string, body: any) {
-    return this.request("PUT", endpoint, body);
+  async put(endpoint: string, data: any) {
+    return this.request("put", endpoint, data);
   }
 }
 

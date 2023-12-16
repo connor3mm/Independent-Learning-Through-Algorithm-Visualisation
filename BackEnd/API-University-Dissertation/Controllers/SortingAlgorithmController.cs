@@ -36,7 +36,7 @@ public class SortingAlgorithmController : ControllerBase
     {
         try
         {
-            arr = new int[] { 9, 5, 2, 7, 1 };
+            arr = new[] { 9, 5, 2, 7, 1 };
             return Ok(_sortingService.SortingAlgorithm(SortingStrategy.SelectionSort, arr));
         }
         catch (Exception ex)

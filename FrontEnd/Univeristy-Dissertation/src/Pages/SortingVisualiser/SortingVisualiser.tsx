@@ -41,12 +41,7 @@ const handleBubbleSort = () => {
         <>
           <div>
             <p>Origin: {origin}</p>
-            <a href="https://vitejs.dev" target="_blank">
-              <img src={viteLogo} className="logo" alt="Vite logo" />
-            </a>
-            <a href="https://react.dev" target="_blank"></a>
           </div>
-          <h1>Vite + React</h1>
           <div className="card">
           <BubbleSortAnimation states={bubbleData} />
          

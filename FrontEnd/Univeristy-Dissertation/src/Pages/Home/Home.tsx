@@ -46,7 +46,7 @@ function Home() {
 
   const navigate2 = () => {
     // Navigate to another page
-    navigate('/sortingVisualiser'); // Replace '/another-page' with the path of the page you want to navigate to
+    navigate('/sortingVisualiser'); 
   };
 
   return (
@@ -64,7 +64,7 @@ function Home() {
           </div>
           <h1>Vite + React</h1>
           <div className="card">
-          <button onClick={navigate2}>Go to Another Page</button>
+          <button className="homeButton"  onClick={navigate2}>Go to Another Page</button>
           </div>
 
           <ul>
