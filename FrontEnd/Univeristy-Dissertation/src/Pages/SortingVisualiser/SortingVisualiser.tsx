@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import viteLogo from "/vite.svg";
 import { bubbleSort } from "../../api/ApiEndpoints";
-import { useNavigate } from "react-router-dom";
 import BubbleSortAnimation from "./BubbleSort/BubbleSort";
 
 
@@ -9,7 +7,6 @@ function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [bubbleData, setBubbleData] = useState<number[][]>([]);
   const origin = window.location.origin;
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(false)

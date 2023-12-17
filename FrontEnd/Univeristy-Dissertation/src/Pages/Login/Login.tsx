@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { userLogin } from '../../api/ApiEndpoints';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -8,11 +9,23 @@ const Login = () => {
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
-    console.log('Username:', username);
-    console.log('Password:', password);
+    apiCall()
+
     setUsername('');
     setPassword('');
   };
+
+  const apiCall = () => {
+    async function login() {
+    try {
+      await userLogin(username, password).then((data) => {
+        console.log(data)
+      });
+    } catch (error) {}
+  }
+  login()
+  };
+
 
   return (
     <div>

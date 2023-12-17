@@ -5,19 +5,10 @@ const NavigationBar = () => {
   return (
     <nav>
       <ul className="navbar">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/sortingVisualiser">Sorting Visualiser</Link>
-        </li>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        {/* Add other navigation links */}
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/sortingVisualiser">Sorting Visualiser</Link></li>
+        <li className='rightButton'><Link to="/register">Register</Link></li>
+        <li className='rightButton'><Link to="/login">Login</Link></li>
       </ul>
     </nav>
   );

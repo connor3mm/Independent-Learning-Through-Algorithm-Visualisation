@@ -8,7 +8,6 @@ interface RegisterFormData {
 }
 
 const Register: React.FC = () => {
-  // State to manage user registration data
   const [formData, setFormData] = useState<RegisterFormData>({
     fullName: '',
     email: '',
@@ -16,24 +15,13 @@ const Register: React.FC = () => {
     confirmPassword: '',
   });
 
-  // Function to handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Check if passwords match
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match. Please re-enter.");
       return;
     }
-    // Perform registration logic using form data
-    // Example: You might call an API to register the user
-    console.log('Form Data:', formData);
-    // Clear input fields after form submission
-    setFormData({
-      fullName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
   };
 
   const handleChange = (

@@ -1,6 +1,5 @@
 using API_University_Dissertation.Enums;
 using API_University_Dissertation.Interfaces;
-
 namespace API_University_Dissertation.Services;
 
 public interface ISortingAlgorithmService

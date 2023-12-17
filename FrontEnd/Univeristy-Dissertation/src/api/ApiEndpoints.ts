@@ -19,3 +19,12 @@ export const bubbleSort = async (data: number[]) => {
     console.log(error.message);
   }
 };
+
+export const userLogin = async (email: string, password: string) => {
+  try {
+    const response = await api.post("login", { email, password });
+    return response;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
