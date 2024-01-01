@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { registerUser } from '../../api/ApiEndpoints';
 
 interface RegisterFormData {
   fullName: string;
@@ -14,14 +15,29 @@ const Register: React.FC = () => {
     password: '',
     confirmPassword: '',
   });
+  
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match. Please re-enter.");
       return;
     }
+
+    try {
+      const data = await registerUser(formData.email, formData.password);
+      if(data.status !== 400){
+        console.log(data);
+        setRegistrationSuccess(true);
+  
+      }
+     
+    } catch (error) {
+      console.error(error);
+    }
+  
   };
 
   const handleChange = (
@@ -36,9 +52,11 @@ const Register: React.FC = () => {
 
   return (
     <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+      {!registrationSuccess ? (
         <div>
+          <h2>Register</h2>
+          <form onSubmit={handleSubmit}>
+          <div>
           <label htmlFor="fullName">Full Name:</label>
           <input
             type="text"
@@ -74,8 +92,14 @@ const Register: React.FC = () => {
             onChange={(e) => handleChange(e, 'confirmPassword')}
           />
         </div>
-        <button type="submit">Register</button>
-      </form>
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      ) : (
+        <div>
+          <h2>Registration Successful!</h2>
+        </div>
+      )}
     </div>
   );
 };

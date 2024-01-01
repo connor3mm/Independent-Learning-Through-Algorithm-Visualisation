@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { bubbleSort } from "../../api/ApiEndpoints";
-import BubbleSortAnimation from "./BubbleSort/BubbleSort";
+import SortAnimation from "../../components/SortingAlgorithmVisualiser/AlgorithmAnimation";
+import "./SortingVisualiser.css"
 
 
 function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [bubbleData, setBubbleData] = useState<number[][]>([]);
-  const origin = window.location.origin;
 
   useEffect(() => {
     setLoading(false)
@@ -36,12 +36,12 @@ const handleBubbleSort = () => {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <div>
-            <p>Origin: {origin}</p>
+          <div className="sortAnimationContainer">
+            <div className="algorithmBox"> 
+          <SortAnimation states={bubbleData} />
           </div>
-          <div className="card">
-          <BubbleSortAnimation states={bubbleData} />
-         
+          <div className="algorithmBox"> 
+          </div>
           </div>
         </>
       )}

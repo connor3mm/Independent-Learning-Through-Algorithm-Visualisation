@@ -1,31 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { userLogin } from '../../api/ApiEndpoints';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+interface LoginProps {
+  handleLogin: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ handleLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      handleLogin()
+      navigate('/');
+    }
+  }, [navigate]);
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
-    apiCall()
-
-    setUsername('');
-    setPassword('');
-  };
-
-  const apiCall = () => {
-    async function login() {
     try {
-      await userLogin(username, password).then((data) => {
-        console.log(data)
-      });
-    } catch (error) {}
-  }
-  login()
+      const data = await userLogin(username, password);
+      localStorage.setItem('loggedInUser', JSON.stringify(data));
+      handleLogin()
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+    
+    }
   };
-
 
   return (
     <div>

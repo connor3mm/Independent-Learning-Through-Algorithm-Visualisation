@@ -1,52 +1,22 @@
 import { useEffect, useState } from "react";
-import viteLogo from "/vite.svg";
 import "./Home.css";
-import { apiTester, bubbleSort } from "../../api/ApiEndpoints";
-import WeatherForecast from "../../models/WeatherForecast";
 import { useNavigate } from "react-router-dom";
-
+import mascot from "../../components/Images/Sloth-removebg-FixedBG.png";
 
 function Home() {
-
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [weatherForecast, setWeatherForecast] = useState<WeatherForecast[]>([]);
-  const [bubbleData, setBubbleData] = useState<number[]>([]);
-  const origin = window.location.origin;
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        await apiTester().then((data) => {
-          setWeatherForecast(data);
-          console.log(data);
-        });
-      } catch (error) {}
-    }
-
-    fetchData();
-    setLoading(false);
-
-    async function fetchBubbleData() {
-      const numbers = [5, 2, 9, 1, 5, 6];
-      setLoading(true);
-      try {
-        await bubbleSort(numbers).then((data) => {
-          setBubbleData(data);
-          console.log(data);
-        });
-      } catch (error) {}
-    }
-
-    fetchBubbleData();
     setLoading(false);
   }, []);
 
+  const sortingVisualiserNav = () => {
+    navigate("/sortingVisualiser");
+  };
 
-  const navigate2 = () => {
-    // Navigate to another page
-    navigate('/sortingVisualiser'); 
+  const profileNav = () => {
+    navigate("/profile");
   };
 
   return (
@@ -55,34 +25,32 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <div>
-            <p>Origin: {origin}</p>
-            <a href="https://vitejs.dev" target="_blank">
-              <img src={viteLogo} className="logo" alt="Vite logo" />
-            </a>
-            <a href="https://react.dev" target="_blank"></a>
-          </div>
-          <h1>Vite + React</h1>
-          <div className="card">
-          <button className="homeButton"  onClick={navigate2}>Go to Another Page</button>
-          </div>
+          <h1>Welcome to Alogrithm Visualiser!</h1>
+          <div className="homeContainer">
+            <div className="mascotContainer">
+              <img src={mascot} alt="Sloth-Application Mascot" />
+            </div>
 
-          <ul>
-            {weatherForecast.map((item, index) => (
-              <li key={index}>
-                <strong>Date:</strong> {item.date}
-                <br />
-                <strong>summary:</strong> {item.summary}
-                <br />
-                <strong>temperatureC:</strong> {item.temperatureC}
-                <br />
-                <strong>temperatureF:</strong> {item.temperatureF}
-                <br />
-                <br />
-                <br />
-              </li>
-            ))}
-          </ul>
+            <div className="buttonCard">
+              <div className="buttonCardContainer">
+                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                  Sorting Visualiser
+                </button>
+                <button className="homeButtons" onClick={profileNav}>
+                  My Profile
+                </button>
+              </div>
+
+              <div className="buttonCardContainer2">
+                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                  Learning Zone
+                </button>
+                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                  Testing Zone
+                </button>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
-import "./BubbleSort.css";
+import "./AlgorithmAnimation.css";
 
-interface BubbleSortAnimationProps {
+interface AlgorithmAnimationProps {
   states: number[][];
 }
 
-const BubbleSortAnimation: React.FC<BubbleSortAnimationProps> = ({
+const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
   states,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -46,7 +46,7 @@ const BubbleSortAnimation: React.FC<BubbleSortAnimationProps> = ({
               labels: states[currentStep].map(String),
               datasets: [
                 {
-                  label: "Bubble Sort Visualization",
+                  label: '',
                   data: states[0],
                   backgroundColor: "rgba(54, 162, 235, 0.5)",
                   borderColor: "rgba(54, 162, 235, 1)",
@@ -62,6 +62,9 @@ const BubbleSortAnimation: React.FC<BubbleSortAnimationProps> = ({
                 },
               },
               plugins: {
+                legend: {
+                  display: false,
+                },
                 tooltip: {
                   enabled: false,
                 },
@@ -74,11 +77,11 @@ const BubbleSortAnimation: React.FC<BubbleSortAnimationProps> = ({
   }, [currentStep, states]);
 
   return (
-    <div className="bubble-sort-container">
+    <div className="sort-container">
       <h2>Bubble Sort Visualization</h2>
-      <canvas ref={chartRef} className="bubble-sort-chart"></canvas>
+      <canvas ref={chartRef} className="sort-chart"></canvas>
     </div>
   );
 };
 
-export default BubbleSortAnimation;
+export default AlgorithmAnimation;

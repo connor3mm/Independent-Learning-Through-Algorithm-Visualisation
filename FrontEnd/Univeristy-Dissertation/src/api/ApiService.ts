@@ -18,7 +18,10 @@ class ApiService {
 
   private handleError(error: AxiosError) {
     if (error.response) {
-      throw new Error(`Request failed with status: ${error.response.status}`);
+      const { status, data } = error.response;
+      throw new Error(
+        `Request failed with status: ${status} - ${JSON.stringify(data)}`
+      );
     } else if (error.request) {
       throw new Error("Request failed: No response received");
     } else {
