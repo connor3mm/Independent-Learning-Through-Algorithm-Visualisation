@@ -1,7 +1,7 @@
+using API_University_Dissertation.Application.Strategies;
+using API_University_Dissertation.Core.Services.Interfaces;
+using API_University_Dissertation.Core.Services.Services;
 using API_University_Dissertation.Data;
-using API_University_Dissertation.Interfaces;
-using API_University_Dissertation.Services;
-using API_University_Dissertation.Strategies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

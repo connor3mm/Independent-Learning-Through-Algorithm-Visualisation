@@ -15,7 +15,7 @@
     flex: 1;
   }
   
-  .buttonCard {
+  .buttonContainer {
     flex: 1;
     padding: 2em;
     display: flex;
@@ -29,14 +29,14 @@
   }
 
   .homeButtons {
-    /* background-image: linear-gradient(to bottom, #2BC0E4 0%, #EAECC6  20%, #2BC0E4  100%); */
-    background: linear-gradient(
+    background-image: linear-gradient(to bottom, #2BC0E4 0%, #EAECC6  20%, #2BC0E4  100%);
+    /* background: linear-gradient(
       to right,
       pink 0%,
       pink 33.33%, 
       paleturquoise 33.33%,
       paleturquoise 100%
-  );
+  ); */
   
     padding: 5%;
     text-align: center;

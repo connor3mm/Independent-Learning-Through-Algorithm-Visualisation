@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import mascot from "../../components/Images/Sloth-removebg-FixedBG.png";
+import FlexButton from "../../components/FlexButton/FlexButton";
 
 function Home() {
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -31,7 +32,7 @@ function Home() {
               <img src={mascot} alt="Sloth-Application Mascot" />
             </div>
 
-            <div className="buttonCard">
+            <div className="buttonContainer">
               <div className="buttonCardContainer">
                 <button className="homeButtons" onClick={sortingVisualiserNav}>
                   Sorting Visualiser
@@ -48,6 +49,7 @@ function Home() {
                 <button className="homeButtons" onClick={sortingVisualiserNav}>
                   Testing Zone
                 </button>
+                {/* <FlexButton></FlexButton> */}
               </div>
             </div>
           </div>

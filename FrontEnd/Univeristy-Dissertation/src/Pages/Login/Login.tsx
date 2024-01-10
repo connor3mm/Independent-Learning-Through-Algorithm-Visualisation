@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import { userLogin } from '../../api/ApiEndpoints';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { userLogin } from "../../api/ApiEndpoints";
+import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
   handleLogin: () => void;
 }
 
 const Login: React.FC<LoginProps> = ({ handleLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedInUser');
+    const loggedInUser = localStorage.getItem("loggedInUser");
     if (loggedInUser) {
-      handleLogin()
-      navigate('/');
+      handleLogin();
+      navigate("/");
     }
   }, [navigate]);
 
@@ -23,12 +23,11 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     event.preventDefault();
     try {
       const data = await userLogin(username, password);
-      localStorage.setItem('loggedInUser', JSON.stringify(data));
-      handleLogin()
-      navigate('/');
+      localStorage.setItem("loggedInUser", JSON.stringify(data));
+      handleLogin();
+      navigate("/");
     } catch (error) {
-      console.error('Login failed:', error);
-    
+      console.error("Login failed:", error);
     }
   };
 

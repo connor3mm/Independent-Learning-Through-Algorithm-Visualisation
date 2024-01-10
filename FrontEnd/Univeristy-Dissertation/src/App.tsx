@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SortingVisualiser from "./pages/SortingVisualiser/SortingVisualiser";
-import NavigationBar from './components/Navigation/NavigationBar'
+import NavigationBar from "./components/Navigation/NavigationBar";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
@@ -16,18 +16,18 @@ function App() {
   };
 
   const handleLogout = () => {
-    const confirmLogout = window.confirm('Are you sure you want to log out?');
-  
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+
     if (confirmLogout) {
       setIsLoggedIn(false);
-      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem("loggedInUser");
     }
   };
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedInUser');
+    const loggedInUser = localStorage.getItem("loggedInUser");
     if (loggedInUser) {
-      handleLogin()
+      handleLogin();
     }
   }, []);
 
@@ -41,7 +41,10 @@ function App() {
             <Route path="/sortingVisualiser" element={<SortingVisualiser />} />
             {!isLoggedIn && (
               <>
-                <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+                <Route
+                  path="/login"
+                  element={<Login handleLogin={handleLogin} />}
+                />
                 <Route path="/register" element={<Register />} />
               </>
             )}

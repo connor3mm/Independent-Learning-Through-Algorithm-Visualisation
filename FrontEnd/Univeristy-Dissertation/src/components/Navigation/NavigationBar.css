@@ -3,26 +3,46 @@
 }
 
 .navbar {
-  background-color: #1c163a;;
+  display: flex;
+  background-color: #1c163a;
   padding: 15px 20px;
   margin: 0;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
 }
 
 .navbar li {
   display: inline-block;
-  margin-right: 1%;
   color: white;
 }
 
+.firstNavSection{
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
 
-.rightButton {
-margin-left: auto;
+.firstNavSection li {
+  display: inline-block;
+  margin-right: 5%;
+  color: white;
+}
+
+.secondNavSection {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  background-color: #1c163a;
+  padding: 15px 20px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.secondNavSection li{
+  margin-right: 1%;
+  margin-left: 1%;
 }
 
   a {

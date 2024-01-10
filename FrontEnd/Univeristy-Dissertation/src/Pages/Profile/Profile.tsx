@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface UserProfile {
   accessToken: string;
@@ -6,16 +7,16 @@ interface UserProfile {
 
 const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  
-  
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedInUser');
+  const navigate = useNavigate();
 
-  if (loggedInUser) {
-    const user = JSON.parse(loggedInUser);
-    setUserProfile(user)
-    console.log('User data:', user);
-  }
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      setUserProfile(user);
+      console.log("User data:", user);
+    }
   }, []);
 
   return (
@@ -26,7 +27,16 @@ const Profile: React.FC = () => {
           <p>Email: {userProfile.accessToken}</p>
         </div>
       ) : (
-        <><p>Profile not found</p><p>Please Register or Log In</p></>
+        <>
+          <p>Profile not found</p>
+          <p>Please Register or Log In</p>
+          <div>
+            <button onClick={() => navigate("/register")}> Register</button>
+          </div>
+          <div>
+            <button onClick={() => navigate("login")}> Log In</button>
+          </div>
+        </>
       )}
     </div>
   );

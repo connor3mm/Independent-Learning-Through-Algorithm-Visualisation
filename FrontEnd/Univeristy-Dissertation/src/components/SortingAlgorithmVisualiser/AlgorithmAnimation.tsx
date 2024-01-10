@@ -4,10 +4,14 @@ import "./AlgorithmAnimation.css";
 
 interface AlgorithmAnimationProps {
   states: number[][];
+  speed: number;
+  isPlaying: boolean;
 }
 
 const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
   states,
+  speed,
+  isPlaying,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const chartRef = useRef<HTMLCanvasElement | null>(null);
@@ -17,10 +21,10 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
     let animation: NodeJS.Timeout;
 
     const playAnimation = () => {
-      if (currentStep < states.length - 1) {
+      if (isPlaying && currentStep < states.length - 1) {
         animation = setTimeout(() => {
           setCurrentStep((prevStep) => prevStep + 1);
-        }, 1000); // Interval Duration, maybe find a calculation for longer lists
+        }, speed);
       }
     };
 
@@ -29,7 +33,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
     return () => {
       clearTimeout(animation);
     };
-  }, [currentStep, states]);
+  }, [currentStep, states, speed, isPlaying]);
 
   useEffect(() => {
     if (chartRef.current && states[currentStep]) {
@@ -46,7 +50,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
               labels: states[currentStep].map(String),
               datasets: [
                 {
-                  label: '',
+                  label: "",
                   data: states[0],
                   backgroundColor: "rgba(54, 162, 235, 0.5)",
                   borderColor: "rgba(54, 162, 235, 1)",
@@ -78,7 +82,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
 
   return (
     <div className="sort-container">
-      <h2>Bubble Sort Visualization</h2>
+      <h2>Bubble Sort Visualisation</h2>
       <canvas ref={chartRef} className="sort-chart"></canvas>
     </div>
   );
