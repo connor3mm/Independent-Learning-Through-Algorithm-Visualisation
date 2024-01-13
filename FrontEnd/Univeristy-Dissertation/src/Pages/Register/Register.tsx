@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { registerUser } from '../../api/ApiEndpoints';
+import React, { useState } from "react";
+import { registerUser } from "../../services/api/ApiEndpoints";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {
   fullName: string;
@@ -9,13 +10,14 @@ interface RegisterFormData {
 }
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<RegisterFormData>({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  
+
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,16 +30,13 @@ const Register: React.FC = () => {
 
     try {
       const data = await registerUser(formData.email, formData.password);
-      if(data.status !== 400){
+      if (data.status !== 400) {
         console.log(data);
         setRegistrationSuccess(true);
-  
       }
-     
     } catch (error) {
       console.error(error);
     }
-  
   };
 
   const handleChange = (
@@ -56,49 +55,54 @@ const Register: React.FC = () => {
         <div>
           <h2>Register</h2>
           <form onSubmit={handleSubmit}>
-          <div>
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            id="fullName"
-            value={formData.fullName}
-            onChange={(e) => handleChange(e, 'fullName')}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={formData.email}
-            onChange={(e) => handleChange(e, 'email')}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={(e) => handleChange(e, 'password')}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={(e) => handleChange(e, 'confirmPassword')}
-          />
-        </div>
+            <div>
+              <label htmlFor="fullName">Full Name:</label>
+              <input
+                type="text"
+                id="fullName"
+                value={formData.fullName}
+                onChange={(e) => handleChange(e, "fullName")}
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={(e) => handleChange(e, "email")}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                value={formData.password}
+                onChange={(e) => handleChange(e, "password")}
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={(e) => handleChange(e, "confirmPassword")}
+              />
+            </div>
             <button type="submit">Register</button>
           </form>
         </div>
       ) : (
-        <div>
-          <h2>Registration Successful!</h2>
-        </div>
+        <>
+          <div>
+            <h2>Registration Successful!</h2>
+          </div>
+          <div>
+            <button onClick={() => navigate("/login")}> Log In</button>
+          </div>
+        </>
       )}
     </div>
   );

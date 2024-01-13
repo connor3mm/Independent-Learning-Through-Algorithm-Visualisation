@@ -42,9 +42,9 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
         chartInstance.current.data.datasets[0].data = states[currentStep];
         chartInstance.current.update();
       } else {
-        const ctx = chartRef.current.getContext("2d");
-        if (ctx) {
-          chartInstance.current = new Chart(ctx, {
+        const context = chartRef.current.getContext("2d");
+        if (context) {
+          chartInstance.current = new Chart(context, {
             type: "bar",
             data: {
               labels: states[currentStep].map(String),

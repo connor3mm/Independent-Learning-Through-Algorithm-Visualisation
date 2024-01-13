@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
             <button onClick={() => navigate("/register")}> Register</button>
           </div>
           <div>
-            <button onClick={() => navigate("login")}> Log In</button>
+            <button onClick={() => navigate("/login")}> Log In</button>
           </div>
         </>
       )}

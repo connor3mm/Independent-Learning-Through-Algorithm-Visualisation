@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { bubbleSort } from "../../api/ApiEndpoints";
-import SortAnimation from "../../components/SortingAlgorithmVisualiser/AlgorithmAnimation";
+import { bubbleSort } from "../../services/api/ApiEndpoints";
+import SortAnimation from "../../components/AlgorithmAnimation/AlgorithmAnimation";
 import "./SortingVisualiser.css";
 
 function SortingVisualiser() {

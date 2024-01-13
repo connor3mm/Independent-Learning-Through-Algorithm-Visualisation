@@ -7,6 +7,8 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import { useEffect, useState } from "react";
+import LearningZone from "./pages/LearningZone/LearningZone";
+import TestingZone from "./pages/TestingZone/TestingZone";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +41,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sortingVisualiser" element={<SortingVisualiser />} />
+            <Route path="/learningZone" element={<LearningZone />} />
+            <Route path="/testingZone" element={<TestingZone />} />
             {!isLoggedIn && (
               <>
                 <Route

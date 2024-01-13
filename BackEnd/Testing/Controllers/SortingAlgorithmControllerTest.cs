@@ -90,5 +90,37 @@ namespace Testing.Controllers
             var badRequestResult = result as BadRequestObjectResult;
             Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
         }
+        
+        [Test]
+        public void MergeSort_WithException_ReturnsBadRequest()
+        {
+            // Arrange
+            _sortingServiceMock.Setup(x => x.SortingAlgorithm(SortingStrategy.MergeSort, It.IsAny<int[]>()))
+                .Throws(new Exception("Test Exception"));
+
+            // Act
+            var result = _controller.MergeSort(Array.Empty<int>());
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
+        }
+        
+        [Test]
+        public void InsertionSort_WithException_ReturnsBadRequest()
+        {
+            // Arrange
+            _sortingServiceMock.Setup(x => x.SortingAlgorithm(SortingStrategy.InsertionSort, It.IsAny<int[]>()))
+                .Throws(new Exception("Test Exception"));
+
+            // Act
+            var result = _controller.InsertionSort(Array.Empty<int>());
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
+        }
     }
 }

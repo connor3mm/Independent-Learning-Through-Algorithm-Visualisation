@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import mascot from "../../components/Images/Sloth-removebg-FixedBG.png";
-import FlexButton from "../../components/FlexButton/FlexButton";
 
 function Home() {
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -12,12 +11,8 @@ function Home() {
     setLoading(false);
   }, []);
 
-  const sortingVisualiserNav = () => {
-    navigate("/sortingVisualiser");
-  };
-
-  const profileNav = () => {
-    navigate("/profile");
+  const buttonNav = (page: string) => {
+    navigate(page);
   };
 
   return (
@@ -34,19 +29,31 @@ function Home() {
 
             <div className="buttonContainer">
               <div className="buttonCardContainer">
-                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                <button
+                  className="homeButtons"
+                  onClick={() => buttonNav("/sortingVisualiser")}
+                >
                   Sorting Visualiser
                 </button>
-                <button className="homeButtons" onClick={profileNav}>
+                <button
+                  className="homeButtons"
+                  onClick={() => buttonNav("/profile")}
+                >
                   My Profile
                 </button>
               </div>
 
               <div className="buttonCardContainer2">
-                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                <button
+                  className="homeButtons"
+                  onClick={() => buttonNav("/learningZone")}
+                >
                   Learning Zone
                 </button>
-                <button className="homeButtons" onClick={sortingVisualiserNav}>
+                <button
+                  className="homeButtons"
+                  onClick={() => buttonNav("/testingZone")}
+                >
                   Testing Zone
                 </button>
                 {/* <FlexButton></FlexButton> */}
