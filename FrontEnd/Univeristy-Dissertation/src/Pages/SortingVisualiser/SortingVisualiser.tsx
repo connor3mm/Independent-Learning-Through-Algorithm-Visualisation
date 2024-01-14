@@ -1,32 +1,63 @@
 import { useEffect, useState } from "react";
-import { bubbleSort } from "../../services/api/ApiEndpoints";
+import { sortingAlgorithm } from "../../services/api/ApiEndpoints";
 import SortAnimation from "../../components/AlgorithmAnimation/AlgorithmAnimation";
 import "./SortingVisualiser.css";
+import SortingAlgorithm from "../../services/enums/SortingAlgorithms";
+import AlgorithmInputBox from "../../components/AlgorithmInputBox/AlgorithmInputBox";
+import SpeedOptions from "../../components/SpeedOptions/SpeedOptions";
 
 function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [bubbleData, setBubbleData] = useState<number[][]>([]);
   const [speed, setSpeed] = useState<number>(1000);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const numbers = [5, 2, 9, 1, 5, 6];
+  const [showSecondVisualiser, setShowSecondVisualiser] =
+    useState<boolean>(false);
+  const [customInputArray, setCustomInputArray] = useState<number[]>([
+    5, 2, 9, 1, 5, 6,
+  ]);
+
+  const [sortingData, setSortingData] = useState<number[][]>([]);
+  const [secondSortingData, setSecondSortingData] = useState<number[][]>([]);
+  const [selectedAlgorithm, setSelectedAlgorithm] =
+    useState<string>("bubbleSort");
+  const [secondSelectedAlgorithm, setSecondSelectedAlgorithm] =
+    useState<string>("bubbleSort");
 
   useEffect(() => {
     setLoading(false);
-    handleBubbleSort(numbers);
-  }, []);
+    handleSortingAlgorithmChange(selectedAlgorithm);
+    handleSecondSortingAlgorithmChange(secondSelectedAlgorithm);
+  }, [selectedAlgorithm, secondSelectedAlgorithm, customInputArray]);
 
-  const handleBubbleSort = (input: any) => {
+  const handleSortingAlgorithmChange = (algorithm: string) => {
     setLoading(true);
-    async function fetchBubbleData() {
+    async function fetchData() {
       try {
-        await bubbleSort(input).then((data) => {
-          setBubbleData(data);
+        await sortingAlgorithm(algorithm, customInputArray).then((data) => {
+          setSortingData(data);
         });
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     }
 
-    fetchBubbleData();
-    setLoading(false);
+    fetchData();
+  };
+
+  const handleSecondSortingAlgorithmChange = (algorithm: string) => {
+    setLoading(true);
+    async function fetchData() {
+      try {
+        await sortingAlgorithm(algorithm, customInputArray).then((data) => {
+          setSecondSortingData(data);
+        });
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
   };
 
   const handleSpeedChange = (newSpeed: number) => {
@@ -34,13 +65,58 @@ function SortingVisualiser() {
   };
 
   const handlePlayButtonClick = () => {
+    reset();
     setIsPlaying(true);
   };
 
   const reset = () => {
     setIsPlaying(false);
-    handleBubbleSort(numbers);
+    handleSortingAlgorithmChange(selectedAlgorithm);
+    handleSecondSortingAlgorithmChange(secondSelectedAlgorithm);
   };
+
+  const handleAlgorithmChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedAlgorithm(e.target.value);
+    setIsPlaying(false);
+  };
+
+  const handleSecondAlgorithmChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSecondSelectedAlgorithm(e.target.value);
+    setIsPlaying(false);
+  };
+
+  const toggleSecondVisualiser = () => {
+    reset();
+    setShowSecondVisualiser(!showSecondVisualiser);
+  };
+
+  const renderVisualisationContainer = (
+    algorithm: any,
+    key: any,
+    sortedData: any
+  ) => (
+    <div className="visualisationContainer" key={key}>
+      <SortAnimation
+        states={sortedData}
+        speed={speed}
+        isPlaying={isPlaying}
+        title={SortingAlgorithm[algorithm as keyof typeof SortingAlgorithm]}
+      />
+    </div>
+  );
+
+  const renderDropdown = (value: any, onChange: any) => (
+    <select className="dropBox" value={value} onChange={onChange}>
+      <option value="bubbleSort">{SortingAlgorithm.bubbleSort}</option>
+      <option value="selectionSort">{SortingAlgorithm.selectionSort}</option>
+      <option value="insertionSort">{SortingAlgorithm.insertionSort}</option>
+      <option value="quickSort">{SortingAlgorithm.quickSort}</option>
+      <option value="mergeSort">{SortingAlgorithm.mergeSort}</option>
+      <option value="bubbleSort" disabled hidden></option>
+    </select>
+  );
 
   return (
     <>
@@ -49,62 +125,45 @@ function SortingVisualiser() {
       ) : (
         <>
           <div className="sortAnimationContainer">
-            <div className="visualisationContainer">
-              <SortAnimation
-                states={bubbleData}
-                speed={speed}
-                isPlaying={isPlaying}
-              />
-            </div>
+            {renderVisualisationContainer(selectedAlgorithm, 1, sortingData)}
+
+            {showSecondVisualiser &&
+              renderVisualisationContainer(
+                secondSelectedAlgorithm,
+                2,
+                secondSortingData
+              )}
+
             <div className="visualisationControlsContainer">
               <div className="controls">
                 <h2>Controls</h2>
 
-                <div>
-                  <label>
-                    Slow
-                    <input
-                      type="checkbox"
-                      checked={speed === 1500}
-                      onChange={() => handleSpeedChange(1500)}
-                    />
-                  </label>
-                  <label>
-                    Medium
-                    <input
-                      type="checkbox"
-                      checked={speed === 1000}
-                      onChange={() => handleSpeedChange(1000)}
-                    />
-                  </label>
-                  <label>
-                    Fast
-                    <input
-                      type="checkbox"
-                      checked={speed === 500}
-                      onChange={() => handleSpeedChange(500)}
-                    />
-                  </label>
-                </div>
+                <SpeedOptions
+                  speed={speed}
+                  handleSpeedChange={handleSpeedChange}
+                />
+
                 <button onClick={handlePlayButtonClick}>Play</button>
                 <button onClick={reset}>Reset</button>
-                <div>
-                  <select className="dropBox">
-                    <option value="bubbleSort">Bubble Sort</option>
-                    <option value="selectionSort">Selection Sort</option>
-                    <option value="insertionSort">Insertion Sort</option>
-                    <option value="quickSort">Quick Sort</option>
-                    <option value="mergeSort">Merge Sort</option>
-                  </select>
-                </div>
-              </div>
 
-              <div className="customInputs">
-                <h2>Custom Input values:</h2>
-                <form>
-                  <input type="text" name="inputs"></input>
-                </form>
+                <button onClick={toggleSecondVisualiser}>
+                  {showSecondVisualiser ? "Hide Compare" : "Compare"}
+                </button>
+
+                <div>
+                  {renderDropdown(selectedAlgorithm, handleAlgorithmChange)}
+                </div>
+
+                {showSecondVisualiser && (
+                  <div>
+                    {renderDropdown(
+                      secondSelectedAlgorithm,
+                      handleSecondAlgorithmChange
+                    )}
+                  </div>
+                )}
               </div>
+              <AlgorithmInputBox setCustomInputArray={setCustomInputArray} />
             </div>
           </div>
         </>

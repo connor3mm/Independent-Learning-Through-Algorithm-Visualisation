@@ -6,12 +6,14 @@ interface AlgorithmAnimationProps {
   states: number[][];
   speed: number;
   isPlaying: boolean;
+  title: any;
 }
 
 const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
   states,
   speed,
   isPlaying,
+  title,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const chartRef = useRef<HTMLCanvasElement | null>(null);
@@ -82,7 +84,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
 
   return (
     <div className="sort-container">
-      <h2>Bubble Sort Visualisation</h2>
+      <h2>{title} Visualization</h2>
       <canvas ref={chartRef} className="sort-chart"></canvas>
     </div>
   );

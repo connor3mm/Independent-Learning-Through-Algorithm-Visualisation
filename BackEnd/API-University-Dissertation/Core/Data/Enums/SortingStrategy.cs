@@ -4,5 +4,6 @@ namespace API_University_Dissertation.Core.Data.Enums;
         BubbleSort,
         SelectionSort,
         MergeSort,
-        InsertionSort
+        InsertionSort,
+        QuickSort
     }

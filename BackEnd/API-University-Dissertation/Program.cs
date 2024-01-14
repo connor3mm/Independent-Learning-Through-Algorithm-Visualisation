@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         corsPolicyBuilder =>
         {
-            corsPolicyBuilder.WithOrigins("http://localhost:5173")
+            corsPolicyBuilder.WithOrigins("http://localhost:5174")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -33,6 +33,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
 builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
+builder.Services.AddScoped<ISortingStrategy, MergeSort>();
+builder.Services.AddScoped<ISortingStrategy, InsertionSort>();
+builder.Services.AddScoped<ISortingStrategy, QuickSort>();
 builder.Services.AddScoped<ISortingAlgorithmService, SortingAlgorithmService>();
 
 var app = builder.Build();

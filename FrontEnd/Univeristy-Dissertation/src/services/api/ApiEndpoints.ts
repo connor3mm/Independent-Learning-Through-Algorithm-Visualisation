@@ -2,9 +2,9 @@ import ApiService from "./ApiService";
 
 const api = new ApiService("http://localhost:5137/");
 
-export const bubbleSort = async (data: number[]) => {
+export const sortingAlgorithm = async (algorithm: string, data: number[]) => {
   try {
-    const response = await api.post(`sortingAlgorithm/bubblesort/`, data);
+    const response = await api.post(`sortingAlgorithm/${algorithm}/`, data);
     return response;
   } catch (error: any) {
     console.log(error.message);

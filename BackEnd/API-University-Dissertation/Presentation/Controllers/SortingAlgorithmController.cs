@@ -69,4 +69,17 @@ public class SortingAlgorithmController : ControllerBase
             return BadRequest($"An error occurred: {ex.Message}");
         }
     }
+    
+    [HttpPost("quicksort", Name = "quicksort")]
+    public IActionResult QuickSort(int[] arr)
+    {
+        try
+        {
+            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.QuickSort, arr));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
+    }
 }
