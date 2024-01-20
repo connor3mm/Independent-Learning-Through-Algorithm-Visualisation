@@ -1,0 +1,7 @@
+{
+  "description": "Shell Sort.",
+  "averageComplexity": "O(n1.25) O(n × log n)",
+  "bestCase": "O(n × log n)",
+  "worstCase": "O(n^2)",
+  "spaceComplexity": "O(1)"
+}

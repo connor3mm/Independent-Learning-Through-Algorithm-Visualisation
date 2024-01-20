@@ -1,0 +1,7 @@
+{
+  "description": "Selection Sort.",
+  "averageComplexity": "O(n^2)",
+  "bestCase": "O(n^2)",
+  "worstCase": "O(n^2)",
+  "spaceComplexity": "O(1)"
+}

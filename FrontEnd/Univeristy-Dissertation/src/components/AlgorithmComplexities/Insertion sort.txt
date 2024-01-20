@@ -1,0 +1,7 @@
+{
+  "description": "Insertion Sort.",
+  "averageComplexity": "O(n2)",
+  "bestCase": "O(n)",
+  "worstCase": "O(n2)",
+  "spaceComplexity": "O(1)"
+}

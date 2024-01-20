@@ -62,9 +62,21 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
             },
             options: {
               indexAxis: "x",
+
               scales: {
                 y: {
                   display: false,
+                },
+                x: {
+                  grid: {
+                    color: "#1c163a",
+                  },
+                  ticks: {
+                    color: "#FFFF",
+                    font: {
+                      size: 20,
+                    },
+                  },
                 },
               },
               plugins: {

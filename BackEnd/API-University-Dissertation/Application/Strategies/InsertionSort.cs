@@ -10,19 +10,24 @@ public class InsertionSort : ISortingStrategy
         var currentArray = new int[arrayLength];
         Array.Copy(unsortedList, currentArray, arrayLength);
 
-        yield return unsortedList;
+        yield return currentArray;
 
-        for (var i = 0; i < arrayLength - 1; i++)
+        for (var i = 1; i < arrayLength; i++)
         {
-            for (var j = 0; j < arrayLength - i - 1; j++)
+            var key = currentArray[i];
+            var j = i - 1;
+
+            while (j >= 0 && currentArray[j] > key)
             {
-                if (currentArray[j] <= currentArray[j + 1]) continue;
-                (currentArray[j], currentArray[j + 1]) = (currentArray[j + 1], currentArray[j]);
+                currentArray[j + 1] = currentArray[j];
+                j--;
 
                 var newState = new int[arrayLength];
                 Array.Copy(currentArray, newState, arrayLength);
                 yield return newState;
             }
+
+            currentArray[j + 1] = key;
         }
     }
 }

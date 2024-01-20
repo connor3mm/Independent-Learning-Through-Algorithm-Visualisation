@@ -112,8 +112,10 @@ function SortingVisualiser() {
       <option value="bubbleSort">{SortingAlgorithm.bubbleSort}</option>
       <option value="selectionSort">{SortingAlgorithm.selectionSort}</option>
       <option value="insertionSort">{SortingAlgorithm.insertionSort}</option>
-      <option value="quickSort">{SortingAlgorithm.quickSort}</option>
       <option value="mergeSort">{SortingAlgorithm.mergeSort}</option>
+      <option value="quickSort">{SortingAlgorithm.quickSort}</option>
+      <option value="shellSort">{SortingAlgorithm.shellSort}</option>
+      <option value="heapSort">{SortingAlgorithm.heapsort}</option>
       <option value="bubbleSort" disabled hidden></option>
     </select>
   );
@@ -147,7 +149,7 @@ function SortingVisualiser() {
                 <button onClick={reset}>Reset</button>
 
                 <button onClick={toggleSecondVisualiser}>
-                  {showSecondVisualiser ? "Hide Compare" : "Compare"}
+                  {showSecondVisualiser ? "Hide Compare" : "Compare Algorithms"}
                 </button>
 
                 <div>

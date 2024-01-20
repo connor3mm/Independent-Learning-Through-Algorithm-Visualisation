@@ -1,0 +1,112 @@
+.learningContainer {
+    display: flex;
+    min-height: 100vh;
+    padding-right: 2em;
+    
+  }
+  
+  .learningZone {
+    flex: 2;
+    flex-grow: 1;
+  }
+
+  .learningZoneHeader{
+    border-radius: 5px;
+  }
+
+  .info{
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.01em;
+    border-radius: 5px;
+  }
+
+  .vertical-menu {
+    flex: 0.2;
+    width: 200px;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #1c163a;
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.1em;
+    border-radius: 5px;
+    margin-top: 2vh;
+  }
+  
+  .vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+  
+  .vertical-menu a:hover {
+    background-color: #ccc;
+  }
+  
+  .vertical-menu a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .learningZoneContainer{
+    display: flex;
+    background-color: #ccc;
+    min-height: 80vh;
+    margin: 2vh;
+    margin-left: 3vh;
+
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.01em;
+    border-radius: 20px;
+  }
+
+  .learningZoneInsideContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1vh;
+
+    width: 100%;
+    background-color: #10163a;
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.01em;
+    border-radius: 20px;
+  }
+
+  .learningHeader{
+    margin-left: 10vh;
+    font-size: 2.5em;
+    text-align: left;
+  }
+
+  .learningZoneDescriptionContainer{
+      display: flex;
+    
+  }
+
+  .learningZoneDescription{
+    Display: flex;
+    flex: 1;
+    flex-direction: column;
+   
+  }
+
+  .learningZoneComplexity{
+    Display: flex;
+    flex: .5;
+    flex-direction: column;
+  }
+
+  .learningZoneDescription{
+    text-align: left;
+    margin-left: 10vh;
+  }
+
+  .learningZoneComplexity{
+    margin-left: 10vh;
+    margin-right: 10vh;
+  }

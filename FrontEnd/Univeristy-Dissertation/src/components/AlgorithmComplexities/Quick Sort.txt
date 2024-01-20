@@ -1,0 +1,7 @@
+{
+  "description": "Quick Sort.",
+  "averageComplexity": "O(n × log n)",
+  "bestCase": "O(n × log n)",
+  "worstCase": "O(n^2)",
+  "spaceComplexity": "O(n)"
+}

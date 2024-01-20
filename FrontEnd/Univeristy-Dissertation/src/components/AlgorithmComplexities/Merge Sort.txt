@@ -1,0 +1,7 @@
+{
+  "description": "Merge Sort.",
+  "averageComplexity": "O(n × log n)",
+  "bestCase": "O(n × log n)",
+  "worstCase": "O(n × log n)",
+  "spaceComplexity": "O(n)"
+}
