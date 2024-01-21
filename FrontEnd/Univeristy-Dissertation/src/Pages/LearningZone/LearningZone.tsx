@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LearningZone.css";
 import SortingAlgorithm from "../../services/enums/SortingAlgorithms";
 
 const LearningZone: React.FC = () => {
+  const [infoFlag, setInfoFlag] = useState(false);
   const [complexityInfo, setComplexityInfo] = useState<{
     description: string;
     averageComplexity: string;
@@ -17,15 +18,34 @@ const LearningZone: React.FC = () => {
     spaceComplexity: "Default Space Complexity",
   });
 
+  const [infoDescription, setInfoDescription] = useState<{
+    description: string;
+    complexityDescription: string;
+  }>({
+    description: "Default Info Description",
+    complexityDescription: "Default Complexity Description",
+  });
+
+  useEffect(() => {
+    fetch(`src/components/AlgorithmDescriptions/Default Descriptions.txt`)
+      .then((response) => response.text())
+      .then((data) => {
+        const parsedData = JSON.parse(data);
+        setInfoDescription(parsedData);
+        setInfoFlag(false);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   const algorithmClickHandler = (algorithm: string) => {
-    const filePath = `src/components/AlgorithmComplexities/${algorithm}.txt`;
+    const filePath = `src/components/AlgorithmDescriptions/${algorithm}.txt`;
 
     fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
-        console.log(parsedData);
         setComplexityInfo(parsedData);
+        setInfoFlag(true);
       })
       .catch((err) => console.error(err));
   };
@@ -107,15 +127,28 @@ const LearningZone: React.FC = () => {
             <div className="learningZoneDescriptionContainer">
               <div className="learningZoneDescription">
                 <h2 className="infoTitle">Description</h2>
-                <div>{complexityInfo?.description}</div>
+                {infoFlag ? (
+                  <div>{complexityInfo?.description}</div>
+                ) : (
+                  infoDescription.description
+                )}
               </div>
+              <div className="separator"></div>
               <div className="learningZoneComplexity">
                 <h2 className="infoTitle">Complexity</h2>
                 <div>
-                  <p>Average Complexity: {complexityInfo?.averageComplexity}</p>
-                  <p>Best Case: {complexityInfo?.bestCase}</p>
-                  <p>Worst Case: {complexityInfo?.worstCase}</p>
-                  <p>Space Complexity: {complexityInfo?.spaceComplexity}</p>
+                  {infoFlag ? (
+                    <>
+                      <p>
+                        Average Complexity: {complexityInfo?.averageComplexity}
+                      </p>
+                      <p>Best Case: {complexityInfo?.bestCase}</p>
+                      <p>Worst Case: {complexityInfo?.worstCase}</p>
+                      <p>Space Complexity: {complexityInfo?.spaceComplexity}</p>
+                    </>
+                  ) : (
+                    infoDescription.complexityDescription
+                  )}
                 </div>
               </div>
             </div>

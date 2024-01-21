@@ -19,7 +19,7 @@ public class SortingAlgorithmService(IEnumerable<ISortingStrategy> strategies) :
         {
             throw new ArgumentException("Invalid strategy");
         }
-
+        
         return selectedStrategy.Sort(arr);
     }
 }
