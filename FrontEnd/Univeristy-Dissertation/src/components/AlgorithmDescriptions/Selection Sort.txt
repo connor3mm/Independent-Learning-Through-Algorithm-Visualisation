@@ -1,5 +1,5 @@
 {
-  "description": "Selection Sort.",
+  "description": "Selection Sort is an in-place sorting algorithm that iteratively divides a data structure into two sublists: the ordered sublist and the unordered sublist. The algorithm traverses all elements of the data structure, selecting the smallest element from the unordered sublist during each iteration, and appends it to the ordered sublist. This process progressively populates the ordered sublist. \nWhile simple and intuitive, Selection Sort does not demand additional memory. However, its quadratic time complexity makes it inefficient for large data structures.\nVarious enhanced versions of this algorithm, such as Heap Sort, have been developed to address its limitations and improve performance.",
   "averageComplexity": "O(n^2)",
   "bestCase": "O(n^2)",
   "worstCase": "O(n^2)",

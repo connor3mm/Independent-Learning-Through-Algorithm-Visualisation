@@ -84,34 +84,36 @@
 
   .learningZoneDescriptionContainer{
       display: flex;
-    
   }
 
   .learningZoneDescription{
     Display: flex;
     flex: 1;
     flex-direction: column;
-   
+    margin-bottom: 5vh;
+    text-align: left;
+    margin-left: 10vh;
   }
 
   .learningZoneComplexity{
     Display: flex;
     flex: .5;
     flex-direction: column;
-  }
-
-  .learningZoneDescription{
-    text-align: left;
-    margin-left: 10vh;
-  }
-
-  .learningZoneComplexity{
     margin-left: 10vh;
     margin-right: 10vh;
+    text-align: left;
   }
 
   .separator {
     width: 1px;
     background-color: #401069;
-    margin: 0 10px;
+    margin: 0 2em 0 2em;
+  }
+
+  .description, .complexityDescription{
+    font-size: larger;
+  }
+
+  .complexityTable{
+    width: 100%;
   }

@@ -1,6 +1,6 @@
 {
-  "description": "Shell Sort.",
-  "averageComplexity": "O(n1.25) O(n × log n)",
+  "description": "Shell Sort, one of the oldest sorting algorithms, extends the principles of Insertion Sort. While fast and relatively simple to implement, evaluating its performance can be challenging.\nIn contrast to Insertion Sort, Shell Sort initiates comparisons between elements that are distant from each other, with the gap gradually decreasing. By initially comparing the most distant elements, the algorithm aims to optimize performance, avoiding the limitation of only comparing adjacent elements as seen in other sorting techniques.",
+  "averageComplexity": "O(n × log n)",
   "bestCase": "O(n × log n)",
   "worstCase": "O(n^2)",
   "spaceComplexity": "O(1)"

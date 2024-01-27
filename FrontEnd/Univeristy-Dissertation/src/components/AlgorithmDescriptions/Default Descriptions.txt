@@ -1,4 +1,4 @@
 {
-  "description": "Testing.",
-  "complexity": "Testing2."
+    "description": "Welcome to our Learning Hub! \nHere, you'll discover the fundamentals of sorting and searching algorithms. \nSorting algorithms arrange data, optimizing its order for easier analysis. Meanwhile, searching algorithms efficiently locate specific elements within datasets. \nFrom Bubble Sort to Binary Search, understanding these concepts enhances your problem-solving skills and algorithmic thinking. Join us in exploring these essential tools in computer science!",
+    "complexityDescription": "Time complexity measures the execution time, and space complexity gauges the memory requirements. \nAsymptotic notations like Big O provide a concise way to express these complexities. \nUnderstanding these concepts is vital for crafting efficient algorithms and making informed decisions about resource usage. Dive into our resources to unravel the complexities of algorithm analysis!"
 }

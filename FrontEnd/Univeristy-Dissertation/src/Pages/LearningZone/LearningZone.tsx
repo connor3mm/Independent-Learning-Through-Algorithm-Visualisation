@@ -26,12 +26,17 @@ const LearningZone: React.FC = () => {
     complexityDescription: "Default Complexity Description",
   });
 
+  const renderTextLines = (text: string) => {
+    return text.split("\n").map((line, index) => <p key={index}>{line}</p>);
+  };
+
   useEffect(() => {
     fetch(`src/components/AlgorithmDescriptions/Default Descriptions.txt`)
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
         setInfoDescription(parsedData);
+
         setInfoFlag(false);
       })
       .catch((err) => console.error(err));
@@ -128,26 +133,44 @@ const LearningZone: React.FC = () => {
               <div className="learningZoneDescription">
                 <h2 className="infoTitle">Description</h2>
                 {infoFlag ? (
-                  <div>{complexityInfo?.description}</div>
+                  <div className="description">
+                    {renderTextLines(complexityInfo?.description)}
+                  </div>
                 ) : (
-                  infoDescription.description
+                  <div className="description">
+                    {renderTextLines(infoDescription?.description)}
+                  </div>
                 )}
               </div>
               <div className="separator"></div>
               <div className="learningZoneComplexity">
                 <h2 className="infoTitle">Complexity</h2>
-                <div>
+                <div className="description">
                   {infoFlag ? (
                     <>
-                      <p>
-                        Average Complexity: {complexityInfo?.averageComplexity}
-                      </p>
-                      <p>Best Case: {complexityInfo?.bestCase}</p>
-                      <p>Worst Case: {complexityInfo?.worstCase}</p>
-                      <p>Space Complexity: {complexityInfo?.spaceComplexity}</p>
+                      <table className="complexityTable">
+                        <tr>
+                          <td>Average Complexity:</td>
+                          <td>{complexityInfo?.averageComplexity}</td>
+                        </tr>
+                        <tr>
+                          <td>Best Case:</td>
+                          <td>{complexityInfo?.bestCase}</td>
+                        </tr>
+                        <tr>
+                          <td>Worst Case:</td>
+                          <td>{complexityInfo?.worstCase}</td>
+                        </tr>
+                        <tr>
+                          <td>Space Complexity:</td>
+                          <td>{complexityInfo?.spaceComplexity}</td>
+                        </tr>
+                      </table>
                     </>
                   ) : (
-                    infoDescription.complexityDescription
+                    <div>
+                      {renderTextLines(infoDescription?.complexityDescription)}
+                    </div>
                   )}
                 </div>
               </div>

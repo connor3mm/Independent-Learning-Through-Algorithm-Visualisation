@@ -1,5 +1,5 @@
 {
-  "description": "Heap Sort.",
+  "description": "Heap Sort is an in-place iterative sorting algorithm that relies on auxiliary data structures known as heaps. Although less efficient than algorithms with comparable time complexity, Heap Sort is not well-suited for data structures with few elements.\nThe heap functions as a binary tree, where each node's value is greater than or equal to its children's values, resulting in the root holding the maximum value. The initial phase involves organizing the data structure to create the heap, followed by a progressive reordering process reminiscent of Selection Sort, starting with the larger elements.",
   "averageComplexity": "O(n × log n)",
   "bestCase": "O(n × log n)",
   "worstCase": "O(n × log n)",

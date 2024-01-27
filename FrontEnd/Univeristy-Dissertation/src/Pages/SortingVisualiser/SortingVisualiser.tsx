@@ -5,6 +5,8 @@ import "./SortingVisualiser.css";
 import SortingAlgorithm from "../../services/enums/SortingAlgorithms";
 import AlgorithmInputBox from "../../components/AlgorithmInputBox/AlgorithmInputBox";
 import SpeedOptions from "../../components/SpeedOptions/SpeedOptions";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -129,13 +131,6 @@ function SortingVisualiser() {
           <div className="sortAnimationContainer">
             {renderVisualisationContainer(selectedAlgorithm, 1, sortingData)}
 
-            {showSecondVisualiser &&
-              renderVisualisationContainer(
-                secondSelectedAlgorithm,
-                2,
-                secondSortingData
-              )}
-
             <div className="visualisationControlsContainer">
               <div className="controls">
                 <h2>Controls</h2>
@@ -144,14 +139,16 @@ function SortingVisualiser() {
                   speed={speed}
                   handleSpeedChange={handleSpeedChange}
                 />
-
-                <button onClick={handlePlayButtonClick}>Play</button>
-                <button onClick={reset}>Reset</button>
-
-                <button onClick={toggleSecondVisualiser}>
+                <ButtonGroup
+                  variant="contained"
+                  aria-label="outlined primary button group"
+                >
+                  <Button onClick={handlePlayButtonClick}>Play</Button>
+                  <Button onClick={reset}>Reset</Button>
+                </ButtonGroup>
+                <Button variant="outlined" onClick={toggleSecondVisualiser}>
                   {showSecondVisualiser ? "Hide Compare" : "Compare Algorithms"}
-                </button>
-
+                </Button>
                 <div>
                   {renderDropdown(selectedAlgorithm, handleAlgorithmChange)}
                 </div>
@@ -167,6 +164,12 @@ function SortingVisualiser() {
               </div>
               <AlgorithmInputBox setCustomInputArray={setCustomInputArray} />
             </div>
+            {showSecondVisualiser &&
+              renderVisualisationContainer(
+                secondSelectedAlgorithm,
+                2,
+                secondSortingData
+              )}
           </div>
         </>
       )}
