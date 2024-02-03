@@ -5,9 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>API_University_Dissertation</RootNamespace>
+        <UserSecretsId>e7028ab8-b074-41f9-835f-657902a9d8d3</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-rc.2.23480.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-rc.2.23480.2"/>
@@ -22,12 +24,12 @@
         <PackageReference Include="NUnit.ConsoleRunner" Version="3.16.3" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.0" />
     </ItemGroup>
 
 
     <ItemGroup>
       <Folder Include="Application\" />
-      <Folder Include="Core\Repositories\" />
       <Folder Include="Core\Services\" />
       <Folder Include="Infrastructure\" />
       <Folder Include="Presentation\" />

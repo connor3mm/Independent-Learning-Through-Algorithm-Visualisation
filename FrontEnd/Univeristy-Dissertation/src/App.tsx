@@ -18,12 +18,8 @@ function App() {
   };
 
   const handleLogout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to log out?");
-
-    if (confirmLogout) {
-      setIsLoggedIn(false);
-      localStorage.removeItem("loggedInUser");
-    }
+    setIsLoggedIn(false);
+    localStorage.removeItem("loggedInUser");
   };
 
   useEffect(() => {

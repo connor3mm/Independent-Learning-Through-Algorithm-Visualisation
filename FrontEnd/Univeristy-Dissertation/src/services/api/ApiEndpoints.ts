@@ -1,11 +1,12 @@
 import ApiService from "./ApiService";
 
-const api = new ApiService("http://localhost:5137/");
+const defaultUrl = "https://localhost:7206/";
+const api = new ApiService(defaultUrl, null);
 
 export const sortingAlgorithm = async (algorithm: string, data: number[]) => {
   try {
-    const response = await api.post(`sortingAlgorithm/${algorithm}/`, data);
-    return response;
+    const responseData = await api.post(`sortingAlgorithm/${algorithm}/`, data);
+    return responseData;
   } catch (error: any) {
     console.log(error.message);
     throw error;
@@ -15,7 +16,6 @@ export const sortingAlgorithm = async (algorithm: string, data: number[]) => {
 export const userLogin = async (email: string, password: string) => {
   try {
     const response = await api.post("login", { email, password });
-    console.log(response);
     return response;
   } catch (error: any) {
     console.log(error.message);
@@ -26,10 +26,43 @@ export const userLogin = async (email: string, password: string) => {
 export const registerUser = async (email: string, password: string) => {
   try {
     const response = await api.post("register", { email, password });
-    console.log(response);
     return response;
   } catch (error: any) {
     console.log(error.message);
+    throw error;
+  }
+};
+
+export const getProfile = async () => {
+  setUserToken();
+
+  try {
+    const responseData = await api.get(`profile`);
+    return responseData;
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+export const saveProfile = async (userProfile: UserProfile) => {
+  try {
+    const responseData = await api.post(`profile/saveprofile`, userProfile);
+    return responseData;
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+const setUserToken = () => {
+  try {
+    const token = localStorage.getItem("loggedInUser");
+    if (!token) {
+      throw new Error("Token not found in localStorage");
+    }
+    api.setAuthToken(token);
+  } catch (error) {
     throw error;
   }
 };

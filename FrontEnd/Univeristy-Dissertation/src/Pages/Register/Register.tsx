@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { registerUser } from "../../services/api/ApiEndpoints";
+import { registerUser, saveProfile } from "../../services/api/ApiEndpoints";
 import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {
-  fullName: string;
-  email: string;
   password: string;
   confirmPassword: string;
 }
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<RegisterFormData>({
-    fullName: "",
+  const [userProfile, setUserProfile] = useState<UserProfile>({
     email: "",
+    firstName: "",
+    lastName: "",
+    proficiencyLevel: "Undetermined",
+    createdOn: new Date().toISOString().split("T")[0],
+  });
+  const [formData, setFormData] = useState<RegisterFormData>({
     password: "",
     confirmPassword: "",
   });
@@ -22,6 +25,7 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let registerSuccess = false;
 
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match. Please re-enter.");
@@ -29,13 +33,19 @@ const Register: React.FC = () => {
     }
 
     try {
-      const data = await registerUser(formData.email, formData.password);
-      if (data.status !== 400) {
-        console.log(data);
-        setRegistrationSuccess(true);
-      }
+      await registerUser(userProfile.email, formData.password);
+      registerSuccess = true;
     } catch (error) {
       console.error(error);
+    }
+
+    if (registerSuccess) {
+      try {
+        await saveProfile(userProfile);
+        setRegistrationSuccess(true);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -49,6 +59,16 @@ const Register: React.FC = () => {
     });
   };
 
+  const handleChangeUser = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: keyof UserProfile
+  ) => {
+    setUserProfile({
+      ...userProfile,
+      [field]: event.target.value,
+    });
+  };
+
   return (
     <div>
       {!registrationSuccess ? (
@@ -56,12 +76,21 @@ const Register: React.FC = () => {
           <h2>Register</h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="fullName">Full Name:</label>
+              <label htmlFor="firstName">First Name:</label>
               <input
                 type="text"
-                id="fullName"
-                value={formData.fullName}
-                onChange={(e) => handleChange(e, "fullName")}
+                id="firstName"
+                value={userProfile.firstName}
+                onChange={(e) => handleChangeUser(e, "firstName")}
+              />
+            </div>
+            <div>
+              <label htmlFor="fullName">Last Name:</label>
+              <input
+                type="text"
+                id="lastName"
+                value={userProfile.lastName}
+                onChange={(e) => handleChangeUser(e, "lastName")}
               />
             </div>
             <div>
@@ -69,8 +98,8 @@ const Register: React.FC = () => {
               <input
                 type="email"
                 id="email"
-                value={formData.email}
-                onChange={(e) => handleChange(e, "email")}
+                value={userProfile.email}
+                onChange={(e) => handleChangeUser(e, "email")}
               />
             </div>
             <div>

@@ -96,7 +96,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
 
   return (
     <div className="sort-container">
-      <h2>{title} Visualization</h2>
+      <h2>{title} Visualisation</h2>
       <canvas ref={chartRef} className="sort-chart"></canvas>
     </div>
   );

@@ -21,42 +21,39 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <h1>Welcome to Alogrithm Visualiser!</h1>
+          <h1>Home</h1>
           <div className="homeContainer">
             <div className="mascotContainer">
               <img src={mascot} alt="Sloth-Application Mascot" />
             </div>
 
             <div className="buttonContainer">
-              <div className="buttonCardContainer">
+              <div className="homeButtonContainer">
                 <button
-                  className="homeButtons"
+                  className="div1 homeButtons"
                   onClick={() => buttonNav("/sortingVisualiser")}
                 >
                   Sorting Visualiser
                 </button>
                 <button
-                  className="homeButtons"
+                  className="div2 homeButtons"
                   onClick={() => buttonNav("/profile")}
                 >
                   My Profile
                 </button>
-              </div>
 
-              <div className="buttonCardContainer2">
                 <button
-                  className="homeButtons"
+                  className="div3 homeButtons"
                   onClick={() => buttonNav("/learningZone")}
                 >
                   Learning Zone
                 </button>
                 <button
-                  className="homeButtons"
+                  className="div4 homeButtons"
                   onClick={() => buttonNav("/testingZone")}
                 >
                   Testing Zone
                 </button>
-                {/* <FlexButton></FlexButton> */}
               </div>
             </div>
           </div>

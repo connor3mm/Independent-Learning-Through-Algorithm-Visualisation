@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavigationBar.css";
+import LogoutAlerts from "../LogOutAlert/LogOutAlert";
 
 interface NavigationBarProps {
   isLoggedIn: boolean;
@@ -11,6 +12,21 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   isLoggedIn,
   handleLogout,
 }) => {
+  const [isLogoutAlertOpen, setIsLogoutAlertOpen] = React.useState(false);
+
+  const handleLogoutClick = () => {
+    setIsLogoutAlertOpen(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    setIsLogoutAlertOpen(false);
+    handleLogout();
+  };
+
+  const handleLogoutCancel = () => {
+    setIsLogoutAlertOpen(false);
+  };
+
   return (
     <nav>
       <ul className="navbar">
@@ -47,11 +63,16 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <Link to="/profile">Profile</Link>
               </li>
               <p> | </p>
-              <li className="rightButton" onClick={handleLogout}>
-                <Link to="/">Logout</Link>
+              <li className="rightButton" onClick={handleLogoutClick}>
+                <Link to="">Logout</Link>
               </li>
             </>
           )}
+          <LogoutAlerts
+            open={isLogoutAlertOpen}
+            onConfirm={handleLogoutConfirm}
+            onCancel={handleLogoutCancel}
+          />
         </div>
       </ul>
     </nav>

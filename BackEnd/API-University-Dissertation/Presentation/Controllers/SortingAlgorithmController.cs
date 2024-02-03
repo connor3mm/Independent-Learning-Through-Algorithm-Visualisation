@@ -27,7 +27,9 @@ public class SortingAlgorithmController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occurred: {ex.Message}");
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
         }
     }
 
@@ -40,7 +42,9 @@ public class SortingAlgorithmController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occurred: {ex.Message}");
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
         }
     }
 
@@ -53,7 +57,9 @@ public class SortingAlgorithmController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occurred: {ex.Message}");
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
         }
     }
 
@@ -66,10 +72,12 @@ public class SortingAlgorithmController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occurred: {ex.Message}");
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
         }
     }
-    
+
     [HttpPost("quicksort", Name = "quicksort")]
     public IActionResult QuickSort(int[] arr)
     {
@@ -79,7 +87,9 @@ public class SortingAlgorithmController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occurred: {ex.Message}");
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
         }
     }
 }

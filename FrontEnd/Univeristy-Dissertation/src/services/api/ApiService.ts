@@ -1,19 +1,18 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosInstance, AxiosError } from "axios";
 
-class ApiService {
+class ApiAuthService {
   private axiosInstance: AxiosInstance;
+  private authToken: string | null;
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, authToken: string | null) {
+    this.authToken = authToken;
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
     });
-  }
-
-  private handleResponse(response: AxiosResponse) {
-    return response.data;
   }
 
   private handleError(error: AxiosError) {
@@ -29,14 +28,21 @@ class ApiService {
     }
   }
 
+  setAuthToken(authToken: string | null) {
+    this.authToken = authToken;
+  }
+
   private async request(method: string, endpoint: string, data?: any) {
     try {
       const response = await this.axiosInstance.request({
         method,
         url: endpoint,
         data,
+        headers: {
+          Authorization: `Bearer ${this.authToken}`,
+        },
       });
-      return this.handleResponse(response);
+      return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         this.handleError(error as AxiosError);
@@ -59,4 +65,4 @@ class ApiService {
   }
 }
 
-export default ApiService;
+export default ApiAuthService;

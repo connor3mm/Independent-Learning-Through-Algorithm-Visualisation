@@ -23,7 +23,8 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     event.preventDefault();
     try {
       const data = await userLogin(username, password);
-      localStorage.setItem("loggedInUser", JSON.stringify(data));
+      const accessToken = data.accessToken;
+      localStorage.setItem("loggedInUser", accessToken);
       handleLogin();
       navigate("/");
     } catch (error) {
