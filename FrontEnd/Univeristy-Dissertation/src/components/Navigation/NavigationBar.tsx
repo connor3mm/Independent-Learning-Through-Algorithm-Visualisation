@@ -38,10 +38,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <Link to="/sortingVisualiser">Sorting Visualiser</Link>
           </li>
           <li>
-            <Link to="/learningZone">Learning</Link>
+            <Link to="/learningZone">Learning Zone</Link>
           </li>
           <li>
-            <Link to="/testingZone">Testing</Link>
+            <Link to="/testingZone">Testing Zone</Link>
           </li>
         </div>
 

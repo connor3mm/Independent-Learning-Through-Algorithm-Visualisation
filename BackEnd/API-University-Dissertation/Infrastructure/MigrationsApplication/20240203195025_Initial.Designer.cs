@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API_University_Dissertation.MigrationsApplication
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240201151111_Initial")]
+    [Migration("20240203195025_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,10 +36,6 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.Property<DateOnly>("CreatedOn")
                         .HasColumnType("date");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -49,6 +45,10 @@ namespace API_University_Dissertation.MigrationsApplication
                         .HasColumnType("text");
 
                     b.Property<string>("ProficiencyLevel")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserUUID")
                         .IsRequired()
                         .HasColumnType("text");
 

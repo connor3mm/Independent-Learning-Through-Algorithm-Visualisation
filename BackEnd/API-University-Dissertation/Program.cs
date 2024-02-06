@@ -1,3 +1,4 @@
+using API_University_Dissertation.Application.Mappers;
 using API_University_Dissertation.Application.Strategies;
 using API_University_Dissertation.Core.Repositories;
 using API_University_Dissertation.Core.Services.Interfaces;
@@ -75,6 +76,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+builder.Services.AddTransient<IAspNetUserRepository, AspNetUserRepository>();
 builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
 builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
 builder.Services.AddScoped<ISortingStrategy, MergeSort>();
@@ -82,6 +84,7 @@ builder.Services.AddScoped<ISortingStrategy, InsertionSort>();
 builder.Services.AddScoped<ISortingStrategy, QuickSort>();
 builder.Services.AddScoped<ISortingAlgorithmService, SortingAlgorithmService>();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
+builder.Services.AddAutoMapper(typeof(UserProfileMapper));
 
 var app = builder.Build();
 app.UseRouting();

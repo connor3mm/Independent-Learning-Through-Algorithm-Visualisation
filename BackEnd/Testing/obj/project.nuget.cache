@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "IO/1Zuup3lIgAl/2cjp8mSGlEpBLc7u/aTfE9NEOmJuE7iarc4opKDB8S63nWoboNV8WmRDOd0Wn7utRCpm0BQ==",
+  "dgSpecHash": "PEHbZdTZbAznhLidnvT0SUyveUZflY2MJqIGGsQ+H77kB0rUcjnFchbjuhkZlcNYTDBpvSI5vmNsCzxr0whjcQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\conno\\OneDrive - University of Strathclyde\\Fourth Year\\CS408 - Individual project\\University Dissertation\\BackEnd\\Testing\\Testing.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\conno\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\conno\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.1\\microsoft.aspnetcore.authentication.jwtbearer.8.0.1.nupkg.sha512",
@@ -16,6 +18,7 @@
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\8.0.0-rc.2.23480.2\\microsoft.aspnetcore.identity.entityframeworkcore.8.0.0-rc.2.23480.2.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0-rc.2.23480.2\\microsoft.aspnetcore.openapi.8.0.0-rc.2.23480.2.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.codecoverage\\17.6.0\\microsoft.codecoverage.17.6.0.nupkg.sha512",
+    "C:\\Users\\conno\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0-rc.2.23480.1\\microsoft.entityframeworkcore.8.0.0-rc.2.23480.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.0-rc.2.23480.1\\microsoft.entityframeworkcore.abstractions.8.0.0-rc.2.23480.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.0-rc.2.23480.1\\microsoft.entityframeworkcore.analyzers.8.0.0-rc.2.23480.1.nupkg.sha512",

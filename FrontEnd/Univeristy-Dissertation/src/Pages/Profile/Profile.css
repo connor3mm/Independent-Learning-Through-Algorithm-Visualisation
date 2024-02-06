@@ -20,7 +20,7 @@
     border-radius: 20px;
     background-color: #10163a;
     outline-style:solid;
-    outline-color: #ccc;
+    outline-color: greenyellow;
     outline-width: 0.2em;
   }
   
@@ -35,7 +35,7 @@
     border-radius: 20px;
     background-color: #10163a;
     outline-style:solid;
-    outline-color: #ccc;
+    outline-color: greenyellow;
     outline-width: 0.2em;
     padding-bottom: 1em;
   }

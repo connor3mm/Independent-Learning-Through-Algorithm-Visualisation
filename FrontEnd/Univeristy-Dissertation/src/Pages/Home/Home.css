@@ -41,17 +41,22 @@ h1 {
 .homeButtons {
   text-align: center;
   border-radius: 5%;
-  color: #fff;
-  padding: 2em;
-  font-size: 1.5em;
-  font-family:serif, Helvetica, sans-serif;
+  color: #e0e1e5;
+  padding: 1.5em;
+  font-size: 2em;
+  font-family:Helvetica Neue, Helvetica, Arial;
   outline-style:solid;
-  outline-width: .3em;
+  outline-width: .1em;
   background-color:  #10163a;
 }
 
 button:hover {
   background-position: bottom center; 
-  color: #fff;
+  color: #535bf2;
   text-decoration: none;
+  background-color: #1c163a;
+}
+
+.homeTitle{
+  padding-left: 5em;
 }

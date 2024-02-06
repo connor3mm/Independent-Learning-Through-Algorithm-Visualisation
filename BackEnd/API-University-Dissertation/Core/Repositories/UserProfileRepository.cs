@@ -1,16 +1,13 @@
-using System.Runtime.InteropServices.JavaScript;
 using API_University_Dissertation.Core.Data.Entities;
 using API_University_Dissertation.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Npgsql;
 
 namespace API_University_Dissertation.Core.Repositories;
 
 public interface IUserProfileRepository
 {
     void Add(UserProfile profile);
-    UserProfile GetByEmail(string email);
     void UpdateProficiencyLevel(UserProfile user);
+    UserProfile GetByUuid(string uuid);
 }
 
 public class UserProfileRepository : IUserProfileRepository
@@ -28,9 +25,9 @@ public class UserProfileRepository : IUserProfileRepository
         _context.SaveChanges();
     }
 
-    public UserProfile GetByEmail(string email)
+    public UserProfile GetByUuid(string uuid)
     {
-        return _context.UserProfiles.SingleOrDefault(u => u.Email == email);
+        return _context.UserProfiles.SingleOrDefault(u => u.UserUUID == uuid) ?? throw new InvalidOperationException();
     }
 
     public void UpdateProficiencyLevel(UserProfile user)

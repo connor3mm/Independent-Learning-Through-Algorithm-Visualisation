@@ -21,7 +21,9 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <h1>Home</h1>
+          <div className="homeTitle">
+            <h1>Home</h1>
+          </div>
           <div className="homeContainer">
             <div className="mascotContainer">
               <img src={mascot} alt="Sloth-Application Mascot" />

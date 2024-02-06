@@ -55,6 +55,16 @@ export const saveProfile = async (userProfile: UserProfile) => {
   }
 };
 
+export const generateQuizQuestions = async () => {
+  try {
+    const responseData = await api.get(`quiz/generatequizquestions`);
+    return responseData;
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
 const setUserToken = () => {
   try {
     const token = localStorage.getItem("loggedInUser");

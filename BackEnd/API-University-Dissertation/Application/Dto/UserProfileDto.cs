@@ -1,12 +1,9 @@
-using System.ComponentModel.DataAnnotations.Schema;
+namespace API_University_Dissertation.Application.DTO;
 
-namespace API_University_Dissertation.Core.Data.Entities;
-
-public class UserProfile
+public class UserProfileDto
 {
     public int ID { get; set; }
-    [ForeignKey("AspNetUsers")]
-    public string UserUUID { get; set; }
+    public string Email { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string ProficiencyLevel { get; set; }

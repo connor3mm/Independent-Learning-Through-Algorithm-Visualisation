@@ -125,3 +125,5 @@ C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individu
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

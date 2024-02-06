@@ -33,10 +33,6 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.Property<DateOnly>("CreatedOn")
                         .HasColumnType("date");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -46,6 +42,10 @@ namespace API_University_Dissertation.MigrationsApplication
                         .HasColumnType("text");
 
                     b.Property<string>("ProficiencyLevel")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserUUID")
                         .IsRequired()
                         .HasColumnType("text");
 

@@ -52,7 +52,7 @@
   
   .learningZoneContainer{
     display: flex;
-    background-color: #ccc;
+    background-color: red;
     min-height: 80vh;
     margin: 2vh;
     margin-left: 3vh;
@@ -98,8 +98,8 @@
     Display: flex;
     flex: .5;
     flex-direction: column;
-    margin-left: 10vh;
-    margin-right: 10vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
     text-align: left;
   }
 

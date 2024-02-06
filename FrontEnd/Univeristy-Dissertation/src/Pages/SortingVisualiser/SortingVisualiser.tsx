@@ -12,18 +12,19 @@ function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [speed, setSpeed] = useState<number>(1000);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [showSecondVisualiser, setShowSecondVisualiser] =
-    useState<boolean>(false);
+
   const [customInputArray, setCustomInputArray] = useState<number[]>([
     5, 2, 9, 1, 5, 6,
   ]);
-
   const [sortingData, setSortingData] = useState<number[][]>([]);
   const [secondSortingData, setSecondSortingData] = useState<number[][]>([]);
+
   const [selectedAlgorithm, setSelectedAlgorithm] =
     useState<string>("bubbleSort");
   const [secondSelectedAlgorithm, setSecondSelectedAlgorithm] =
     useState<string>("bubbleSort");
+  const [showSecondVisualiser, setShowSecondVisualiser] =
+    useState<boolean>(false);
 
   useEffect(() => {
     setLoading(false);

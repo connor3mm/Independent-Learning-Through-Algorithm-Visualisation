@@ -1,6 +1,5 @@
 using System.Security.Claims;
-using API_University_Dissertation.Core.Data.Entities;
-using API_University_Dissertation.Core.Repositories;
+using API_University_Dissertation.Application.DTO;
 using API_University_Dissertation.Core.Services.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,13 +24,13 @@ public class UserProfileController : ControllerBase
     public IActionResult Profile()
     {
         var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-
-        if (userEmail == null) return BadRequest();
-        return Ok(_profileService.GetRecordByEmail(userEmail));
+        var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (userUuid == null || userEmail == null) return BadRequest();
+        return Ok(_profileService.GetRecordByUuid(userUuid, userEmail));
     }
 
     [HttpPost("saveprofile", Name = "saveprofile")]
-    public IActionResult SaveProfile(UserProfile userProfile)
+    public IActionResult SaveProfile(UserProfileDto userProfile)
     {
         _profileService.AddNewProfile(userProfile);
         return Ok();
@@ -40,8 +39,9 @@ public class UserProfileController : ControllerBase
     [HttpPatch("updateproficiency", Name = "updateproficiency"), Authorize]
     public IActionResult UpdateProficiency(string proficiencyLevel)
     {
-        var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-        _profileService.UpdateProficiency(proficiencyLevel, userEmail);
+        var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (userUuid == null) return BadRequest();
+        _profileService.UpdateProficiency(proficiencyLevel, userUuid);
         return Ok();
     }
 }

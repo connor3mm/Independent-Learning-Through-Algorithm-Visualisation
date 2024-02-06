@@ -1,0 +1,107 @@
+  .info{
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.01em;
+    border-radius: 5px;
+  }
+
+  .vertical-menu {
+    flex: 0.2;
+    width: 200px;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #1c163a;
+    outline-style:solid;
+    outline-color: black;
+    outline-width: 0.1em;
+    border-radius: 5px;
+    margin-top: 2vh;
+  }
+  
+  .vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+  
+  .vertical-menu a:hover {
+    background-color: #ccc;
+  }
+  
+  .vertical-menu a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  .testingZoneInsideContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #10163a;
+
+    min-height: 80vh;
+    margin: 3vh;
+
+    outline-style:solid;
+    outline-color: lightblue;
+    outline-width: 0.2em;
+    border-radius: 20px;
+  }
+
+  .testingHeader{
+    margin-left: 10vh;
+    font-size: 2.5em;
+    text-align: left;
+  }
+
+  .testingZoneDescriptionContainer{
+      display: flex;
+  }
+
+  .testingZoneDescription{
+    Display: flex;
+    flex: 2;
+    flex-direction: column;
+    margin-bottom: 5vh;
+    text-align: left;
+    margin-left: 10vh;
+  }
+
+  .testingPlaySide{
+    Display: flex;
+    flex: .5;
+    flex-direction: column;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    text-align: left;
+  }
+
+  .testingSeparator {
+    width: 1px;
+    background-color: #401069;
+    margin: 0 2em 0 2em;
+  }
+
+  .description, .complexityDescription{
+    font-size: larger;
+  }
+
+  .complexityTable{
+    width: 100%;
+  }
+
+  .playQuizButton{
+    width: 10%;
+    font-size: larger;
+    color: black;
+    background-color: lightblue;
+    padding: 1em;
+    border-radius: 10px;
+  }
+
+  .testingDescription{
+    font-size: larger;
+    margin-right: 20em;
+    margin-bottom: 2em;
+  }
