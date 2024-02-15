@@ -10,4 +10,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<ProficiencyLevel> ProficiencyLevels { get; set; }
+    public DbSet<UserQuizStatistics> UserQuizStatistics { get; set; }
 }

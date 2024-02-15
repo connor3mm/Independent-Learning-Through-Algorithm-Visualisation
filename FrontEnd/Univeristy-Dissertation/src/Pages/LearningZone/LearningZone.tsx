@@ -104,7 +104,7 @@ const LearningZone: React.FC = () => {
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler(SortingAlgorithm.heapsort)}
+          onClick={() => algorithmClickHandler(SortingAlgorithm.heapSort)}
         >
           Heap Sort
         </a>

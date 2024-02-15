@@ -32,7 +32,7 @@ namespace Testing.Controllers
             _sortingServiceMock
                 .Setup(x => x.SortingAlgorithm(SortingStrategy.BubbleSort, inputArray))
                 .Returns(new[] { sortedArray });
-            
+
             // Act
             var result = _controller.BubbleSort(inputArray) as ObjectResult;
 
@@ -90,7 +90,7 @@ namespace Testing.Controllers
             var badRequestResult = result as BadRequestObjectResult;
             Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
         }
-        
+
         [Test]
         public void MergeSort_WithException_ReturnsBadRequest()
         {
@@ -106,7 +106,7 @@ namespace Testing.Controllers
             var badRequestResult = result as BadRequestObjectResult;
             Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
         }
-        
+
         [Test]
         public void InsertionSort_WithException_ReturnsBadRequest()
         {
@@ -116,6 +116,41 @@ namespace Testing.Controllers
 
             // Act
             var result = _controller.InsertionSort(Array.Empty<int>());
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.AreEqual("An error occurred: Test Exception", badRequestResult?.Value);
+        }
+
+        [Test]
+        public void QuickSort_ValidInput_ReturnsOk()
+        {
+            // Arrange
+            var inputArray = new[] { 9, 5, 2, 7, 1 };
+            var sortedArray = new[] { 1, 2, 5, 7, 9 };
+
+            _sortingServiceMock
+                .Setup(x => x.SortingAlgorithm(SortingStrategy.QuickSort, inputArray))
+                .Returns(new[] { sortedArray });
+
+            // Act
+            var result = _controller.QuickSort(inputArray) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result?.StatusCode);
+        }
+
+        [Test]
+        public void QuickSort_WithException_ReturnsBadRequest()
+        {
+            // Arrange
+            _sortingServiceMock.Setup(x => x.SortingAlgorithm(SortingStrategy.QuickSort, It.IsAny<int[]>()))
+                .Throws(new Exception("Test Exception"));
+
+            // Act
+            var result = _controller.QuickSort(Array.Empty<int>());
 
             // Assert
             Assert.IsInstanceOf<BadRequestObjectResult>(result);

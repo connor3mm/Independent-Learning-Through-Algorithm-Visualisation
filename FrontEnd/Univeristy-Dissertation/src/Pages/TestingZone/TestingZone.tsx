@@ -34,7 +34,8 @@ const TestingZone: React.FC = () => {
                   profile, your statistics, including scores and completion
                   rates, will be saved. Witness your growth as you tackle
                   assessments, and enjoy the satisfaction of watching your
-                  average score evolve over time.
+                  average score evolve over time. Choose between a smaller 5
+                  question quiz or with the 10 question quiz.
                 </div>
                 <button
                   className="playQuizButton"

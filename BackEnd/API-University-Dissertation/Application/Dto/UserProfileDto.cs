@@ -6,6 +6,6 @@ public class UserProfileDto
     public string Email { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string ProficiencyLevel { get; set; }
+    public int ProficiencyLevelId { get; set; }
     public DateOnly CreatedOn { get; set; }
 }

@@ -9,6 +9,7 @@ public class UserProfile
     public string UserUUID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string ProficiencyLevel { get; set; }
+    [ForeignKey("ProficiencyLevel")]
+    public int ProficiencyLevelId { get; set; }
     public DateOnly CreatedOn { get; set; }
 }

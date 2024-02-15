@@ -22,6 +22,24 @@ namespace API_University_Dissertation.MigrationsApplication
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.ProficiencyLevel", b =>
+                {
+                    b.Property<int>("LevelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LevelId"));
+
+                    b.Property<string>("LevelName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("LevelId");
+
+                    b.ToTable("ProficiencyLevels");
+                });
+
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.UserProfile", b =>
                 {
                     b.Property<int>("ID")
@@ -41,9 +59,8 @@ namespace API_University_Dissertation.MigrationsApplication
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProficiencyLevel")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ProficiencyLevelId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserUUID")
                         .IsRequired()
@@ -52,6 +69,29 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.HasKey("ID");
 
                     b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.UserQuizStatistics", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("QuizLength")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserUUID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserQuizStatistics");
                 });
 #pragma warning restore 612, 618
         }

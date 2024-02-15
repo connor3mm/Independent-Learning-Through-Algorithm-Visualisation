@@ -57,8 +57,28 @@ export const saveProfile = async (userProfile: UserProfile) => {
 
 export const generateQuizQuestions = async () => {
   try {
-    const responseData = await api.get(`quiz/generatequizquestions`);
+    const responseData = await api.get(`quiz/generatequiz`);
     return responseData;
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+export const saveCurrentUserStatistics = async (userStatistics: any) => {
+  setUserToken();
+  try {
+    return await api.post(`profile/saveuserstatistics`, userStatistics);
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+export const getUserStatistics = async () => {
+  setUserToken();
+  try {
+    return await api.get(`profile/userstatistics`);
   } catch (error: any) {
     console.log(error.message);
     throw error;

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API_University_Dissertation.MigrationsApplication
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240203195025_Initial")]
+    [Migration("20240206132746_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,6 +25,24 @@ namespace API_University_Dissertation.MigrationsApplication
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.ProficiencyLevel", b =>
+                {
+                    b.Property<int>("LevelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LevelId"));
+
+                    b.Property<string>("LevelName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("LevelId");
+
+                    b.ToTable("ProficiencyLevels");
+                });
+
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.UserProfile", b =>
                 {
                     b.Property<int>("ID")
@@ -33,8 +51,8 @@ namespace API_University_Dissertation.MigrationsApplication
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<DateOnly>("CreatedOn")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -44,9 +62,8 @@ namespace API_University_Dissertation.MigrationsApplication
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProficiencyLevel")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ProficiencyLevelId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserUUID")
                         .IsRequired()

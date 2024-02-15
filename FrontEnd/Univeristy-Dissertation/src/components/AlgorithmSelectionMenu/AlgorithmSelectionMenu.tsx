@@ -11,7 +11,7 @@ const SortingAlgorithm = {
   mergeSort: "Merge Sort",
   quickSort: "Quick Sort",
   shellSort: "Shell Sort",
-  heapsort: "Heap Sort",
+  heapSort: "Heap Sort",
 };
 
 const AlgorithmSelectionMenu = () => {

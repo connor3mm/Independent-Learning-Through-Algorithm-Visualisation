@@ -13,7 +13,7 @@ const Register: React.FC = () => {
     email: "",
     firstName: "",
     lastName: "",
-    proficiencyLevel: "Undetermined",
+    proficiencyLevelId: 1,
     createdOn: new Date().toISOString().split("T")[0],
   });
   const [formData, setFormData] = useState<RegisterFormData>({

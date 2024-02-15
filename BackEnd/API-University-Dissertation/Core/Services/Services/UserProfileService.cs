@@ -9,7 +9,9 @@ public interface IUserProfileService
 {
     void AddNewProfile(UserProfileDto userProfileDto);
     UserProfileDto GetRecordByUuid(string uuid, string email);
-    void UpdateProficiency(string proficiencyLevel, string userEmail);
+    void UpdateProficiency(int proficiencyLevel, string userEmail);
+    void SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics, string userUuid);
+    ProfileStatisticsDto GetUserStatistics(string userUuid);
 }
 
 public class UserProfileService : IUserProfileService
@@ -42,10 +44,37 @@ public class UserProfileService : IUserProfileService
         return userDto;
     }
 
-    public void UpdateProficiency(string proficiencyLevel, string uuid)
+    public void UpdateProficiency(int proficiencyLevel, string uuid)
     {
         var user = _userProfileRepository.GetByUuid(uuid);
-        user.ProficiencyLevel = proficiencyLevel;
+        user.ProficiencyLevelId = proficiencyLevel;
         _userProfileRepository.UpdateProficiencyLevel(user);
+    }
+
+    public void SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics, string userUuid)
+    {
+        var quizStats = new UserQuizStatistics
+        {
+            UserUUID = userUuid,
+            Score = userQuizStatistics.score,
+            QuizLength = userQuizStatistics.quizLength,
+        };
+
+        _userProfileRepository.SaveUserStatistics(quizStats);
+    }
+
+    public ProfileStatisticsDto GetUserStatistics(string userUuid)
+    {
+        var userStatistics = _userProfileRepository.GetUserStatistics(userUuid).ToList();
+        var totalScore = userStatistics.Sum(e => e.Score);
+        var totalQuestions = userStatistics.Sum(e => e.QuizLength);
+        var result = new ProfileStatisticsDto
+        {
+            TotalScore = totalScore,
+            TotalQuestions = totalQuestions,
+            GamesPlayed = userStatistics.Count,
+            AverageScore = Math.Round((double) totalQuestions / totalScore, 2),
+        };
+        return result;
     }
 }

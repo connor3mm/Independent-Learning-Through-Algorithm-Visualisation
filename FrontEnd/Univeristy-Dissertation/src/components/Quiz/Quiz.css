@@ -27,13 +27,17 @@
     padding: 1.5rem;
     color: white;
   }
+  
+  .option-choice{
+    padding-left: 10px;
+  }
 
   .choice-container.correct {
-    background-color: #8aff8a;
+    background-color: #45f845;
   }
   
   .choice-container.incorrect {
-    background-color: #ff8a8a;
+    background-color: #ff3131;
   }
 
   

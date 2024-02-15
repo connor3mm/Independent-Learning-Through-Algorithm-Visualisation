@@ -118,7 +118,7 @@ function SortingVisualiser() {
       <option value="mergeSort">{SortingAlgorithm.mergeSort}</option>
       <option value="quickSort">{SortingAlgorithm.quickSort}</option>
       <option value="shellSort">{SortingAlgorithm.shellSort}</option>
-      <option value="heapSort">{SortingAlgorithm.heapsort}</option>
+      <option value="heapSort">{SortingAlgorithm.heapSort}</option>
       <option value="bubbleSort" disabled hidden></option>
     </select>
   );

@@ -8,6 +8,8 @@ public interface IUserProfileRepository
     void Add(UserProfile profile);
     void UpdateProficiencyLevel(UserProfile user);
     UserProfile GetByUuid(string uuid);
+    void SaveUserStatistics(UserQuizStatistics userQuizStatistics);
+    IEnumerable<UserQuizStatistics> GetUserStatistics(string userUuid);
 }
 
 public class UserProfileRepository : IUserProfileRepository
@@ -28,6 +30,17 @@ public class UserProfileRepository : IUserProfileRepository
     public UserProfile GetByUuid(string uuid)
     {
         return _context.UserProfiles.SingleOrDefault(u => u.UserUUID == uuid) ?? throw new InvalidOperationException();
+    }
+
+    public void SaveUserStatistics(UserQuizStatistics userQuizStatistics)
+    {
+        _context.UserQuizStatistics.Add(userQuizStatistics);
+        _context.SaveChanges();
+    }
+
+    public IEnumerable<UserQuizStatistics> GetUserStatistics(string userUuid)
+    {
+        return _context.UserQuizStatistics.Where(u => u.UserUUID == userUuid);
     }
 
     public void UpdateProficiencyLevel(UserProfile user)

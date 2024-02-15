@@ -119,3 +119,17 @@ C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individu
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\API-University-Dissertation.dll
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\API-University-Dissertation.pdb
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Scrutor.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\Testing\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
