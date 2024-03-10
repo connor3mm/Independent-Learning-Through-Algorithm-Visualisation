@@ -54,15 +54,12 @@ public class UserProfileController : ControllerBase
         }
     }
 
-    [HttpPatch("updateproficiency", Name = "updateproficiency"), Authorize]
-    public IActionResult UpdateProficiency(int proficiencyLevel)
+    [HttpPost("updateproficiency", Name = "updateproficiency")]
+    public IActionResult UpdateProficiency([FromBody] ProficiencyUpdateDto model)
     {
-        var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        if (userUuid == null) return BadRequest();
-
         try
         {
-            _profileService.UpdateProficiency(proficiencyLevel, userUuid);
+            _profileService.UpdateProficiency(model.ProficiencyLevelId, model.Email);
             return Ok();
         }
         catch (Exception ex)

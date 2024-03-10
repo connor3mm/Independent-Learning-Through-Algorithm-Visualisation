@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 function AlgorithmInputBox({
   setCustomInputArray,
+  setIsPlaying,
 }: {
   setCustomInputArray: React.Dispatch<React.SetStateAction<number[]>>;
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [customInput, setCustomInput] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -26,6 +28,7 @@ function AlgorithmInputBox({
       setErrorMessage("");
       setCustomInputArray(inputArray);
     }
+    setIsPlaying(false);
   };
 
   return (

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { registerUser, saveProfile } from "../../services/api/ApiEndpoints";
 import { useNavigate } from "react-router-dom";
+import "./Registration.css";
+import ProficiencyQuiz from "../../components/ProficiencyQuiz/ProficiencyQuiz";
 
 interface RegisterFormData {
   password: string;
   confirmPassword: string;
 }
 
+interface UserProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  proficiencyLevelId: number;
+  createdOn: string;
+}
+
 const Register: React.FC = () => {
   const navigate = useNavigate();
+
   const [userProfile, setUserProfile] = useState<UserProfile>({
     email: "",
     firstName: "",
@@ -25,7 +36,7 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    let registerSuccess = false;
+    let registerSuccess = true;
 
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match. Please re-enter.");
@@ -35,6 +46,7 @@ const Register: React.FC = () => {
     try {
       await registerUser(userProfile.email, formData.password);
       registerSuccess = true;
+      setRegistrationSuccess(true);
     } catch (error) {
       console.error(error);
     }
@@ -42,7 +54,6 @@ const Register: React.FC = () => {
     if (registerSuccess) {
       try {
         await saveProfile(userProfile);
-        setRegistrationSuccess(true);
       } catch (error) {
         console.error(error);
       }
@@ -71,68 +82,71 @@ const Register: React.FC = () => {
 
   return (
     <div>
-      {!registrationSuccess ? (
-        <div>
-          <h2>Register</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="firstName">First Name:</label>
-              <input
-                type="text"
-                id="firstName"
-                value={userProfile.firstName}
-                onChange={(e) => handleChangeUser(e, "firstName")}
-              />
-            </div>
-            <div>
-              <label htmlFor="fullName">Last Name:</label>
-              <input
-                type="text"
-                id="lastName"
-                value={userProfile.lastName}
-                onChange={(e) => handleChangeUser(e, "lastName")}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                value={userProfile.email}
-                onChange={(e) => handleChangeUser(e, "email")}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={formData.password}
-                onChange={(e) => handleChange(e, "password")}
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Confirm Password:</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={(e) => handleChange(e, "confirmPassword")}
-              />
-            </div>
-            <button type="submit">Register</button>
-          </form>
-        </div>
-      ) : (
-        <>
+      <div className="registrationBox">
+        {registrationSuccess ? (
           <div>
             <h2>Registration Successful!</h2>
+            <div>
+              <button onClick={() => navigate("/login")}> Log In</button>
+            </div>
+            <div>
+              <ProficiencyQuiz email={userProfile.email} />
+            </div>
           </div>
-          <div>
-            <button onClick={() => navigate("/login")}> Log In</button>
-          </div>
-        </>
-      )}
+        ) : (
+          <>
+            <h2>Register</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="firstName">First Name:</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  value={userProfile.firstName}
+                  onChange={(e) => handleChangeUser(e, "firstName")}
+                />
+              </div>
+              <div>
+                <label htmlFor="fullName">Last Name:</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  value={userProfile.lastName}
+                  onChange={(e) => handleChangeUser(e, "lastName")}
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={userProfile.email}
+                  onChange={(e) => handleChangeUser(e, "email")}
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={(e) => handleChange(e, "password")}
+                />
+              </div>
+              <div>
+                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={(e) => handleChange(e, "confirmPassword")}
+                />
+              </div>
+              <button type="submit">Register</button>
+            </form>
+          </>
+        )}
+      </div>
     </div>
   );
 };

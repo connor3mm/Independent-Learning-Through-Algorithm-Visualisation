@@ -15,6 +15,10 @@ class ApiAuthService {
     });
   }
 
+  setAuthToken(authToken: string | null) {
+    this.authToken = authToken;
+  }
+
   private handleError(error: AxiosError) {
     if (error.response) {
       const { status, data } = error.response;
@@ -26,10 +30,6 @@ class ApiAuthService {
     } else {
       throw new Error(`Request failed: ${error.message}`);
     }
-  }
-
-  setAuthToken(authToken: string | null) {
-    this.authToken = authToken;
   }
 
   private async request(method: string, endpoint: string, data?: any) {
@@ -58,6 +58,9 @@ class ApiAuthService {
 
   async post(endpoint: string, data: any) {
     return this.request("post", endpoint, data);
+  }
+  async patch(endpoint: string, data: any) {
+    return this.request("patch", endpoint, JSON.stringify(data));
   }
 
   async put(endpoint: string, data: any) {

@@ -40,3 +40,15 @@
     padding-bottom: 1em;
   }
  
+  .notFoundBox{
+    border: 2px solid;
+    margin: auto;
+    width: 40%;
+    padding: 1vh;
+    padding-bottom: 5vh;
+   
+    outline-style:solid;
+    outline-color: #FFF;
+    outline-width: 0.1em;
+    border-radius: 20px;
+}

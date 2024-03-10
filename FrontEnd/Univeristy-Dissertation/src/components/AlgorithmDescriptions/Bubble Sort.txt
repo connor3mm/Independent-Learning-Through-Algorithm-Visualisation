@@ -1,7 +1,7 @@
 {
   "description": "Bubble Sort is an iterative sorting algorithm that mimics the rising motion of bubbles in fizzy water, with each bubble symbolizing an element within the data structure. \nIn this algorithm, larger bubbles ascend to the top more quickly than smaller ones, drawing a parallel to the sorting process. It systematically traverses the data structure, comparing each element to the subsequent one in each iteration. If they are in the incorrect order, a swap occurs. \nWhile it is a straightforward algorithm to implement, its efficiency is limited. On average, other quadratic sorting algorithms with equivalent time complexity, such as Selection Sort or Insertion Sort, tend to outperform Bubble Sort.",
-  "averageComplexity": "O(n × log n)",
-  "bestCase": "O(n × log n)",
+  "averageComplexity": "O(n^2)",
+  "bestCase": "O(n)",
   "worstCase": "O(n^2)",
-  "spaceComplexity": "O(n)"
+  "spaceComplexity": "O(1)"
 }

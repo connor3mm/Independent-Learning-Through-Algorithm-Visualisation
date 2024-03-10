@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { getProfile, getUserStatistics } from "../../services/api/ApiEndpoints";
 import "./Profile.css";
 import proficiencyLevel from "../../services/enums/ProficiencyLevel";
+import ProficiencyQuiz from "../../components/ProficiencyQuiz/ProficiencyQuiz";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 interface UserStatistics {
   totalScore: number;
@@ -13,6 +16,7 @@ interface UserStatistics {
 
 const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [showProficiencyTest, setShowProficiencyTest] = useState(false);
   const [userStatistics, setUserStatistics] = useState<UserStatistics>({
     totalScore: 0,
     totalQuestions: 0,
@@ -49,45 +53,53 @@ const Profile: React.FC = () => {
   return (
     <div>
       <h2>Profile</h2>
-      {userProfile ? (
-        <>
-          <div className="profile-flex-container">
-            <div className="profile-flex-items">
-              <h2>User Details</h2>
-              <p>Email: {userProfile.email}</p>
-              <p>First Name: {userProfile.firstName}</p>
-              <p>Last Name : {userProfile.lastName}</p>
-              <p>
-                Proficiency Level :{" "}
-                {proficiencyLevel[userProfile.proficiencyLevelId]}
-              </p>
-              <p>Created On : {userProfile.createdOn}</p>
-            </div>
-            <div className="profile-flex-items">
-              {" "}
-              <h2>Testing Statistics</h2>
-              <p>Games Played: {userStatistics.gamesPlayed}</p>
-              <p>Total Score: {userStatistics.totalScore}</p>
-              <p>Total Questions: {userStatistics.totalQuestions}</p>
-              <p>Average Score: {userStatistics.averageScore}</p>
-              <p>Proficency Level Progresssion: </p>
-            </div>
+      {showProficiencyTest ? (
+        <div className="registrationBox">
+          <ProficiencyQuiz email={userProfile?.email} />
+        </div>
+      ) : userProfile ? (
+        <div className="profile-flex-container">
+          <div className="profile-flex-items">
+            <h2>User Details</h2>
+            <p>Email: {userProfile.email}</p>
+            <p>First Name: {userProfile.firstName}</p>
+            <p>Last Name: {userProfile.lastName}</p>
+            <p>Account Created On: {userProfile.createdOn}</p>
+            <p>
+              Proficiency Level:{" "}
+              {proficiencyLevel[userProfile.proficiencyLevelId]}
+            </p>
+            {userProfile.proficiencyLevelId === 1 && (
+              <button onClick={() => setShowProficiencyTest(true)}>
+                Take Proficiency Test
+              </button>
+            )}
           </div>
-        </>
+          <div className="profile-flex-items">
+            <h2>Testing Statistics</h2>
+            <p>Games Played: {userStatistics.gamesPlayed}</p>
+            <p>Total Score: {userStatistics.totalScore}</p>
+            <p>Total Questions: {userStatistics.totalQuestions}</p>
+            <p>Average Score: {userStatistics.averageScore}</p>
+            {userProfile.proficiencyLevelId !== 1 && (
+              <p>Proficiency Level Progression: </p>
+            )}
+          </div>
+        </div>
       ) : (
-        <>
+        <div className="notFoundBox">
           <p>Profile not found</p>
           <p>Please Register or Log In</p>
-          <div>
-            <button onClick={() => navigate("/register")}> Register</button>
-          </div>
-          <div>
-            <button onClick={() => navigate("/login")}> Log In</button>
-          </div>
-        </>
+          <ButtonGroup
+            variant="contained"
+            aria-label="outlined primary button group"
+          >
+            <Button onClick={() => navigate("/register")}>Register</Button>
+            <Button onClick={() => navigate("/login")}>Log In</Button>
+          </ButtonGroup>
+        </div>
       )}
     </div>
   );
 };
-
 export default Profile;

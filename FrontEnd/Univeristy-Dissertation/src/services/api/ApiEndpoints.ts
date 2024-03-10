@@ -65,6 +65,22 @@ export const generateQuizQuestions = async () => {
   }
 };
 
+export const updateProficencyLevel = async (
+  email?: string,
+  ProficiencyLevelId?: number
+) => {
+  try {
+    console.log(ProficiencyLevelId);
+    return await api.post(`profile/updateproficiency`, {
+      email,
+      ProficiencyLevelId,
+    });
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
 export const saveCurrentUserStatistics = async (userStatistics: any) => {
   setUserToken();
   try {

@@ -26,7 +26,10 @@ function Home() {
           </div>
           <div className="homeContainer">
             <div className="mascotContainer">
-              <img src={mascot} alt="Sloth-Application Mascot" />
+              <img
+                src={mascot}
+                alt="Sloth holding laptop - The Application Mascot"
+              />
             </div>
 
             <div className="buttonContainer">

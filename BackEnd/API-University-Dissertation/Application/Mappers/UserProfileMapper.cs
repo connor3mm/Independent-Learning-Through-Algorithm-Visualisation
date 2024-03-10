@@ -11,5 +11,7 @@ public class UserProfileMapper : Profile
     {
         CreateMap<UserProfile, UserProfileDto>();
         CreateMap<UserProfileDto, UserProfile>();
+        CreateMap<QuestionChoices, QuestionChoicesDTO>();
+        CreateMap<QuizQuestions, QuizQuestionsDTO>();
     }
 }

@@ -1,7 +1,7 @@
 {
   "description": "Insertion Sort is a straightforward sorting algorithm that constructs the sorted array incrementally by processing one element at a time. While less performant than more advanced sorting algorithms, it offers advantages in simplicity and efficiency when dealing with small data structures that are nearly sorted.\nThe algorithm operates by dividing the data structure into two sublists: a sorted sublist and an unsorted sublist. Initially, the sorted sublist consists of a single element, which is then gradually expanded. In each iteration, the algorithm selects an element from the unsorted sublist and inserts it at the appropriate position within the sorted sublist",
-  "averageComplexity": "O(n2)",
+  "averageComplexity": "O(n^2)",
   "bestCase": "O(n)",
-  "worstCase": "O(n2)",
+  "worstCase": "O(n^2)",
   "spaceComplexity": "O(1)"
 }

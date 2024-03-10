@@ -6,7 +6,7 @@
         <entry key="Common:8d469fe8-15da-4166-9101-eafbe6a32361:dbContext" value="API_University_Dissertation.Data.ApplicationDbContext" />
         <entry key="Common:buildConfiguration" value="Debug" />
         <entry key="Common:noBuild" value="false" />
-        <entry key="Common:outputFolder" value="MigrationsUserStatistics" />
+        <entry key="Common:outputFolder" value="MigrationsQuizQuestions" />
       </map>
     </option>
   </component>

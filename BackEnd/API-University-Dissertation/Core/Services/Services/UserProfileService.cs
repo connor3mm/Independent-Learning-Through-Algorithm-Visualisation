@@ -2,6 +2,9 @@ using API_University_Dissertation.Application.DTO;
 using API_University_Dissertation.Core.Data.Entities;
 using API_University_Dissertation.Core.Repositories;
 using AutoMapper;
+using API_University_Dissertation.Core.Data.Enums;
+using Microsoft.AspNetCore.Http.HttpResults;
+using ProficiencyLevel = API_University_Dissertation.Core.Data.Enums.ProficiencyLevel;
 
 namespace API_University_Dissertation.Core.Services.Services;
 
@@ -44,20 +47,32 @@ public class UserProfileService : IUserProfileService
         return userDto;
     }
 
-    public void UpdateProficiency(int proficiencyLevel, string uuid)
+    public void UpdateProficiency(int proficiencyLevel, string userEmail)
     {
-        var user = _userProfileRepository.GetByUuid(uuid);
+        var aspUserId = _aspNetUserRepository.GetByEmail(userEmail);
+        if (aspUserId == null) throw new Exception("User with uuid" + aspUserId + "not found");
+
+        var user = _userProfileRepository.GetByUuid(aspUserId);
+        if (user == null) throw new Exception("User with uuid" + aspUserId + "not found");
+
         user.ProficiencyLevelId = proficiencyLevel;
         _userProfileRepository.UpdateProficiencyLevel(user);
     }
 
     public void SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics, string userUuid)
     {
+        var user = _userProfileRepository.GetByUuid(userUuid);
+        if (user.ProficiencyLevelId == (int)ProficiencyLevel.Undetermined)
+        {
+            user.ProficiencyLevelId = (int)ProficiencyLevel.Beginner;
+            _userProfileRepository.UpdateProficiencyLevel(user);
+        }
+
         var quizStats = new UserQuizStatistics
         {
             UserUUID = userUuid,
-            Score = userQuizStatistics.score,
-            QuizLength = userQuizStatistics.quizLength,
+            Score = userQuizStatistics.Score,
+            QuizLength = userQuizStatistics.QuizLength,
         };
 
         _userProfileRepository.SaveUserStatistics(quizStats);
@@ -73,7 +88,7 @@ public class UserProfileService : IUserProfileService
             TotalScore = totalScore,
             TotalQuestions = totalQuestions,
             GamesPlayed = userStatistics.Count,
-            AverageScore = Math.Round((double) totalQuestions / totalScore, 2),
+            AverageScore = Math.Round((double)totalQuestions / totalScore, 2),
         };
         return result;
     }

@@ -13,8 +13,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -42,6 +40,11 @@ builder.Services.AddSwaggerGen(options =>
             new string[] { }
         },
     });
+});
+
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole();
 });
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -74,9 +77,11 @@ builder.Services.AddCors(options =>
                 .AllowAnyMethod();
         });
 });
-
+builder.Services.AddLogging();
 builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 builder.Services.AddTransient<IAspNetUserRepository, AspNetUserRepository>();
+builder.Services.AddTransient<IQuizRepository, QuizRepository>();
+builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
 builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
 builder.Services.AddScoped<ISortingStrategy, MergeSort>();

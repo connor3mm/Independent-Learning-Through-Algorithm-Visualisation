@@ -8,11 +8,12 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import ClearIcon from "@mui/icons-material/Clear";
 
 interface QuizQuestion {
+  id: number;
   question: string;
-  options: QuizOption[];
+  questionChoices: QuestionChoice[];
 }
 
-interface QuizOption {
+interface QuestionChoice {
   id: number;
   choice: string;
   isCorrect: boolean;
@@ -28,11 +29,13 @@ const Quiz: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerSelected, setAnswerSelected] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [quizData, setQuizData] = useState<QuizQuestion[]>([
     {
+      id: 1,
       question: "Default Question",
-      options: [
+      questionChoices: [
         { id: 0, choice: "Answer A", isCorrect: false },
         { id: 1, choice: "Answer B", isCorrect: false },
         { id: 2, choice: "Answer C", isCorrect: false },
@@ -44,65 +47,17 @@ const Quiz: React.FC = () => {
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
-        await generateQuizQuestions().then((data) => {
-          setQuizData(data);
-        });
+        const data = await generateQuizQuestions();
+        setQuizData(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
+        setIsLoading(false);
       }
     };
 
     fetchQuizData();
-    setQuizData(questions);
   }, []);
-
-  const questions: QuizQuestion[] = [
-    {
-      question: "What is the capital of America?",
-      options: [
-        { id: 0, choice: "New York City", isCorrect: false },
-        { id: 1, choice: "Boston", isCorrect: false },
-        { id: 2, choice: "Santa Fe", isCorrect: false },
-        { id: 3, choice: "Washington DC", isCorrect: true },
-      ],
-    },
-    {
-      question: "What year was the Constitution of America written?",
-      options: [
-        { id: 0, choice: "1787", isCorrect: true },
-        { id: 1, choice: "1776", isCorrect: false },
-        { id: 2, choice: "1774", isCorrect: false },
-        { id: 3, choice: "1826", isCorrect: false },
-      ],
-    },
-    {
-      question: "Who was the second president of the US?",
-      options: [
-        { id: 0, choice: "John Adams", isCorrect: true },
-        { id: 1, choice: "Paul Revere", isCorrect: false },
-        { id: 2, choice: "Thomas Jefferson", isCorrect: false },
-        { id: 3, choice: "Benjamin Franklin", isCorrect: false },
-      ],
-    },
-    {
-      question: "What is the largest state in the US?",
-      options: [
-        { id: 0, choice: "California", isCorrect: false },
-        { id: 1, choice: "Alaska", isCorrect: true },
-        { id: 2, choice: "Texas", isCorrect: false },
-        { id: 3, choice: "Montana", isCorrect: false },
-      ],
-    },
-    {
-      question: "Which of the following countries DO NOT border the US?",
-      options: [
-        { id: 0, choice: "Canada", isCorrect: false },
-        { id: 1, choice: "Russia", isCorrect: true },
-        { id: 2, choice: "Cuba", isCorrect: false },
-        { id: 3, choice: "Mexico", isCorrect: false },
-      ],
-    },
-  ];
 
   const optionClicked = (isCorrect: boolean) => {
     if (answerSelected) {
@@ -111,9 +66,7 @@ const Quiz: React.FC = () => {
 
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
-      console.log("hi");
     }
-
     setAnswerSelected(true);
   };
 
@@ -153,7 +106,9 @@ const Quiz: React.FC = () => {
 
   return (
     <div className="container">
-      {showResults ? (
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : showResults ? (
         <div className="final-results">
           <h1>Final Results</h1>
           <h2>
@@ -175,10 +130,10 @@ const Quiz: React.FC = () => {
               Question: {currentQuestion + 1} out of {quizData.length}
             </h3>
             <h2 className="question-text">
-              {quizData[currentQuestion].question}
+              {quizData[currentQuestion]?.question}
             </h2>
 
-            {quizData[currentQuestion].options.map((option, index) => {
+            {quizData[currentQuestion]?.questionChoices.map((option, index) => {
               const isCorrect = option.isCorrect;
               const optionClassName = `choice-container${
                 answerSelected && isCorrect

@@ -52,9 +52,8 @@ h1 {
 
 button:hover {
   background-position: bottom center; 
-  color: #535bf2;
   text-decoration: none;
-  background-color: #1c163a;
+  background-color: #543bd3;
 }
 
 .homeTitle{

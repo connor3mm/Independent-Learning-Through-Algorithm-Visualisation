@@ -123,6 +123,34 @@ const LearningZone: React.FC = () => {
         >
           Binary Search
         </a>
+        <a
+          href="#"
+          className="info"
+          onClick={() => algorithmClickHandler("Bubble Sort")}
+        >
+          Depth-First Search
+        </a>
+        <a
+          href="#"
+          className="info"
+          onClick={() => algorithmClickHandler("Bubble Sort")}
+        >
+          Breadth-First Search
+        </a>
+        <a
+          href="#"
+          className="info"
+          onClick={() => algorithmClickHandler("Bubble Sort")}
+        >
+          A Star Search
+        </a>
+        <a
+          href="#"
+          className="info"
+          onClick={() => algorithmClickHandler("Bubble Sort")}
+        >
+          Uniform Cost Search
+        </a>
       </div>
       <div className="learningZone">
         <div className="learningZoneContainer">

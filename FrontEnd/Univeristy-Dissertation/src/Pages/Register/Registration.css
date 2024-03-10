@@ -1,0 +1,11 @@
+.registrationBox{
+    border: 2px solid;
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+    margin-top: 10vh;
+    outline-style:solid;
+    outline-color: #FFF;
+    outline-width: 0.1em;
+    border-radius: 20px;
+}

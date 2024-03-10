@@ -1,0 +1,26 @@
+.error-container {
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .clear-icon {
+    vertical-align: middle;
+  }
+
+  .loginBox{
+    border: 2px solid;
+    margin: auto;
+    width: 30%;
+    padding-bottom: 20px;
+    margin-top: 10vh;
+    outline-style:solid;
+    outline-color: #FFF;
+    outline-width: 0.1em;
+    border-radius: 20px;
+  }
+
+  .button-container{
+    padding-top: 2vh;
+  }

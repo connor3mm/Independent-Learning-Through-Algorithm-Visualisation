@@ -118,7 +118,6 @@ function SortingVisualiser() {
       <option value="mergeSort">{SortingAlgorithm.mergeSort}</option>
       <option value="quickSort">{SortingAlgorithm.quickSort}</option>
       <option value="shellSort">{SortingAlgorithm.shellSort}</option>
-      <option value="heapSort">{SortingAlgorithm.heapSort}</option>
       <option value="bubbleSort" disabled hidden></option>
     </select>
   );
@@ -131,7 +130,12 @@ function SortingVisualiser() {
         <>
           <div className="sortAnimationContainer">
             {renderVisualisationContainer(selectedAlgorithm, 1, sortingData)}
-
+            {showSecondVisualiser &&
+              renderVisualisationContainer(
+                secondSelectedAlgorithm,
+                2,
+                secondSortingData
+              )}
             <div className="visualisationControlsContainer">
               <div className="controls">
                 <h2>Controls</h2>
@@ -163,14 +167,11 @@ function SortingVisualiser() {
                   </div>
                 )}
               </div>
-              <AlgorithmInputBox setCustomInputArray={setCustomInputArray} />
+              <AlgorithmInputBox
+                setCustomInputArray={setCustomInputArray}
+                setIsPlaying={setIsPlaying}
+              />
             </div>
-            {showSecondVisualiser &&
-              renderVisualisationContainer(
-                secondSelectedAlgorithm,
-                2,
-                secondSortingData
-              )}
           </div>
         </>
       )}

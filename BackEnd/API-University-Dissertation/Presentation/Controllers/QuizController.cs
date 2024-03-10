@@ -5,7 +5,7 @@ namespace API_University_Dissertation.Presentation.Controllers;
 
 [ApiController]
 [Route("quiz")]
-public class QuizController : ControllerBase
+public class  QuizController : ControllerBase
 {
     private readonly ILogger<QuizController> _logger;
     private readonly IQuizService _quizService;
@@ -22,8 +22,7 @@ public class QuizController : ControllerBase
     {
         try
         {
-            _quizService.GenerateQuiz();
-            return Ok();
+            return Ok(_quizService.GenerateQuiz());
         }
         catch (Exception ex)
         {
