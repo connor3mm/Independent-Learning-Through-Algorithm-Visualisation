@@ -15,4 +15,24 @@ public class ApplicationDbContext : DbContext
     public DbSet<QuizQuestions> QuizQuestions { get; set; }
     public DbSet<QuestionChoices> QuestionChoices { get; set; }
     public DbSet<QuestionType> QuestionTypes { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<QuestionType>().HasData(
+            new QuestionType { Id = 1, Type = "Complexity" },
+            new QuestionType { Id = 2, Type = "Sorting Algorithms" },
+            new QuestionType { Id = 3, Type = "Searching Algorithms" },
+            new QuestionType { Id = 4, Type = "Other" }
+        );
+
+
+        modelBuilder.Entity<ProficiencyLevel>().HasData(
+            new ProficiencyLevel { LevelId = 1, LevelName = "Undetermined" },
+            new ProficiencyLevel { LevelId = 2, LevelName = "Beginner" },
+            new ProficiencyLevel { LevelId = 3, LevelName = "Intermediate" },
+            new ProficiencyLevel { LevelId = 4, LevelName = "Advanced" }
+        );
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

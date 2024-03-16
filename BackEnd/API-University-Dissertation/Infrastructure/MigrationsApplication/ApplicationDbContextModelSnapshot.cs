@@ -38,6 +38,28 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.HasKey("LevelId");
 
                     b.ToTable("ProficiencyLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            LevelId = 1,
+                            LevelName = "Undetermined"
+                        },
+                        new
+                        {
+                            LevelId = 2,
+                            LevelName = "Beginner"
+                        },
+                        new
+                        {
+                            LevelId = 3,
+                            LevelName = "Intermediate"
+                        },
+                        new
+                        {
+                            LevelId = 4,
+                            LevelName = "Advanced"
+                        });
                 });
 
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuestionChoices", b =>
@@ -65,6 +87,45 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.ToTable("QuestionChoices");
                 });
 
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuestionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "Complexity"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "Sorting Algorithms"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Type = "Searching Algorithms"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "Other"
+                        });
+                });
+
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuizQuestions", b =>
                 {
                     b.Property<int>("Id")
@@ -77,7 +138,12 @@ namespace API_University_Dissertation.MigrationsApplication
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("QuestionTypeId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionTypeId");
 
                     b.ToTable("QuizQuestions");
                 });
@@ -145,6 +211,22 @@ namespace API_University_Dissertation.MigrationsApplication
                         .IsRequired();
 
                     b.Navigation("QuizQuestion");
+                });
+
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuizQuestions", b =>
+                {
+                    b.HasOne("API_University_Dissertation.Core.Data.Entities.QuestionType", "QuestionType")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuestionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("QuestionType");
+                });
+
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuestionType", b =>
+                {
+                    b.Navigation("QuizQuestions");
                 });
 
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuizQuestions", b =>

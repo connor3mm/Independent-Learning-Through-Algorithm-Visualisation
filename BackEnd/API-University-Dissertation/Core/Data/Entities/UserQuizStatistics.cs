@@ -9,4 +9,5 @@ public class UserQuizStatistics
     public string UserUUID { get; set; }
     public int Score { get; set; }
     public int QuizLength { get; set; }
+    public DateTime CreatedOn { get; set; }
 }
