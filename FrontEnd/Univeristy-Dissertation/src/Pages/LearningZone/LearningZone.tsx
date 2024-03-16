@@ -108,7 +108,7 @@ const LearningZone: React.FC = () => {
         >
           Heap Sort
         </a>
-        <h3>Searching Algortithms</h3>
+        <h3>Searching Algorithms</h3>
         <a
           href="#"
           className="info"

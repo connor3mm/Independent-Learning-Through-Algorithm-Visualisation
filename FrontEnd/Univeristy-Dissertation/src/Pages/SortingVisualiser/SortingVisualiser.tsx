@@ -140,6 +140,21 @@ function SortingVisualiser() {
               <div className="controls">
                 <h2>Controls</h2>
 
+                <div>
+                  <div>Algorithm One</div>
+                  {renderDropdown(selectedAlgorithm, handleAlgorithmChange)}
+                </div>
+
+                {showSecondVisualiser && (
+                  <div>
+                    <div>Algorithm Two</div>
+                    {renderDropdown(
+                      secondSelectedAlgorithm,
+                      handleSecondAlgorithmChange
+                    )}
+                  </div>
+                )}
+
                 <SpeedOptions
                   speed={speed}
                   handleSpeedChange={handleSpeedChange}
@@ -154,18 +169,6 @@ function SortingVisualiser() {
                 <Button variant="outlined" onClick={toggleSecondVisualiser}>
                   {showSecondVisualiser ? "Hide Compare" : "Compare Algorithms"}
                 </Button>
-                <div>
-                  {renderDropdown(selectedAlgorithm, handleAlgorithmChange)}
-                </div>
-
-                {showSecondVisualiser && (
-                  <div>
-                    {renderDropdown(
-                      secondSelectedAlgorithm,
-                      handleSecondAlgorithmChange
-                    )}
-                  </div>
-                )}
               </div>
               <AlgorithmInputBox
                 setCustomInputArray={setCustomInputArray}

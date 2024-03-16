@@ -81,6 +81,7 @@ public class UserProfileService : IUserProfileService
     public ProfileStatisticsDto GetUserStatistics(string userUuid)
     {
         var userStatistics = _userProfileRepository.GetUserStatistics(userUuid).ToList();
+        var numberOfGames = userStatistics.Count();
         var totalScore = userStatistics.Sum(e => e.Score);
         var totalQuestions = userStatistics.Sum(e => e.QuizLength);
         var result = new ProfileStatisticsDto
@@ -88,7 +89,7 @@ public class UserProfileService : IUserProfileService
             TotalScore = totalScore,
             TotalQuestions = totalQuestions,
             GamesPlayed = userStatistics.Count,
-            AverageScore = Math.Round((double)totalQuestions / totalScore, 2),
+            AverageScore = totalScore != 0 ? Math.Round((double)totalScore / numberOfGames, 2) : 0,
         };
         return result;
     }

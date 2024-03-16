@@ -28,6 +28,9 @@ const SpeedOptions: React.FC<SpeedOptionsProps> = ({
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="female"
         name="radio-buttons-group"
+        sx={{
+          flexDirection: "row",
+        }}
       >
         <FormControlLabel
           value="slow"

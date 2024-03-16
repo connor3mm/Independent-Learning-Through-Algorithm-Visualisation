@@ -28,12 +28,12 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
     },
     {
       questionText:
-        "Whats you knowledge levels of time and space complecity of sorting algorithms?",
+        "What's your knowledge levels of time and space complexity of sorting algorithms?",
       questionChoices: ["No knowledge", "Little knowledge", "Expert"],
     },
     {
       questionText:
-        "Whats you knowledge levels of time and space complecity of searching algorithms?",
+        "What's your knowledge levels of time and space complexity of searching algorithms?",
       questionChoices: ["No knowledge", "Little knowledge", "Expert"],
     },
     {

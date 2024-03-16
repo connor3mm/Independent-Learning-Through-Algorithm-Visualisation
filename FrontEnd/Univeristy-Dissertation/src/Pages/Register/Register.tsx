@@ -38,7 +38,10 @@ const Register: React.FC = () => {
     event.preventDefault();
     let registerSuccess = true;
 
-    if (formData.password !== formData.confirmPassword) {
+    if (
+      formData.password === "" ||
+      formData.password !== formData.confirmPassword
+    ) {
       alert("Passwords don't match. Please re-enter.");
       return;
     }
