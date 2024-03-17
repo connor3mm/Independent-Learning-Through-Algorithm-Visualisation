@@ -59,6 +59,11 @@ namespace API_University_Dissertation.MigrationsApplication
                         {
                             LevelId = 4,
                             LevelName = "Advanced"
+                        },
+                        new
+                        {
+                            LevelId = 5,
+                            LevelName = "Expert"
                         });
                 });
 
@@ -170,6 +175,9 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.Property<int>("ProficiencyLevelId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("ProficiencyScore")
+                        .HasColumnType("integer");
+
                     b.Property<string>("UserUUID")
                         .IsRequired()
                         .HasColumnType("text");
@@ -187,17 +195,21 @@ namespace API_University_Dissertation.MigrationsApplication
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("QuizLength")
                         .HasColumnType("integer");
 
                     b.Property<int>("Score")
                         .HasColumnType("integer");
 
-                    b.Property<string>("UserUUID")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("UserProfileID")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UserProfileID");
 
                     b.ToTable("UserQuizStatistics");
                 });
@@ -224,6 +236,17 @@ namespace API_University_Dissertation.MigrationsApplication
                     b.Navigation("QuestionType");
                 });
 
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.UserQuizStatistics", b =>
+                {
+                    b.HasOne("API_University_Dissertation.Core.Data.Entities.UserProfile", "UserProfile")
+                        .WithMany("UserQuizStatistics")
+                        .HasForeignKey("UserProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuestionType", b =>
                 {
                     b.Navigation("QuizQuestions");
@@ -232,6 +255,11 @@ namespace API_University_Dissertation.MigrationsApplication
             modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.QuizQuestions", b =>
                 {
                     b.Navigation("QuestionChoices");
+                });
+
+            modelBuilder.Entity("API_University_Dissertation.Core.Data.Entities.UserProfile", b =>
+                {
+                    b.Navigation("UserQuizStatistics");
                 });
 #pragma warning restore 612, 618
         }

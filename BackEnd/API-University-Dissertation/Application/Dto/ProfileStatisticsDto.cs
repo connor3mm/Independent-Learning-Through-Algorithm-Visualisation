@@ -6,4 +6,5 @@ public class ProfileStatisticsDto
     public int TotalQuestions { get; set; }
     public int GamesPlayed { get; set; }
     public double AverageScore { get; set; }
+    public int ProficiencyScore { get; set; }
 }

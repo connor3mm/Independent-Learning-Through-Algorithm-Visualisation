@@ -6,7 +6,7 @@ namespace API_University_Dissertation.Core.Repositories;
 
 public interface IQuizRepository
 {
-    List<QuizQuestions> GetQuizQuestions();
+    List<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count);
 }
 
 public class QuizRepository : IQuizRepository
@@ -18,11 +18,13 @@ public class QuizRepository : IQuizRepository
         _context = context;
     }
 
-    public List<QuizQuestions> GetQuizQuestions()
+    public List<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count)
     {
         return _context.QuizQuestions
             .Include(q => q.QuestionChoices)
-            .Where(q => q.Id == 1 || q.Id == 2 || q.Id == 3)
+            .Where(q => quizTypeIds.Contains(q.QuestionTypeId))
+            .OrderBy(q => EF.Functions.Random())
+            .Take(count)
             .ToList();
     }
 }

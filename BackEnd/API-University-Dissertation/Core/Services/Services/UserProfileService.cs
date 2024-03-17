@@ -2,8 +2,6 @@ using API_University_Dissertation.Application.DTO;
 using API_University_Dissertation.Core.Data.Entities;
 using API_University_Dissertation.Core.Repositories;
 using AutoMapper;
-using API_University_Dissertation.Core.Data.Enums;
-using Microsoft.AspNetCore.Http.HttpResults;
 using ProficiencyLevel = API_University_Dissertation.Core.Data.Enums.ProficiencyLevel;
 
 namespace API_University_Dissertation.Core.Services.Services;
@@ -56,7 +54,7 @@ public class UserProfileService : IUserProfileService
         if (user == null) throw new Exception("User with uuid" + aspUserId + "not found");
 
         user.ProficiencyLevelId = proficiencyLevel;
-        _userProfileRepository.UpdateProficiencyLevel(user);
+        _userProfileRepository.UpdateUserProfile(user);
     }
 
     public void SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics, string userUuid)
@@ -65,22 +63,39 @@ public class UserProfileService : IUserProfileService
         if (user.ProficiencyLevelId == (int)ProficiencyLevel.Undetermined)
         {
             user.ProficiencyLevelId = (int)ProficiencyLevel.Beginner;
-            _userProfileRepository.UpdateProficiencyLevel(user);
+            _userProfileRepository.UpdateUserProfile(user);
         }
 
         var quizStats = new UserQuizStatistics
         {
-            UserUUID = userUuid,
+            UserProfile = user,
             Score = userQuizStatistics.Score,
             QuizLength = userQuizStatistics.QuizLength,
+            CreatedOn = DateTime.UtcNow,
         };
-
+        
         _userProfileRepository.SaveUserStatistics(quizStats);
+        UpdateUserProficiencyScore(userQuizStatistics, user);
+    }
+
+    private void UpdateUserProficiencyScore(UserQuizStatisticsDto userQuizStatistics, UserProfile user)
+    {
+        var userScore = user.ProficiencyScore + userQuizStatistics.Score;
+        user.ProficiencyScore = userScore;
+        if (userScore >= 50 && user.ProficiencyLevelId < (int)ProficiencyLevel.Expert)
+        {
+            user.ProficiencyLevelId += 1;
+            user.ProficiencyScore = 0;
+        }
+
+        _userProfileRepository.UpdateUserProfile(user);
     }
 
     public ProfileStatisticsDto GetUserStatistics(string userUuid)
     {
-        var userStatistics = _userProfileRepository.GetUserStatistics(userUuid).ToList();
+        var user = _userProfileRepository.GetByUuid(userUuid);
+        var userStatistics = user.UserQuizStatistics;
+
         var numberOfGames = userStatistics.Count();
         var totalScore = userStatistics.Sum(e => e.Score);
         var totalQuestions = userStatistics.Sum(e => e.QuizLength);
@@ -90,6 +105,7 @@ public class UserProfileService : IUserProfileService
             TotalQuestions = totalQuestions,
             GamesPlayed = userStatistics.Count,
             AverageScore = totalScore != 0 ? Math.Round((double)totalScore / numberOfGames, 2) : 0,
+            ProficiencyScore = user.ProficiencyScore,
         };
         return result;
     }

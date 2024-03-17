@@ -1,15 +1,15 @@
 using API_University_Dissertation.Core.Data.Entities;
 using API_University_Dissertation.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_University_Dissertation.Core.Repositories;
 
 public interface IUserProfileRepository
 {
     void Add(UserProfile profile);
-    void UpdateProficiencyLevel(UserProfile user);
+    void UpdateUserProfile(UserProfile user);
     UserProfile GetByUuid(string uuid);
     void SaveUserStatistics(UserQuizStatistics userQuizStatistics);
-    IEnumerable<UserQuizStatistics> GetUserStatistics(string userUuid);
 }
 
 public class UserProfileRepository : IUserProfileRepository
@@ -29,7 +29,7 @@ public class UserProfileRepository : IUserProfileRepository
 
     public UserProfile GetByUuid(string uuid)
     {
-        return _context.UserProfiles.SingleOrDefault(u => u.UserUUID == uuid) ?? throw new InvalidOperationException();
+        return _context.UserProfiles.Include(q => q.UserQuizStatistics).SingleOrDefault(u => u.UserUUID == uuid) ?? throw new InvalidOperationException();
     }
 
     public void SaveUserStatistics(UserQuizStatistics userQuizStatistics)
@@ -38,12 +38,7 @@ public class UserProfileRepository : IUserProfileRepository
         _context.SaveChanges();
     }
 
-    public IEnumerable<UserQuizStatistics> GetUserStatistics(string userUuid)
-    {
-        return _context.UserQuizStatistics.Where(u => u.UserUUID == userUuid);
-    }
-
-    public void UpdateProficiencyLevel(UserProfile user)
+    public void UpdateUserProfile(UserProfile user)
     {
         _context.UserProfiles.Update(user);
         _context.SaveChanges();

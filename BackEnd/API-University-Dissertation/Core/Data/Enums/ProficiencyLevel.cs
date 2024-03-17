@@ -2,8 +2,10 @@ namespace API_University_Dissertation.Core.Data.Enums;
 
 public enum ProficiencyLevel
 {
-    Undetermined = 0,
-    Beginner = 1,
-    Intermediate = 2,
-    Advanced = 3
+    Undetermined = 1,
+    Beginner = 2,
+    Intermediate = 3,
+    Advanced = 4,
+    Expert = 5
+    
 }

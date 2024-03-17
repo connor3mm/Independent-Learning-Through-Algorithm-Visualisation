@@ -11,5 +11,9 @@ public class UserProfile
     public string LastName { get; set; }
     [ForeignKey("ProficiencyLevel")]
     public int ProficiencyLevelId { get; set; }
+    public int ProficiencyScore { get; set; }
     public DateOnly CreatedOn { get; set; }
+    
+    
+    public List<UserQuizStatistics> UserQuizStatistics { get; set; }
 }

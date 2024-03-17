@@ -24,13 +24,13 @@ public class ApplicationDbContext : DbContext
             new QuestionType { Id = 3, Type = "Searching Algorithms" },
             new QuestionType { Id = 4, Type = "Other" }
         );
-
-
+        
         modelBuilder.Entity<ProficiencyLevel>().HasData(
             new ProficiencyLevel { LevelId = 1, LevelName = "Undetermined" },
             new ProficiencyLevel { LevelId = 2, LevelName = "Beginner" },
             new ProficiencyLevel { LevelId = 3, LevelName = "Intermediate" },
-            new ProficiencyLevel { LevelId = 4, LevelName = "Advanced" }
+            new ProficiencyLevel { LevelId = 4, LevelName = "Advanced" },
+            new ProficiencyLevel { LevelId = 5, LevelName = "Expert" }
         );
 
         base.OnModelCreating(modelBuilder);

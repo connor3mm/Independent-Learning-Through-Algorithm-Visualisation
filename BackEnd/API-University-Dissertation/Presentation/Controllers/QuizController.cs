@@ -17,12 +17,12 @@ public class  QuizController : ControllerBase
         _quizService = quizService;
     }
 
-    [HttpGet("generatequiz", Name = "generatequiz")]
-    public IActionResult GenerateQuiz()
+    [HttpPost("generatequiz", Name = "generatequiz")]
+    public IActionResult GenerateQuiz([FromBody] int[] quizTypeIds)
     {
         try
         {
-            return Ok(_quizService.GenerateQuiz());
+            return Ok(_quizService.GenerateQuiz(quizTypeIds));
         }
         catch (Exception ex)
         {

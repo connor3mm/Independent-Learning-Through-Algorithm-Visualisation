@@ -6,7 +6,7 @@ namespace API_University_Dissertation.Core.Services.Services;
 
 public interface IQuizService
 {
-    List<QuizQuestionsDTO> GenerateQuiz();
+    List<QuizQuestionsDTO> GenerateQuiz(int[] quizTypeIds);
 }
 
 public class QuizService : IQuizService
@@ -20,9 +20,10 @@ public class QuizService : IQuizService
         _mapper = mapper;
     }
 
-    public List<QuizQuestionsDTO> GenerateQuiz()
+    public List<QuizQuestionsDTO> GenerateQuiz(int[] quizTypeIds)
     {
-        var quizQuestions = _quizRepository.GetQuizQuestions();
+        const int questionCount = 5;
+        var quizQuestions = _quizRepository.GetQuizQuestions(quizTypeIds, questionCount);
 
         return quizQuestions.Select(questions => _mapper.Map<QuizQuestionsDTO>(questions)).ToList();
     }
