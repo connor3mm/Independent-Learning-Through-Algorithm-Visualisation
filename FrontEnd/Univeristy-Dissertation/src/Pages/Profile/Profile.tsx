@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProfile, getUserStatistics } from "../../services/api/ApiEndpoints";
+import {
+  getProfile,
+  getUserStatistics,
+  lastFiveGamesStatistics,
+} from "../../services/api/ApiEndpoints";
 import "./Profile.css";
 import proficiencyLevel from "../../services/enums/ProficiencyLevel";
 import ProficiencyQuiz from "../../components/ProficiencyQuiz/ProficiencyQuiz";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import ProgressionBar from "../../components/ProgressionBar/ProgressionBar";
+import ProgressionChart from "../../components/ProgressionChart/ProgressionChart";
 
 interface UserStatistics {
   totalScore: number;
   totalQuestions: number;
   gamesPlayed: number;
   averageScore: number;
+  proficiencyScore: number;
 }
 
 const Profile: React.FC = () => {
+  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showProficiencyTest, setShowProficiencyTest] = useState(false);
   const [userStatistics, setUserStatistics] = useState<UserStatistics>({
@@ -22,8 +30,8 @@ const Profile: React.FC = () => {
     totalQuestions: 0,
     gamesPlayed: 0,
     averageScore: 0,
+    proficiencyScore: 0,
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -59,7 +67,7 @@ const Profile: React.FC = () => {
         </div>
       ) : userProfile ? (
         <div className="profile-flex-container">
-          <div className="profile-flex-items">
+          <div className="profile-flex-items user-details">
             <h2>User Details</h2>
             <p>Email: {userProfile.email}</p>
             <p>First Name: {userProfile.firstName}</p>
@@ -73,17 +81,24 @@ const Profile: React.FC = () => {
               <button onClick={() => setShowProficiencyTest(true)}>
                 Take Proficiency Test
               </button>
-            )}
+            )}{" "}
+            {userProfile.proficiencyLevelId !== 1 &&
+              userProfile.proficiencyLevelId !== 5 && (
+                <div style={{ display: "inline-block" }}>
+                  Proficiency Level Progression:
+                  <ProgressionBar value={userStatistics.proficiencyScore} />
+                </div>
+              )}
           </div>
           <div className="profile-flex-items">
             <h2>Testing Statistics</h2>
             <p>Games Played: {userStatistics.gamesPlayed}</p>
-            <p>Total Score: {userStatistics.totalScore}</p>
             <p>Total Questions: {userStatistics.totalQuestions}</p>
-            <p>Average Score: {userStatistics.averageScore}</p>
-            {userProfile.proficiencyLevelId !== 1 && (
-              <p>Proficiency Level Progression: </p>
-            )}
+            <p>Total Score: {userStatistics.totalScore}</p>
+            <p>Average Score Per Game: {userStatistics.averageScore}</p>
+            <div className="progressionChart">
+              <ProgressionChart />
+            </div>
           </div>
         </div>
       ) : (

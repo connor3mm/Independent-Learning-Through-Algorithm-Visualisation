@@ -5,6 +5,17 @@ import { useState } from "react";
 
 const TestingZone: React.FC = () => {
   const [quizActive, setQuizActive] = useState(false);
+  const [quizIds, setQuizIds] = useState<number[]>([]);
+
+  const handleStartQuiz = (ids: number[]) => {
+    setQuizIds(ids);
+    setQuizActive(true);
+  };
+
+  const handleResetQuiz = () => {
+    setQuizActive(false);
+    setQuizIds([]);
+  };
 
   return (
     <>
@@ -15,7 +26,7 @@ const TestingZone: React.FC = () => {
           <div className="testingZoneDescription">
             {quizActive ? (
               <>
-                <Quiz></Quiz>
+                <Quiz ids={quizIds} onQuizReset={handleResetQuiz} />
               </>
             ) : (
               <>
@@ -29,7 +40,7 @@ const TestingZone: React.FC = () => {
                   engage and assess your understanding across various subjects.
                 </div>
                 <div className="testingDescription">
-                  For those seeking a personalized learning journey, log in to
+                  For those seeking a personalised learning journey, log in to
                   your profile and your progress will be tracked. With a secure
                   profile, your statistics, including scores and completion
                   rates, will be saved. Witness your growth as you tackle
@@ -37,12 +48,36 @@ const TestingZone: React.FC = () => {
                   average score evolve over time. Current quiz sets are set at 5
                   questions each.
                 </div>
-                <button
-                  className="playQuizButton"
-                  onClick={() => setQuizActive(true)}
-                >
-                  Take Quiz
-                </button>
+                <div className="testingDescription">
+                  WARNING! If you wish for your test score to be saved, register
+                  and log into your account!
+                </div>
+                <div className="testingButtonContainer">
+                  <button
+                    className="playQuizButton"
+                    onClick={() => handleStartQuiz([1])}
+                  >
+                    Complexity Quiz
+                  </button>
+                  <button
+                    className="playQuizButton"
+                    onClick={() => handleStartQuiz([2])}
+                  >
+                    Sorting Algorithm Quiz
+                  </button>
+                  <button
+                    className="playQuizButton"
+                    onClick={() => handleStartQuiz([3])}
+                  >
+                    Searching Algorithm Quiz
+                  </button>
+                  <button
+                    className="playQuizButton"
+                    onClick={() => handleStartQuiz([1, 2, 3])}
+                  >
+                    Combined Quiz
+                  </button>
+                </div>
               </>
             )}
           </div>

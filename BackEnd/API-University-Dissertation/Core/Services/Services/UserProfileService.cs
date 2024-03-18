@@ -13,6 +13,7 @@ public interface IUserProfileService
     void UpdateProficiency(int proficiencyLevel, string userEmail);
     void SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics, string userUuid);
     ProfileStatisticsDto GetUserStatistics(string userUuid);
+    List<UserQuizStatistics> GetLastFiveGamesStatistics(string userUuid);
 }
 
 public class UserProfileService : IUserProfileService
@@ -108,5 +109,12 @@ public class UserProfileService : IUserProfileService
             ProficiencyScore = user.ProficiencyScore,
         };
         return result;
+    }
+
+    public List<UserQuizStatistics> GetLastFiveGamesStatistics(string userUuid)
+    {
+        var user = _userProfileRepository.GetByUuid(userUuid);
+        var userStatistics = user.UserQuizStatistics;
+        return userStatistics.OrderByDescending(x => x.CreatedOn).Take(5).OrderBy(x => x.CreatedOn).ToList();
     }
 }

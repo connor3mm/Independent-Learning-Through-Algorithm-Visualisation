@@ -1,0 +1,8 @@
+{
+  "algorithmName": "Linear Search",
+  "description": "Linear Search, also known as sequential search, is a simplistic algorithm used to find a target value within a collection of elements. Imagine it as scanning through a book page by page to find a specific word.\nIn this algorithm, the search begins at the beginning of the collection and progresses sequentially until the target element is found or the end of the collection is reached. Each element is checked against the target until a match is found or all elements have been examined.\nWhile Linear Search is intuitive and easy to understand, its efficiency diminishes as the size of the collection grows. It has a time complexity of O(n), meaning its performance is directly proportional to the number of elements in the collection. For larger datasets, more efficient search algorithms like binary search are often preferred due to their logarithmic time complexity.",
+  "averageComplexity": "O(n)",
+  "bestCase": "O(1)",
+  "worstCase": "O(n)",
+  "spaceComplexity": "O(1)"
+}

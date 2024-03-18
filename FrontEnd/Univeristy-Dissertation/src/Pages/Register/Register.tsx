@@ -15,6 +15,7 @@ interface UserProfile {
   lastName: string;
   proficiencyLevelId: number;
   createdOn: string;
+  proficiencyScore: number;
 }
 
 const Register: React.FC = () => {
@@ -26,6 +27,7 @@ const Register: React.FC = () => {
     lastName: "",
     proficiencyLevelId: 1,
     createdOn: new Date().toISOString().split("T")[0],
+    proficiencyScore: 0,
   });
   const [formData, setFormData] = useState<RegisterFormData>({
     password: "",

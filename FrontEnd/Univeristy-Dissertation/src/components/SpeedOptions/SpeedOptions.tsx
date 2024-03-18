@@ -3,6 +3,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import "./SpeedOptions.css";
 
 interface SpeedOptionsProps {
   speed: number;
@@ -13,7 +14,7 @@ const SpeedOptions: React.FC<SpeedOptionsProps> = ({
   speed,
   handleSpeedChange,
 }) => (
-  <div>
+  <div className="speedControl">
     <FormControl>
       <FormLabel
         id="demo-radio-buttons-group-label"

@@ -1,6 +1,6 @@
 .learningContainer {
     display: flex;
-    min-height: 100vh;
+    max-height: 100vh;
     padding-right: 2em;
   }
   
@@ -23,7 +23,7 @@
   .vertical-menu {
     flex: 0.2;
     width: 200px;
-    height: 100vh;
+    height: 80vh;
     overflow-y: auto;
     background-color: #1c163a;
     outline-style:solid;
@@ -52,7 +52,7 @@
   
   .learningZoneContainer{
     display: flex;
-    background-color: red;
+    background-color: rgb(186, 12, 12);
     min-height: 80vh;
     margin: 2vh;
     margin-left: 3vh;
@@ -115,4 +115,14 @@
 
   .complexityTable{
     width: 100%;
+  }
+
+  .menu{
+    color: white !important;
+    background-color: rgb(186, 12, 12) !important;
+  }
+
+  .menu:hover {
+    color: white !important;
+    background-color: rgb(226, 100, 100) !important;
   }

@@ -1,0 +1,8 @@
+{
+  "algorithmName": "Uniform Cost Search",
+  "description": "Uniform Cost Search (UCS) is a variant of Dijkstra's algorithm used for finding the shortest path in a weighted graph. Unlike A* Search, UCS does not use a heuristic function and instead focuses solely on the actual cost of reaching each node from the start node.\nIn UCS, the algorithm maintains a priority queue of nodes to explore, where the priority is determined by the cost of reaching each node. It continually expands the node with the lowest cost until the goal node is reached.\nUCS guarantees finding the shortest path as long as the edge costs are non-negative. However, it can be less efficient than A* Search when a good heuristic is available, as it might explore more nodes without guidance from the heuristic.",
+  "averageComplexity": "O(b^(1 + C*/ε))",
+  "bestCase": "O(1)",
+  "worstCase": "O(b^(1 + C*/ε))",
+  "spaceComplexity": "O(b^(1 + C*/ε))"
+}

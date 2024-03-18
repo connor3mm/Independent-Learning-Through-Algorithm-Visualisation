@@ -1,9 +1,4 @@
- .sort-bar {
-    width: 40px;
-    margin-right: 5px;
-  }
-  
-  .sort-container {
+.sort-container {
     background-color: #10163a;
     border-radius: 10px;
   }

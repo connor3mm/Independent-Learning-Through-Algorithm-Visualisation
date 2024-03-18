@@ -1,32 +1,4 @@
-  .info{
-    outline-style:solid;
-    outline-color: black;
-    outline-width: 0.01em;
-    border-radius: 5px;
-  }
-
-  .vertical-menu {
-    flex: 0.2;
-    width: 200px;
-    height: 100vh;
-    overflow-y: auto;
-    background-color: #1c163a;
-    outline-style:solid;
-    outline-color: black;
-    outline-width: 0.1em;
-    border-radius: 5px;
-    margin-top: 2vh;
-  }
-  
-  .vertical-menu a {
-    background-color: #eee;
-    color: black;
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-  }
-  
-  .vertical-menu a:hover {
+ .vertical-menu a:hover {
     background-color: #ccc;
   }
   
@@ -95,7 +67,7 @@
     width: 10%;
     font-size: larger;
     color: black;
-    background-color: lightblue;
+    background-color: #1c163a;
     padding: 1em;
     border-radius: 10px;
   }
@@ -104,4 +76,25 @@
     font-size: larger;
     margin-right: 20em;
     margin-bottom: 2em;
+  }
+
+  .testingButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin-right: 50vh;
+  }
+  
+  .playQuizButton {
+    text-align: center;
+    border-radius: 5%;
+    width: 30vh;
+    padding: 0.5em;
+    font-size: 1.5em;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    outline-style:solid;
+    outline-width: .1em;
+    outline-color: black;
+    color: white;
+
   }

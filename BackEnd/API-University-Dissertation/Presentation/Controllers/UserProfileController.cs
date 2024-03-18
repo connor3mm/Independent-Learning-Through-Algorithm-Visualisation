@@ -106,4 +106,22 @@ public class UserProfileController : ControllerBase
             return BadRequest(errorMessage);
         }
     }
+    [HttpGet("lastfivegamestatistics", Name = "lastfivegamestatistics"), Authorize]
+    public IActionResult LastFiveGamesStatistics()
+    {
+        var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (userUuid == null) return BadRequest();
+
+        try
+        {
+            return Ok(_profileService.GetLastFiveGamesStatistics(userUuid));
+        }
+        catch (Exception ex)
+        {
+            var errorMessage = $"An error occurred: {ex.Message}";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
+        }
+    }
+    
 }

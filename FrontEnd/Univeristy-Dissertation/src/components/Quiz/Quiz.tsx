@@ -24,12 +24,18 @@ interface UserStatistics {
   quizLength: number;
 }
 
-const Quiz: React.FC = () => {
+interface QuizProps {
+  ids: number[];
+  onQuizReset: () => void;
+}
+
+const Quiz: React.FC<QuizProps> = ({ ids, onQuizReset }) => {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerSelected, setAnswerSelected] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [quizData, setQuizData] = useState<QuizQuestion[]>([
     {
@@ -39,7 +45,7 @@ const Quiz: React.FC = () => {
         { id: 0, choice: "Answer A", isCorrect: false },
         { id: 1, choice: "Answer B", isCorrect: false },
         { id: 2, choice: "Answer C", isCorrect: false },
-        { id: 3, choice: "Answer D", isCorrect: true },
+        { id: 3, choice: "Answer D", isCorrect: false },
       ],
     },
   ]);
@@ -47,7 +53,7 @@ const Quiz: React.FC = () => {
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
-        const data = await generateQuizQuestions();
+        const data = await generateQuizQuestions(ids);
         setQuizData(data);
         setIsLoading(false);
       } catch (error) {
@@ -57,7 +63,7 @@ const Quiz: React.FC = () => {
     };
 
     fetchQuizData();
-  }, []);
+  }, [ids]);
 
   const optionClicked = (isCorrect: boolean) => {
     if (answerSelected) {
@@ -88,9 +94,9 @@ const Quiz: React.FC = () => {
         score: score,
         quizLength: quizData.length,
       };
-
       try {
         await saveCurrentUserStatistics(userStatistics);
+        setIsLoggedIn(true);
       } catch (error) {
         console.error("Error saving user statisitcs:", error);
       }
@@ -102,6 +108,7 @@ const Quiz: React.FC = () => {
     setCurrentQuestion(0);
     setShowResults(false);
     setAnswerSelected(false);
+    onQuizReset();
   };
 
   return (
@@ -115,10 +122,20 @@ const Quiz: React.FC = () => {
             {score} out of {quizData.length} correct - (
             {(score / quizData.length) * 100}%)
           </h2>
-          <h3>
-            If you are logged into an account, quiz statistics will be saved to
-            your profile.
-          </h3>
+
+          {isLoggedIn ? (
+            <h3>
+              {" "}
+              You have completed all the Questions! Quiz statistics have be
+              saved to your profile!
+            </h3>
+          ) : (
+            <h3>
+              If you would like to save your quiz scores next time, please
+              register an account!
+            </h3>
+          )}
+
           <button onClick={() => restartGame()}>New game</button>
         </div>
       ) : (

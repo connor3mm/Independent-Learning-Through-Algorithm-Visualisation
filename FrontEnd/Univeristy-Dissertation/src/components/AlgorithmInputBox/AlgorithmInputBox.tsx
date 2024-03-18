@@ -33,7 +33,7 @@ function AlgorithmInputBox({
 
   return (
     <div className="customInputs">
-      <h2>Custom Input values:</h2>
+      <h2>Custom Input values</h2>
       <label>
         Please separate numbers by a comma or space. Any other inputs will be
         ignored.

@@ -55,9 +55,20 @@ export const saveProfile = async (userProfile: UserProfile) => {
   }
 };
 
-export const generateQuizQuestions = async () => {
+export const generateQuizQuestions = async (quizTypeIds: number[]) => {
   try {
-    const responseData = await api.get(`quiz/generatequiz`);
+    const responseData = await api.post(`quiz/generatequiz/`, quizTypeIds);
+    return responseData;
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+export const lastFiveGamesStatistics = async () => {
+  setUserToken();
+  try {
+    const responseData = await api.get(`profile/lastfivegamestatistics`);
     return responseData;
   } catch (error: any) {
     console.log(error.message);
@@ -70,7 +81,6 @@ export const updateProficencyLevel = async (
   ProficiencyLevelId?: number
 ) => {
   try {
-    console.log(ProficiencyLevelId);
     return await api.post(`profile/updateproficiency`, {
       email,
       ProficiencyLevelId,

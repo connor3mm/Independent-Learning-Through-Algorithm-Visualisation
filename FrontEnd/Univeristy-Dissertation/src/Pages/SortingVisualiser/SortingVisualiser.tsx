@@ -129,13 +129,17 @@ function SortingVisualiser() {
       ) : (
         <>
           <div className="sortAnimationContainer">
+            {/* First Visualiser */}
             {renderVisualisationContainer(selectedAlgorithm, 1, sortingData)}
+            {/* First Visualiser */}
             {showSecondVisualiser &&
               renderVisualisationContainer(
                 secondSelectedAlgorithm,
                 2,
                 secondSortingData
               )}
+
+            {/* Algorithm Controls  */}
             <div className="visualisationControlsContainer">
               <div className="controls">
                 <h2>Controls</h2>

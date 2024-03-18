@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import "./LearningZone.css";
 import SortingAlgorithm from "../../services/enums/SortingAlgorithms";
+import SearchingAlgorithms from "../../services/enums/SearchingAlgorithms";
+
+interface ComplexityInfo {
+  algorithmName: string;
+  description: string;
+  averageComplexity: string;
+  bestCase: string;
+  worstCase: string;
+  spaceComplexity: string;
+}
 
 const LearningZone: React.FC = () => {
   const [infoFlag, setInfoFlag] = useState(false);
-  const [complexityInfo, setComplexityInfo] = useState<{
-    description: string;
-    averageComplexity: string;
-    bestCase: string;
-    worstCase: string;
-    spaceComplexity: string;
-  }>({
+  const [complexityInfo, setComplexityInfo] = useState<ComplexityInfo>({
+    algorithmName: "Description",
     description: "Default Description",
     averageComplexity: "Default Average Complexity",
     bestCase: "Default Best Case",
@@ -31,16 +36,30 @@ const LearningZone: React.FC = () => {
   };
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     fetch(`src/components/AlgorithmDescriptions/Default Descriptions.txt`)
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
         setInfoDescription(parsedData);
-
         setInfoFlag(false);
+
+        const info: ComplexityInfo = {
+          algorithmName: "Description",
+          description: "Deafult Description",
+          averageComplexity: "Default Average Complexity",
+          bestCase: "Default Best Case",
+          worstCase: "Default Worst Case",
+          spaceComplexity: "Default Space Complexity",
+        };
+
+        setComplexityInfo(info);
       })
       .catch((err) => console.error(err));
-  }, []);
+  };
 
   const algorithmClickHandler = (algorithm: string) => {
     const filePath = `src/components/AlgorithmDescriptions/${algorithm}.txt`;
@@ -58,6 +77,9 @@ const LearningZone: React.FC = () => {
   return (
     <div className="learningContainer">
       <div className="vertical-menu">
+        <a href="#" className="info menu" onClick={() => fetchData()}>
+          Menu
+        </a>
         <h3 className="learningZoneHeader">Sorting Algorithms</h3>
         <a
           href="#"
@@ -112,42 +134,52 @@ const LearningZone: React.FC = () => {
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() =>
+            algorithmClickHandler(SearchingAlgorithms.linearSearch)
+          }
         >
           Linear Search
         </a>
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() =>
+            algorithmClickHandler(SearchingAlgorithms.binarySearch)
+          }
         >
           Binary Search
         </a>
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() =>
+            algorithmClickHandler(SearchingAlgorithms.depthFirstSearch)
+          }
         >
           Depth-First Search
         </a>
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() =>
+            algorithmClickHandler(SearchingAlgorithms.breadthFirstSearch)
+          }
         >
           Breadth-First Search
         </a>
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() => algorithmClickHandler(SearchingAlgorithms.aStarSearch)}
         >
           A Star Search
         </a>
         <a
           href="#"
           className="info"
-          onClick={() => algorithmClickHandler("Bubble Sort")}
+          onClick={() =>
+            algorithmClickHandler(SearchingAlgorithms.uniformCostSearch)
+          }
         >
           Uniform Cost Search
         </a>
@@ -159,7 +191,7 @@ const LearningZone: React.FC = () => {
 
             <div className="learningZoneDescriptionContainer">
               <div className="learningZoneDescription">
-                <h2 className="infoTitle">Description</h2>
+                <h2 className="infoTitle">{complexityInfo.algorithmName}</h2>
                 {infoFlag ? (
                   <div className="description">
                     {renderTextLines(complexityInfo?.description)}

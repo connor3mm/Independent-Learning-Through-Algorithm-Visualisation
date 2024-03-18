@@ -14,6 +14,5 @@ public class UserProfile
     public int ProficiencyScore { get; set; }
     public DateOnly CreatedOn { get; set; }
     
-    
     public List<UserQuizStatistics> UserQuizStatistics { get; set; }
 }

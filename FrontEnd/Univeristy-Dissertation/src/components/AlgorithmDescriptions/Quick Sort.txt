@@ -1,4 +1,5 @@
 {
+  "algorithmName": "Quick Sort",
   "description": "Quick Sort is a sorting algorithm that operates by recursively dividing the data structure into smaller partitions and sorting them until the entire structure is arranged in order. \nThe partitioning process is centered around a chosen element known as the pivot. Elements larger than the pivot are positioned to the right, while smaller elements are placed to the left, thereby creating two distinct partitions. \nThis partitioning technique, referred to as Divide and Conquer, is a high-performance strategy also employed by other sorting algorithms like Merge Sort.",
   "averageComplexity": "O(n × log n)",
   "bestCase": "O(n × log n)",

@@ -37,6 +37,7 @@
     outline-style:solid;
     outline-color: orange;
     outline-width: 0.15em;
+    padding-bottom: 1em;
 }
 
 .dropBox{
@@ -44,12 +45,9 @@
     color: black;
     border-radius: 5px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
-        font-size: 16px; /* You can adjust the font size to make it bigger */
-        padding: 8px; /* You can adjust the padding for better spacing */
-        width: 200px; /* You can adjust the width as needed */
-      
-      
+    font-size: 16px; 
+    padding: 8px;
+    width: 200px; 
 }
 
 .customInputs{
@@ -60,4 +58,8 @@
     outline-style:solid;
     outline-color: orange;
     outline-width: 0.15em;
+}
+
+.customInputs{
+    padding-bottom: 0.5em;
 }

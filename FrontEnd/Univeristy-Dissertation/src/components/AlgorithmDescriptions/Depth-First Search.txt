@@ -1,0 +1,8 @@
+{
+  "algorithmName": "Depth-First Search",
+  "description": "Depth First Search is another graph traversal algorithm that explores as far as possible along each branch before backtracking. It's akin to navigating through a maze by always choosing the deepest unexplored path until a dead-end is reached, then backtracking to explore other paths.\nIn DFS, a stack data structure is typically used (or recursion) to keep track of vertices to visit. The algorithm continues until all vertices have been visited or until a specific condition is met, such as finding a target vertex.\nDFS is particularly useful for various graph-related problems, such as detecting cycles in a graph, topological sorting, and finding connected components.",
+ "averageComplexity": "O(V + E)",
+  "bestCase": "O(1)",
+  "worstCase": "O(V + E)",
+  "spaceComplexity": "O(V)"
+}

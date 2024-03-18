@@ -6,7 +6,7 @@ namespace API_University_Dissertation.Core.Repositories;
 
 public interface IQuizRepository
 {
-    List<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count);
+    IEnumerable<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count);
 }
 
 public class QuizRepository : IQuizRepository
@@ -18,7 +18,7 @@ public class QuizRepository : IQuizRepository
         _context = context;
     }
 
-    public List<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count)
+    public IEnumerable<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count)
     {
         return _context.QuizQuestions
             .Include(q => q.QuestionChoices)

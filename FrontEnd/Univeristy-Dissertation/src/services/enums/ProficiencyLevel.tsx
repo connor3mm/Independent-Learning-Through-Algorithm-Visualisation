@@ -3,6 +3,7 @@ enum proficiencyLevel {
   Beginner = 2,
   Intermediate = 3,
   Advanced = 4,
+  Expert = 5,
 }
 
 export default proficiencyLevel;

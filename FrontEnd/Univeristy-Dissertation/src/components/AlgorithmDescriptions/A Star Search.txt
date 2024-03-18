@@ -1,0 +1,8 @@
+{
+  "algorithmName": "A Star Search",
+  "description": "A* (pronounced 'A star') is a heuristic search algorithm that efficiently finds the shortest path between two points in a graph, considering both the cost of the path already traversed and an estimate of the remaining cost to the destination. It's often used in pathfinding and graph traversal problems, such as route planning in maps and video games.\nIn A* Search, each node is assigned a cost that consists of two parts:\ng(n): The cost of the path from the starting node to node n.\nh(n): A heuristic function that estimates the cost from node n to the goal node.\nAt each step, A* selects the node with the lowest total cost f(n) = g(n) + h(n) and explores its neighbors. This process continues until the goal node is reached or no more nodes are left to explore.\nA* guarantees finding the shortest path if:\nThe heuristic function h(n) is admissible (never overestimates the cost to reach the goal).\nThe graph does not contain cycles with negative edge weights.",
+  "averageComplexity": "O(b^d)",
+  "bestCase": "O(1)",
+  "worstCase": "O(b^d)",
+  "spaceComplexity": "O(b^d)"
+}

@@ -1,0 +1,8 @@
+{
+  "algorithmName": "Breadth-First Search(BFS)",
+  "description": "Breadth-First Search is a graph traversal algorithm that systematically explores all the vertices of a graph level by level. It starts at a selected vertex and explores all its neighbors before moving on to the next level of vertices. It's akin to exploring a maze by examining all the paths on a given level before descending to the next level.\nIn BFS, a queue data structure is typically used to keep track of the vertices to be visited. The algorithm continues until all vertices have been visited or until a specific condition is met, such as finding a target vertex.\nBFS is particularly useful for finding the shortest path between two vertices in an unweighted graph since it explores vertices level by level. It's also used in various applications like network traversal, social networking algorithms, and puzzle-solving.",
+  "averageComplexity": "O(V + E)",
+  "bestCase": "O(1)",
+  "worstCase": "O(V + E)",
+  "spaceComplexity": "O(V)"
+}
