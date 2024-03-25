@@ -6,6 +6,7 @@ import {
 } from "../../services/api/ApiEndpoints";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import ClearIcon from "@mui/icons-material/Clear";
+import { Button } from "@mui/material";
 
 interface QuizQuestion {
   id: number;
@@ -136,7 +137,15 @@ const Quiz: React.FC<QuizProps> = ({ ids, onQuizReset }) => {
             </h3>
           )}
 
-          <button onClick={() => restartGame()}>New game</button>
+          <Button
+            variant="contained"
+            aria-label="outlined primary button group"
+            className="button-container"
+            type="submit"
+            onClick={() => restartGame()}
+          >
+            New game
+          </Button>
         </div>
       ) : (
         <>
@@ -185,7 +194,16 @@ const Quiz: React.FC<QuizProps> = ({ ids, onQuizReset }) => {
               );
             })}
           </div>
-          {answerSelected && <button onClick={handleNextClick}>Next</button>}
+          {answerSelected && (
+            <Button
+              variant="contained"
+              aria-label="outlined primary button group"
+              className="button-container"
+              onClick={handleNextClick}
+            >
+              Next
+            </Button>
+          )}
         </>
       )}
     </div>

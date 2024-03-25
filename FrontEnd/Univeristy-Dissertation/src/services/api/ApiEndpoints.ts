@@ -28,14 +28,12 @@ export const registerUser = async (email: string, password: string) => {
     const response = await api.post("register", { email, password });
     return response;
   } catch (error: any) {
-    console.log(error.message);
     throw error;
   }
 };
 
 export const getProfile = async () => {
   setUserToken();
-
   try {
     const responseData = await api.get(`profile`);
     return responseData;

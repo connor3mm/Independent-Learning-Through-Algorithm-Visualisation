@@ -127,3 +127,4 @@ C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individu
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\API-University-Dissertation.pdb
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\obj\Debug\net8.0\API-University-Dissertation.genruntimeconfig.cache
 C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\obj\Debug\net8.0\ref\API-University-Dissertation.dll
+C:\Users\conno\OneDrive - University of Strathclyde\Fourth Year\CS408 - Individual project\University Dissertation\BackEnd\API-University-Dissertation\bin\Debug\net8.0\Newtonsoft.Json.dll

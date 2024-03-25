@@ -1,35 +1,33 @@
-using API_University_Dissertation.Core.Services.Interfaces;
+using API_University_Dissertation.Application.Services.Interfaces;
+using API_University_Dissertation.Core.Data.Entities;
 
 namespace API_University_Dissertation.Application.Strategies
 {
     public class InsertionSort : ISortingStrategy
     {
-        public IEnumerable<int[]> Sort(int[] unsortedList)
+        public IEnumerable<SortablePair> Sort(int[] unsortedList)
         {
             var arrayLength = unsortedList.Length;
             var currentArray = new int[arrayLength];
+            var swapped = new List<SortablePair> { new SortablePair(0, 0, true) };
             Array.Copy(unsortedList, currentArray, arrayLength);
-            yield return currentArray;
 
-            for (var i = 1; i < arrayLength; i++)
+            for (var i = 1; i < arrayLength; ++i)
             {
                 var key = currentArray[i];
-                var flag = 0;
-                for (var j = i - 1; j >= 0 && flag != 1;)
-                {
-                    if (key < currentArray[j])
-                    {
-                        currentArray[j + 1] = currentArray[j];
-                        j--;
-                        currentArray[j + 1] = key;
+                var j = i - 1;
 
-                        var newState = new int[arrayLength];
-                        Array.Copy(currentArray, newState, arrayLength);
-                        yield return newState;
-                    }
-                    else flag = 1;
+                while (j >= 0 && currentArray[j] > key)
+                {
+                    var swappablePair = new SortablePair(j, j + 1, true);
+                    swapped.Add(swappablePair);
+                    currentArray[j + 1] = currentArray[j];
+                    j = j - 1;
                 }
+                currentArray[j + 1] = key;
             }
+
+            return swapped;
         }
     }
 }

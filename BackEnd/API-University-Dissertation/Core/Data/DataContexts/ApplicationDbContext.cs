@@ -1,7 +1,7 @@
 using API_University_Dissertation.Core.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API_University_Dissertation.Data;
+namespace API_University_Dissertation.Core.Data.DataContexts;
 
 public class ApplicationDbContext : DbContext
 {
@@ -40,7 +40,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<QuizQuestions>().HasData(
             //Complexity Questions Seeding 
             new QuizQuestions
-                { Id = 1, Question = "What is the best case time complexity of bubble sort?", QuestionTypeId = 1 },
+                { Id = 1, Question = "The best case time complexity of bubble sort is _______?", QuestionTypeId = 1 },
             new QuizQuestions
                 { Id = 2, Question = "What is the worst case time complexity of bubble sort?", QuestionTypeId = 1 },
             new QuizQuestions { Id = 3, Question = "What is the space complexity of bubble sort?", QuestionTypeId = 1 },
@@ -55,7 +55,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
                 { Id = 8, Question = "What is the worst case time complexity of insertion sort?", QuestionTypeId = 1 },
             new QuizQuestions
-                { Id = 9, Question = "What is the space complexity of insertion sort?", QuestionTypeId = 1 },
+                { Id = 9, Question = "The space complexity of insertion sort is ________", QuestionTypeId = 1 },
             new QuizQuestions
                 { Id = 10, Question = "What is the best case time complexity of Merge sort?", QuestionTypeId = 1 },
             new QuizQuestions
@@ -64,7 +64,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
                 { Id = 13, Question = "What is the best case time complexity of quick sort?", QuestionTypeId = 1 },
             new QuizQuestions
-                { Id = 14, Question = "What is the worst case time complexity of quick sort?", QuestionTypeId = 1 },
+                { Id = 14, Question = "The worst case time complexity of quick sort is ______", QuestionTypeId = 1 },
             new QuizQuestions { Id = 15, Question = "What is the space complexity of quick sort?", QuestionTypeId = 1 },
             new QuizQuestions
                 { Id = 16, Question = "What is the best case time complexity of shell sort?", QuestionTypeId = 1 },
@@ -75,7 +75,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
             {
                 Id = 19,
-                Question = "What does the ascending motion of bubbles in fizzy water symbolise in Bubble Sort?",
+                Question = "The ascending motion of bubbles in fizzy water symbolises _________ in Bubble Sort?",
                 QuestionTypeId = 2
             },
             new QuizQuestions
@@ -90,7 +90,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
                 { Id = 22, Question = "What happens during the merging phase of Merge Sort?", QuestionTypeId = 2 },
             new QuizQuestions
-                { Id = 23, Question = "Merge Sort employs which technique to sort elements?", QuestionTypeId = 2 },
+                { Id = 23, Question = "Merge Sort employs the technique of ________ to sort elements?", QuestionTypeId = 2 },
             new QuizQuestions
                 { Id = 24, Question = "Shell Sort is an extension of which sorting algorithm?", QuestionTypeId = 2 },
             new QuizQuestions
@@ -109,7 +109,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
             {
                 Id = 27,
-                Question = "In which data structure is binary search typically applied?",
+                Question = "The data structure _______ is typically applied to Binary search.",
                 QuestionTypeId = 3
             },
             new QuizQuestions
@@ -122,7 +122,7 @@ public class ApplicationDbContext : DbContext
             new QuizQuestions
             {
                 Id = 29,
-                Question = "What is the primary advantage of binary search over linear search?",
+                Question = "______ is the primary advantage of binary search over linear search?",
                 QuestionTypeId = 3
             },
             new QuizQuestions

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "./AlgorithmInputBox.css";
+import ToolTip from "../ToolTip/ToolTip";
 
 function AlgorithmInputBox({
   setCustomInputArray,
@@ -18,12 +20,15 @@ function AlgorithmInputBox({
     e.preventDefault();
 
     const inputArray = customInput
+      .trim()
       .split(/[,\s]+/)
-      .filter((num) => !isNaN(Number(num)) && Number(num) >= 0)
+      .filter(
+        (num) => !isNaN(Number(num)) && Number(num) >= 0 && Number(num) <= 100
+      )
       .map((num) => Number(num));
 
     if (inputArray.length < 2) {
-      setErrorMessage("Please enter one or more postive numbers.");
+      setErrorMessage("Please enter one or more positive numbers.");
     } else {
       setErrorMessage("");
       setCustomInputArray(inputArray);
@@ -33,11 +38,19 @@ function AlgorithmInputBox({
 
   return (
     <div className="customInputs">
-      <h2>Custom Input values</h2>
-      <label>
-        Please separate numbers by a comma or space. Any other inputs will be
-        ignored.
-      </label>
+      <h2
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span>Custom Input values</span>
+        <span style={{ marginLeft: "5px" }}>
+          <ToolTip customMessage="Please separate numbers by a comma or space. Any other inputs will be ignored. Inputs must be positive and under 100." />
+        </span>
+      </h2>
+
       <form onSubmit={handleCustomInputSubmit}>
         <input
           type="text"

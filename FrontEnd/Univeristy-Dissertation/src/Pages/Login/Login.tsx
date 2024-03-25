@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Login.css";
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 
 interface LoginProps {
   handleLogin: () => void;
@@ -86,15 +85,16 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
             <ClearIcon className="clear-icon" /> {error}
           </div>
         )}
-        <ButtonGroup
+
+        <Button
           variant="contained"
           aria-label="outlined primary button group"
           className="button-container"
+          type="submit"
+          disabled={loggingIn}
         >
-          <Button type="submit" disabled={loggingIn}>
-            {loggingIn ? "Logging in..." : "Login"}
-          </Button>
-        </ButtonGroup>
+          {loggingIn ? "Logging in..." : "Login"}
+        </Button>
       </form>
     </div>
   );

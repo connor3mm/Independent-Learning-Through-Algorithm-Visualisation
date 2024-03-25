@@ -1,93 +1,68 @@
-using API_University_Dissertation.Core.Services.Interfaces;
-namespace API_University_Dissertation.Application.Strategies;
+using API_University_Dissertation.Application.Services.Interfaces;
+using API_University_Dissertation.Core.Data.Entities;
 
-public class QuickSort : ISortingStrategy
+namespace API_University_Dissertation.Application.Strategies
 {
-    private static Random rand = new Random();
-
-    public IEnumerable<int[]> Sort(int[] unsortedList)
+    public class QuickSort : ISortingStrategy
     {
-        // Clone the array to avoid modifying the original array
-        int[] arr = (int[])unsortedList.Clone();
-        List<int[]> steps = new List<int[]>();
+        private static Random rand = new Random();
 
-        // Include the initial unsorted array in the steps
-        steps.Add((int[])arr.Clone());
-
-        QuickSortAlgorithm(arr, 0, arr.Length - 1, steps);
-
-        // Include the final sorted array in the steps
-       
-        
-        HashSet<int[]> hashSet = new HashSet<int[]>(steps);
-
-        return hashSet;
-    }
-
-    private void QuickSortAlgorithm(int[] a, int low, int high, List<int[]> steps)
-    {
-        if (low < high)
+        public IEnumerable<SortablePair> Sort(int[] unsortedList)
         {
-            // Choose random pivot and swap with the first element
-            int randomIndex = rand.Next(low, high + 1);
-            Swap(a, low, randomIndex, steps);
+            int[] arr = (int[])unsortedList.Clone();
+            var swaps = new List<SortablePair> { new SortablePair(0, 0, true) };
+            QuickSortAlgorithm(arr, 0, arr.Length - 1, swaps);
 
-            // 2-way partition
-            int pivotIndex = Partition(a, low, high, steps);
-
-            // Recursive sorts
-            QuickSortAlgorithm(a, low, pivotIndex - 1, steps);
-            QuickSortAlgorithm(a, pivotIndex + 1, high, steps);
+            return swaps;
         }
-    }
 
-    private int Partition(int[] a, int low, int high, List<int[]> steps)
-    {
-        int pivot = a[low];
-        int k = low;
-
-        for (int i = low + 1; i <= high; i++)
+        private void QuickSortAlgorithm(int[] a, int low, int high, List<SortablePair> swaps)
         {
-            if (a[i] < pivot)
+            if (low < high)
             {
-                k++;
-                Swap(a, k, i, steps);
+                int randomIndex = rand.Next(low, high + 1);
+                Swap(a, low, randomIndex, swaps);
+
+                int pivotIndex = Partition(a, low, high, swaps);
+
+                QuickSortAlgorithm(a, low, pivotIndex - 1, swaps);
+                QuickSortAlgorithm(a, pivotIndex + 1, high, swaps);
             }
         }
 
-        Swap(a, low, k, steps);
-
-        return k;
-    }
-
-    private void Swap(int[] a, int i, int j, List<int[]> steps)
-    {
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-
-        // Include the current step in the list of steps
-        if (!ArraysEqual(steps[steps.Count - 1], a))
+        private int Partition(int[] a, int low, int high, List<SortablePair> swaps)
         {
-            steps.Add((int[])a.Clone());
-        }
-    }
+            int pivot = a[low];
+            int k = low;
 
-    private bool ArraysEqual(int[] arr1, int[] arr2)
-    {
-        if (arr1.Length != arr2.Length)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < arr1.Length; i++)
-        {
-            if (arr1[i] != arr2[i])
+            for (int i = low + 1; i <= high; i++)
             {
-                return false;
+                if (a[i] < pivot)
+                {
+                    k++;
+                    Swap(a, k, i, swaps);
+                }
+            }
+
+            Swap(a, low, k, swaps);
+
+            return k;
+        }
+
+        private void Swap(int[] a, int i, int j, List<SortablePair> swaps)
+        {
+            if (i != j)
+            {
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+
+                swaps.Add(new SortablePair(i, j, true));
+            }
+            else
+            {
+                swaps.Add(new SortablePair(i, j, false));
             }
         }
-
-        return true;
     }
 }

@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getProfile,
-  getUserStatistics,
-  lastFiveGamesStatistics,
-} from "../../services/api/ApiEndpoints";
+import { getProfile, getUserStatistics } from "../../services/api/ApiEndpoints";
 import "./Profile.css";
 import proficiencyLevel from "../../services/enums/ProficiencyLevel";
 import ProficiencyQuiz from "../../components/ProficiencyQuiz/ProficiencyQuiz";
@@ -78,9 +74,15 @@ const Profile: React.FC = () => {
               {proficiencyLevel[userProfile.proficiencyLevelId]}
             </p>
             {userProfile.proficiencyLevelId === 1 && (
-              <button onClick={() => setShowProficiencyTest(true)}>
+              <Button
+                variant="contained"
+                aria-label="outlined primary button group"
+                className="button-container"
+                type="submit"
+                onClick={() => setShowProficiencyTest(true)}
+              >
                 Take Proficiency Test
-              </button>
+              </Button>
             )}{" "}
             {userProfile.proficiencyLevelId !== 1 &&
               userProfile.proficiencyLevelId !== 5 && (
@@ -96,9 +98,11 @@ const Profile: React.FC = () => {
             <p>Total Questions: {userStatistics.totalQuestions}</p>
             <p>Total Score: {userStatistics.totalScore}</p>
             <p>Average Score Per Game: {userStatistics.averageScore}</p>
-            <div className="progressionChart">
-              <ProgressionChart />
-            </div>
+            {userStatistics.gamesPlayed > 0 && (
+              <div className="progressionChart">
+                <ProgressionChart />
+              </div>
+            )}
           </div>
         </div>
       ) : (

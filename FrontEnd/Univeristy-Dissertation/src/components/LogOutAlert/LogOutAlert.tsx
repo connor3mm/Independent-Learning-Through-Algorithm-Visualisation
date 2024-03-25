@@ -22,11 +22,24 @@ const LogoutAlerts: React.FC<LogoutAlertsProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const [confirmed, setConfirmed] = React.useState(false);
+
+  const handleConfirm = () => {
+    setConfirmed(true);
+    onConfirm(); // Call the original onConfirm function passed from props
+  };
+
+  const handleOkay = () => {
+    // Reset the confirmation state and close the dialog
+    setConfirmed(false);
+    onCancel();
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <React.Fragment>
         <Dialog
-          open={open}
+          open={open && !confirmed} // Only open if the alert is not confirmed
           onClose={onCancel}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -36,7 +49,24 @@ const LogoutAlerts: React.FC<LogoutAlertsProps> = ({
             <Button onClick={onCancel} autoFocus>
               Cancel
             </Button>
-            <Button onClick={onConfirm}>Log Out</Button>
+            <Button onClick={handleConfirm}>Log Out</Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Second screen displayed after confirmation */}
+        <Dialog
+          open={confirmed}
+          onClose={onCancel}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"You have been logged out"}
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={handleOkay} autoFocus>
+              Okay
+            </Button>
           </DialogActions>
         </Dialog>
       </React.Fragment>

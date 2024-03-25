@@ -1,9 +1,12 @@
 .sort-container {
     background-color: #10163a;
     border-radius: 10px;
+    margin: 0 1em;
   }
   
   .sort-chart {
     width: 400px; 
     height: 300px; 
   }
+
+  

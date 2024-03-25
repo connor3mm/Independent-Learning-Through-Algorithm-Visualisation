@@ -30,18 +30,18 @@ const ProgressionChart = () => {
     }
   }, []);
 
-  const scoresArray = lastFiveGamesData.map((game) => game.score);
+  const scoresArray = lastFiveGamesData.map((quiz) => quiz.score);
   const data = {
     labels: lastFiveGamesData.map(
       (game) =>
-        `Game ${new Date(game.createdOn).toLocaleDateString("en-GB", {
+        `Quiz ${new Date(game.createdOn).toLocaleDateString("en-GB", {
           month: "2-digit",
           day: "2-digit",
         })}`
     ),
     datasets: [
       {
-        label: "Last Five Games",
+        label: "Last Five Quizzes",
         data: scoresArray,
         fill: true,
         backgroundColor: "#543bd3",

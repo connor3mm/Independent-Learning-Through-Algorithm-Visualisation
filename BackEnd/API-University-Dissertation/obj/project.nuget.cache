@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nppYnl9VP0Vz/1tdMKnp/F6C/JYSwjmIW4Yqa+yJKCpwocFz4Pcrk6QTDiJsSjtQ4xTw2/mWmtQfOHg8SRlRrg==",
+  "dgSpecHash": "yhQW2eerwH0WzBMW9rgl3MX1dFzQnuWJuhED2EbtUZIPEPeQR9yYoR6stxVTDIWQPdrxHEXApl7h5TmvLe2TeQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\conno\\OneDrive - University of Strathclyde\\Fourth Year\\CS408 - Individual project\\University Dissertation\\BackEnd\\API-University-Dissertation\\API-University-Dissertation.csproj",
   "expectedPackageFiles": [
@@ -56,6 +56,7 @@
     "C:\\Users\\conno\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\moq\\4.20.70\\moq.4.20.70.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\conno\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\npgsql\\8.0.0-rc.2\\npgsql.8.0.0-rc.2.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.0-rc.2\\npgsql.entityframeworkcore.postgresql.8.0.0-rc.2.nupkg.sha512",
     "C:\\Users\\conno\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",

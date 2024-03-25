@@ -24,3 +24,25 @@
   .button-container{
     padding-top: 2vh;
   }
+
+  .loginBox label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .loginBox input {
+    width: 20%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .loginBox button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

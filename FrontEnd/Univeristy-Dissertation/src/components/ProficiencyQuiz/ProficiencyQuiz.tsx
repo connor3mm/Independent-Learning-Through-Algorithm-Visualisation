@@ -79,7 +79,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
   return (
     <>
       {quizComplete ? (
-        <div className="successMessage">
+        <div className="successMessage" data-testid="success-message">
           Your proficiency level has been saved! You will start at the{" "}
           {userLevel}
         </div>
@@ -113,7 +113,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
               )}
 
               {showError && (
-                <div className="errorMessage">
+                <div className="errorMessage" data-testid="error-message">
                   <ClearIcon /> Error: Please choose an option!
                 </div>
               )}

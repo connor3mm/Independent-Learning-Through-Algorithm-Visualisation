@@ -1,5 +1,5 @@
+using API_University_Dissertation.Application.Services.Services;
 using API_University_Dissertation.Core.Data.Enums;
-using API_University_Dissertation.Core.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_University_Dissertation.Presentation.Controllers;
@@ -48,21 +48,6 @@ public class SortingAlgorithmController : ControllerBase
         }
     }
 
-    [HttpPost("mergesort", Name = "mergesort")]
-    public IActionResult MergeSort(int[] arr)
-    {
-        try
-        {
-            return Ok(_sortingService.SortingAlgorithm(SortingStrategy.MergeSort, arr));
-        }
-        catch (Exception ex)
-        {
-            var errorMessage = $"An error occurred: {ex.Message}";
-            _logger.LogError(errorMessage);
-            return BadRequest(errorMessage);
-        }
-    }
-
     [HttpPost("insertionsort", Name = "insertionsort")]
     public IActionResult InsertionSort(int[] arr)
     {
@@ -91,5 +76,20 @@ public class SortingAlgorithmController : ControllerBase
             _logger.LogError(errorMessage);
             return BadRequest(errorMessage);
         }
+    }
+
+    [HttpPost("shellsort", Name = "shellsort")]
+        public IActionResult ShellSort(int[] arr)
+        {
+            try
+            {
+                return Ok(_sortingService.SortingAlgorithm(SortingStrategy.ShellSort, arr));
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = $"An error occurred: {ex.Message}";
+                _logger.LogError(errorMessage);
+                return BadRequest(errorMessage);
+            }
     }
 }

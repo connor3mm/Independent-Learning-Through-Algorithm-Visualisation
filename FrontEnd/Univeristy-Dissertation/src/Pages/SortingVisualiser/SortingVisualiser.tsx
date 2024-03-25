@@ -7,18 +7,19 @@ import AlgorithmInputBox from "../../components/AlgorithmInputBox/AlgorithmInput
 import SpeedOptions from "../../components/SpeedOptions/SpeedOptions";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import ToolTip from "../../components/ToolTip/ToolTip";
 
 function SortingVisualiser() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [speed, setSpeed] = useState<number>(1000);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
   const [customInputArray, setCustomInputArray] = useState<number[]>([
     5, 2, 9, 1, 5, 6,
   ]);
-  const [sortingData, setSortingData] = useState<number[][]>([]);
-  const [secondSortingData, setSecondSortingData] = useState<number[][]>([]);
-
+  const [sortingData, setSortingData] = useState<AlgorithmSwaps[]>([]);
+  const [secondSortingData, setSecondSortingData] = useState<AlgorithmSwaps[]>(
+    []
+  );
   const [selectedAlgorithm, setSelectedAlgorithm] =
     useState<string>("bubbleSort");
   const [secondSelectedAlgorithm, setSecondSelectedAlgorithm] =
@@ -102,10 +103,11 @@ function SortingVisualiser() {
   ) => (
     <div className="visualisationContainer" key={key}>
       <SortAnimation
-        states={sortedData}
+        algorithmSwaps={sortedData}
         speed={speed}
         isPlaying={isPlaying}
         title={SortingAlgorithm[algorithm as keyof typeof SortingAlgorithm]}
+        initialState={customInputArray}
       />
     </div>
   );
@@ -115,7 +117,6 @@ function SortingVisualiser() {
       <option value="bubbleSort">{SortingAlgorithm.bubbleSort}</option>
       <option value="selectionSort">{SortingAlgorithm.selectionSort}</option>
       <option value="insertionSort">{SortingAlgorithm.insertionSort}</option>
-      <option value="mergeSort">{SortingAlgorithm.mergeSort}</option>
       <option value="quickSort">{SortingAlgorithm.quickSort}</option>
       <option value="shellSort">{SortingAlgorithm.shellSort}</option>
       <option value="bubbleSort" disabled hidden></option>
@@ -131,7 +132,7 @@ function SortingVisualiser() {
           <div className="sortAnimationContainer">
             {/* First Visualiser */}
             {renderVisualisationContainer(selectedAlgorithm, 1, sortingData)}
-            {/* First Visualiser */}
+            {/* second Visualiser */}
             {showSecondVisualiser &&
               renderVisualisationContainer(
                 secondSelectedAlgorithm,
@@ -142,16 +143,27 @@ function SortingVisualiser() {
             {/* Algorithm Controls  */}
             <div className="visualisationControlsContainer">
               <div className="controls">
-                <h2>Controls</h2>
+                <h2
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span>Controls</span>
+                  <span style={{ marginLeft: "5px" }}>
+                    <ToolTip customMessage="Drop Down boxes are available to choose your selected algorithm. Speed will didctate how fast the algorithm will swap. You can choose the compare algorithm option to add an additional visulaliser." />
+                  </span>
+                </h2>
 
                 <div>
-                  <div>Algorithm One</div>
+                  <div>Visualiser One</div>
                   {renderDropdown(selectedAlgorithm, handleAlgorithmChange)}
                 </div>
 
                 {showSecondVisualiser && (
                   <div>
-                    <div>Algorithm Two</div>
+                    <div>Visuliser Two</div>
                     {renderDropdown(
                       secondSelectedAlgorithm,
                       handleSecondAlgorithmChange
@@ -170,7 +182,13 @@ function SortingVisualiser() {
                   <Button onClick={handlePlayButtonClick}>Play</Button>
                   <Button onClick={reset}>Reset</Button>
                 </ButtonGroup>
-                <Button variant="outlined" onClick={toggleSecondVisualiser}>
+                <Button
+                  aria-label="outlined primary button group"
+                  className="compare-container"
+                  variant="contained"
+                  color="secondary"
+                  onClick={toggleSecondVisualiser}
+                >
                   {showSecondVisualiser ? "Hide Compare" : "Compare Algorithms"}
                 </Button>
               </div>

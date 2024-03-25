@@ -1,19 +1,28 @@
 using API_University_Dissertation.Application.Mappers;
+using API_University_Dissertation.Application.Services.Interfaces;
+using API_University_Dissertation.Application.Services.Services;
 using API_University_Dissertation.Application.Strategies;
+using API_University_Dissertation.Core.Data.DataContexts;
 using API_University_Dissertation.Core.Repositories;
-using API_University_Dissertation.Core.Services.Interfaces;
-using API_University_Dissertation.Core.Services.Services;
 using API_University_Dissertation.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        JsonConvert.DefaultSettings = () => new JsonSerializerSettings();
+        
+        // Add more options as required
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -42,10 +51,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddLogging(builder =>
-{
-    builder.AddConsole();
-});
+builder.Services.AddLogging(builder => { builder.AddConsole(); });
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -53,17 +59,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-        };
-    });
 builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<DataContext>();
 
 //This allows request from the my frontend with origin 5173
@@ -84,9 +79,9 @@ builder.Services.AddTransient<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<ISortingStrategy, BubbleSort>();
 builder.Services.AddScoped<ISortingStrategy, SelectionSort>();
-builder.Services.AddScoped<ISortingStrategy, MergeSort>();
 builder.Services.AddScoped<ISortingStrategy, InsertionSort>();
 builder.Services.AddScoped<ISortingStrategy, QuickSort>();
+builder.Services.AddScoped<ISortingStrategy, ShellSort>();
 builder.Services.AddScoped<ISortingAlgorithmService, SortingAlgorithmService>();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddAutoMapper(typeof(UserProfileMapper));

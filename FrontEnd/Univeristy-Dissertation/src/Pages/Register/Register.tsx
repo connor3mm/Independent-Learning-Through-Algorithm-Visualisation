@@ -3,6 +3,8 @@ import { registerUser, saveProfile } from "../../services/api/ApiEndpoints";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import ProficiencyQuiz from "../../components/ProficiencyQuiz/ProficiencyQuiz";
+import { Button } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 
 interface RegisterFormData {
   password: string;
@@ -21,6 +23,7 @@ interface UserProfile {
 const Register: React.FC = () => {
   const navigate = useNavigate();
 
+  const [registering, setRegistering] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile>({
     email: "",
     firstName: "",
@@ -35,30 +38,92 @@ const Register: React.FC = () => {
   });
 
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [passwordMismatchError, setPasswordMismatchError] = useState(false);
+
+  // State variables for input field errors
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [emailDuplication, setEmailDuplication] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [passwordValidationErrors, setPasswordValidationErrors] = useState<
+    string[]
+  >([]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let registerSuccess = true;
 
-    if (
-      formData.password === "" ||
-      formData.password !== formData.confirmPassword
-    ) {
-      alert("Passwords don't match. Please re-enter.");
+    // Check for empty fields
+    if (!userProfile.firstName) {
+      setFirstNameError(true);
+      registerSuccess = false;
+    } else {
+      setFirstNameError(false);
+    }
+    if (!userProfile.lastName) {
+      setLastNameError(true);
+      registerSuccess = false;
+    } else {
+      setLastNameError(false);
+    }
+    if (!userProfile.email) {
+      setEmailError(true);
+      registerSuccess = false;
+    } else {
+      setEmailError(false);
+    }
+    if (!formData.password) {
+      setPasswordError(true);
+      registerSuccess = false;
+    } else {
+      setPasswordError(false);
+    }
+    if (!formData.confirmPassword) {
+      setConfirmPasswordError(true);
+      registerSuccess = false;
+    } else {
+      setConfirmPasswordError(false);
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setPasswordMismatchError(true);
+      registerSuccess = false;
+    }
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      setPasswordValidationErrors([
+        "Password must be at least 6 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character.",
+      ]);
+      registerSuccess = false;
+    } else {
+      setPasswordValidationErrors([]);
+    }
+
+    if (!registerSuccess) {
       return;
     }
 
+    var registration = false;
+
+    setRegistering(true);
     try {
       await registerUser(userProfile.email, formData.password);
-      registerSuccess = true;
-      setRegistrationSuccess(true);
-    } catch (error) {
-      console.error(error);
+      registration = true;
+    } catch (error: unknown) {
+      setEmailDuplication(true);
+      registration = false;
+    } finally {
+      setRegistering(false);
     }
 
-    if (registerSuccess) {
+    if (registration) {
       try {
         await saveProfile(userProfile);
+        setRegistrationSuccess(true);
       } catch (error) {
         console.error(error);
       }
@@ -73,6 +138,9 @@ const Register: React.FC = () => {
       ...formData,
       [field]: event.target.value,
     });
+    setPasswordMismatchError(false);
+    setPasswordError(false);
+    setConfirmPasswordError(false);
   };
 
   const handleChangeUser = (
@@ -83,6 +151,15 @@ const Register: React.FC = () => {
       ...userProfile,
       [field]: event.target.value,
     });
+    if (field === "firstName") {
+      setFirstNameError(false);
+    }
+    if (field === "lastName") {
+      setLastNameError(false);
+    }
+    if (field === "email") {
+      setEmailError(false);
+    }
   };
 
   return (
@@ -110,6 +187,9 @@ const Register: React.FC = () => {
                   value={userProfile.firstName}
                   onChange={(e) => handleChangeUser(e, "firstName")}
                 />
+                {firstNameError && (
+                  <p className="error-message">First name is required.</p>
+                )}
               </div>
               <div>
                 <label htmlFor="fullName">Last Name:</label>
@@ -119,6 +199,9 @@ const Register: React.FC = () => {
                   value={userProfile.lastName}
                   onChange={(e) => handleChangeUser(e, "lastName")}
                 />
+                {lastNameError && (
+                  <p className="error-message">Last name is required.</p>
+                )}
               </div>
               <div>
                 <label htmlFor="email">Email:</label>
@@ -128,6 +211,14 @@ const Register: React.FC = () => {
                   value={userProfile.email}
                   onChange={(e) => handleChangeUser(e, "email")}
                 />
+                {emailError && (
+                  <p className="error-message">Email is required.</p>
+                )}
+                {emailDuplication && (
+                  <p className="error-message">
+                    Email is already set to a user.
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="password">Password:</label>
@@ -137,6 +228,9 @@ const Register: React.FC = () => {
                   value={formData.password}
                   onChange={(e) => handleChange(e, "password")}
                 />
+                {passwordError && (
+                  <p className="error-message">Password is required.</p>
+                )}
               </div>
               <div>
                 <label htmlFor="confirmPassword">Confirm Password:</label>
@@ -146,8 +240,37 @@ const Register: React.FC = () => {
                   value={formData.confirmPassword}
                   onChange={(e) => handleChange(e, "confirmPassword")}
                 />
+                {confirmPasswordError && (
+                  <p className="error-message">
+                    <ClearIcon className="clear-icon" /> Confirm password is
+                    required.
+                  </p>
+                )}
+                {passwordMismatchError &&
+                  passwordValidationErrors.length === 0 && (
+                    <p className="error-message">
+                      <ClearIcon className="clear-icon" /> Passwords don't
+                      match. Please re-enter.
+                    </p>
+                  )}
+
+                {passwordValidationErrors.length > 0 &&
+                  passwordValidationErrors.map((error, index) => (
+                    <p key={index} className="error-message">
+                      <ClearIcon className="clear-icon" /> {error}
+                    </p>
+                  ))}
               </div>
-              <button type="submit">Register</button>
+
+              <Button
+                variant="contained"
+                aria-label="outlined primary button group"
+                className="button-container"
+                type="submit"
+                disabled={registering}
+              >
+                {registering ? "Registering account..." : "Register"}
+              </Button>
             </form>
           </>
         )}

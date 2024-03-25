@@ -3,57 +3,64 @@ import Chart from "chart.js/auto";
 import "./AlgorithmAnimation.css";
 
 interface AlgorithmAnimationProps {
-  states: number[][];
+  algorithmSwaps: AlgorithmSwaps[];
   speed: number;
   isPlaying: boolean;
-  title: any;
+  title: string;
+  initialState: number[];
 }
 
 const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
-  states,
+  algorithmSwaps,
   speed,
   isPlaying,
   title,
+  initialState,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const chartInstance = useRef<Chart | null>(null);
+  const [currentState, setCurrentState] = useState<number[]>(initialState);
 
   useEffect(() => {
     let animation: NodeJS.Timeout;
 
     const playAnimation = () => {
-      if (isPlaying && currentStep < states.length - 1) {
+      if (currentStep < algorithmSwaps.length - 1) {
         animation = setTimeout(() => {
           setCurrentStep((prevStep) => prevStep + 1);
-        }, speed);
+        }, speed + 100);
       }
     };
 
-    playAnimation();
+    if (isPlaying) {
+      playAnimation();
+    }
 
     return () => {
       clearTimeout(animation);
     };
-  }, [currentStep, states, speed, isPlaying]);
+  }, [currentStep, speed, isPlaying]);
 
   useEffect(() => {
-    if (chartRef.current && states[currentStep]) {
+    if (chartRef.current && currentState) {
       if (chartInstance.current) {
-        chartInstance.current.data.labels = states[currentStep].map(String);
-        chartInstance.current.data.datasets[0].data = states[currentStep];
+        // Update chart data
+        chartInstance.current.data.labels = currentState.map(String);
+        chartInstance.current.data.datasets[0].data = currentState;
         chartInstance.current.update();
       } else {
+        // Create new chart instance
         const context = chartRef.current.getContext("2d");
         if (context) {
           chartInstance.current = new Chart(context, {
             type: "bar",
             data: {
-              labels: states[currentStep].map(String),
+              labels: initialState.map(String),
               datasets: [
                 {
                   label: "",
-                  data: states[0],
+                  data: currentState,
                   backgroundColor: "rgba(54, 162, 235, 0.5)",
                   borderColor: "rgba(54, 162, 235, 1)",
                   borderWidth: 1,
@@ -92,7 +99,40 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
         }
       }
     }
-  }, [currentStep, states]);
+  }, [currentStep, initialState, algorithmSwaps]);
+
+  useEffect(() => {
+    if (chartRef.current && currentState && isPlaying) {
+      let updatedValues = [...currentState];
+
+      const { firstValue, secondValue, hasSwapped } =
+        algorithmSwaps[currentStep];
+
+      // Swap values
+      if (hasSwapped) {
+        const temp = updatedValues[firstValue];
+        updatedValues[firstValue] = updatedValues[secondValue];
+        updatedValues[secondValue] = temp;
+      }
+
+      setCurrentState(updatedValues);
+
+      if (chartInstance.current) {
+        chartInstance.current.data.labels = updatedValues.map(String);
+        chartInstance.current.data.datasets[0].data = updatedValues;
+        chartInstance.current.data.datasets[0].backgroundColor =
+          updatedValues.map(
+            (_value, index) =>
+              index === firstValue || index === secondValue
+                ? hasSwapped
+                  ? "rgba(0, 255, 0, 0.5)" // Green color for bars swapped
+                  : "rgba(255, 0, 0, 0.5)" // Red color for bars not swapped
+                : "rgba(54, 162, 235, 0.5)" // Default color for other bars
+          );
+        chartInstance.current.update(); // Update the chart
+      }
+    }
+  }, [currentStep]);
 
   return (
     <div className="sort-container">

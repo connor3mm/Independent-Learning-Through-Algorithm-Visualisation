@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using API_University_Dissertation.Application.DTO;
-using API_University_Dissertation.Core.Services.Services;
+using API_University_Dissertation.Application.Services.Services;
+using API_University_Dissertation.Core.Data.Entities;
 using API_University_Dissertation.Presentation.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -175,44 +176,26 @@ public class UserProfileControllerTests
         Assert.AreEqual(200, result?.StatusCode);
     }
 
-    // [Test]
-    // public void UpdateProficiency_ReturnsBadRequest_WhenClaimsAreMissing()
-    // {
-    //     // Arrange
-    //     const int proficiencyLevel = 1;
-    //
-    //     var claims = new Claim[] { };
-    //     SetupControllerContext(claims);
-    //     var proficiencyUpdateDto = new ProficiencyUpdateDto { Email = "test", ProficiencyLevelId = proficiencyLevel };
-    //         
-    //
-    //     // Act
-    //     var result = _controller.UpdateProficiency(proficiencyUpdateDto) as BadRequestResult;
-    //
-    //     // Assert
-    //     Assert.IsNotNull(result);
-    //     Assert.AreEqual(400, result?.StatusCode);
-    // }
-
     [Test]
     public void UpdateProficiency_ReturnsBadRequest_WhenExceptionOccurs()
     {
         // Arrange
         const int proficiencyLevel = 1;
-    
+
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, "userUuid")
         };
-        var proficiencyUpdateDto = new ProficiencyUpdateDto { Email = "userUuid", ProficiencyLevelId = proficiencyLevel };
+        var proficiencyUpdateDto = new ProficiencyUpdateDto
+            { Email = "userUuid", ProficiencyLevelId = proficiencyLevel };
         SetupControllerContext(claims);
-    
+
         _mockProfileService.Setup(x => x.UpdateProficiency(proficiencyLevel, "userUuid"))
             .Throws(new Exception("Test error"));
-    
+
         // Act
         var result = _controller.UpdateProficiency(proficiencyUpdateDto) as BadRequestObjectResult;
-    
+
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(400, result?.StatusCode);
@@ -345,6 +328,64 @@ public class UserProfileControllerTests
 
         // Act
         var result = _controller.UserStatistics() as BadRequestObjectResult;
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(400, result?.StatusCode);
+        Assert.AreEqual("An error occurred: Test error", result?.Value);
+    }
+
+    [Test]
+    public void LastFiveGamesStatistics_ReturnsOkResult_WhenStatisticsRetrievedSuccessfully()
+    {
+        // Arrange
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, "userUuid")
+        };
+        SetupControllerContext(claims);
+
+        _mockProfileService.Setup(x => x.GetLastFiveGamesStatistics("userUuid"))
+            .Returns(new List<UserQuizStatistics> { });
+
+        // Act
+        var result = _controller.LastFiveGamesStatistics() as OkObjectResult;
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(200, result?.StatusCode);
+    }
+
+    [Test]
+    public void LastFiveGamesStatistics_ReturnsBadRequest_WhenUserUuidIsMissing()
+    {
+        // Arrange
+        var claims = new Claim[] { };
+        SetupControllerContext(claims);
+
+        // Act
+        var result = _controller.LastFiveGamesStatistics() as BadRequestResult;
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(400, result?.StatusCode);
+    }
+
+    [Test]
+    public void LastFiveGamesStatistics_ReturnsBadRequest_WhenExceptionOccurs()
+    {
+        // Arrange
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, "userUuid")
+        };
+        SetupControllerContext(claims);
+
+        _mockProfileService.Setup(x => x.GetLastFiveGamesStatistics("userUuid"))
+            .Throws(new Exception("Test error"));
+
+        // Act
+        var result = _controller.LastFiveGamesStatistics() as BadRequestObjectResult;
 
         // Assert
         Assert.IsNotNull(result);

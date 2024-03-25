@@ -1,11 +1,48 @@
-.registrationBox{
-    border: 2px solid;
-    margin: auto;
-    width: 40%;
-    padding: 20px;
-    margin-top: 10vh;
-    outline-style:solid;
-    outline-color: #FFF;
-    outline-width: 0.1em;
-    border-radius: 20px;
+.registrationBox {
+  border: 2px solid;
+  margin: auto;
+  width: 40%;
+  padding: 20px;
+  margin-top: 10vh;
+  outline-style: solid;
+  outline-color: #FFF;
+  outline-width: 0.1em;
+  border-radius: 20px;
+}
+
+.error-message {
+    color: red;
+    padding: 0;
+    margin: 0;
+  }
+
+.clear-icon {
+  vertical-align: middle;
+}
+
+.registrationBox label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.registrationBox input {
+  width: 20%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.registrationBox button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.registrationBox button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

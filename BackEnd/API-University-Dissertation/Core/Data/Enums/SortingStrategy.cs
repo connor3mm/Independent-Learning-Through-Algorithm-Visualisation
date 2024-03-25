@@ -3,7 +3,7 @@ namespace API_University_Dissertation.Core.Data.Enums;
     {
         BubbleSort,
         SelectionSort,
-        MergeSort,
         InsertionSort,
-        QuickSort
+        QuickSort,
+        ShellSort
     }

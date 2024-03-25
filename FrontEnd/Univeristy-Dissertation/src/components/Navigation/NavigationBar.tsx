@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavigationBar.css";
 import LogoutAlerts from "../LogOutAlert/LogOutAlert";
@@ -12,7 +12,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   isLoggedIn,
   handleLogout,
 }) => {
-  const [isLogoutAlertOpen, setIsLogoutAlertOpen] = React.useState(false);
+  const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
 
   const handleLogoutClick = () => {
     setIsLogoutAlertOpen(true);

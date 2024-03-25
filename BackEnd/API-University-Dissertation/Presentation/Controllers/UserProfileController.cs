@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using API_University_Dissertation.Application.DTO;
-using API_University_Dissertation.Core.Services.Services;
+using API_University_Dissertation.Application.Services.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -123,5 +123,4 @@ public class UserProfileController : ControllerBase
             return BadRequest(errorMessage);
         }
     }
-    
 }
