@@ -8,6 +8,7 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "@mui/material";
 
+//Interfaces
 interface QuizQuestion {
   id: number;
   question: string;
@@ -30,6 +31,7 @@ interface QuizProps {
   onQuizReset: () => void;
 }
 
+// Quiz functional component
 const Quiz: React.FC<QuizProps> = ({ ids, onQuizReset }) => {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -105,13 +107,14 @@ const Quiz: React.FC<QuizProps> = ({ ids, onQuizReset }) => {
   };
 
   const restartGame = () => {
-    setScore(0);
-    setCurrentQuestion(0);
-    setShowResults(false);
-    setAnswerSelected(false);
-    onQuizReset();
+    setScore(0); // Resetting score
+    setCurrentQuestion(0); // Resetting current question index
+    setShowResults(false); // Hiding quiz results
+    setAnswerSelected(false); // Resetting answer selected state
+    onQuizReset(); // Calling onQuizReset function
   };
 
+  // Rendering Quiz component
   return (
     <div className="container">
       {isLoading ? (

@@ -20,6 +20,7 @@ public class QuizRepository : IQuizRepository
 
     public IEnumerable<QuizQuestions> GetQuizQuestions(int[] quizTypeIds, int count)
     {
+        //Using LINQ to take the count of random questions from the database based on quiz IDs
         return _context.QuizQuestions
             .Include(q => q.QuestionChoices)
             .Where(q => quizTypeIds.Contains(q.QuestionTypeId))

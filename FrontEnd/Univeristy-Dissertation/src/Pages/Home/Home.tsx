@@ -3,14 +3,17 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import mascot from "../../components/Images/Sloth-removebg-FixedBG.png";
 
+// Home functional component
 function Home() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Function to navigate to different pages
     setLoading(false);
   }, []);
 
+  // Function to navigate to different pages
   const buttonNav = (page: string) => {
     navigate(page);
   };

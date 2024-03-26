@@ -11,9 +11,10 @@ public interface ISortingAlgorithmService
 
 public class SortingAlgorithmService(IEnumerable<ISortingStrategy> strategies) : ISortingAlgorithmService
 {
-    
+    //Strategy Pattern used for sorting algorithm family
     public IEnumerable<SortablePair> SortingAlgorithm(SortingStrategy sortingStrategy, int[] arr)
     {
+        //Selecting sorting algorithm compared to the program injected classes
         var selectedStrategy =
             strategies.FirstOrDefault(strategy => strategy.GetType().Name == sortingStrategy.ToString());
         
@@ -21,7 +22,7 @@ public class SortingAlgorithmService(IEnumerable<ISortingStrategy> strategies) :
         {
             throw new ArgumentException("Invalid strategy");
         }
-        
+        //Call the strategy
         return selectedStrategy.Sort(arr);
     }
 }

@@ -5,11 +5,13 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import "./SpeedOptions.css";
 
+// Interface for SpeedOptionsProps
 interface SpeedOptionsProps {
   speed: number;
   handleSpeedChange: (newSpeed: number) => void;
 }
 
+// SpeedOptions functional component
 const SpeedOptions: React.FC<SpeedOptionsProps> = ({
   speed,
   handleSpeedChange,

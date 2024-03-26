@@ -4,10 +4,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { updateProficencyLevel } from "../../services/api/ApiEndpoints";
 import proficiencyLevel from "../../services/enums/ProficiencyLevel";
 
+// Interface for userDetails
 interface userDetails {
   email?: string;
 }
 
+// ProficiencyQuiz functional component
 const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
   const [showError, setShowError] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
@@ -16,6 +18,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
   const [proficiencyChoice, setProficiencyChoice] = useState(-1);
   const [userLevel, setUserLevel] = useState("");
 
+  // Array of quiz questions
   const questions = [
     {
       questionText: "Do you have any previous knowledge of sorting algorithms?",
@@ -43,6 +46,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
     },
   ];
 
+  // Function to handle click on next button
   const handleNextClick = (rating: number) => {
     if (rating === -1) {
       setShowError(true);
@@ -57,6 +61,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setQuizComplete(true);
+      // Updating user proficiency level based on self-evaluation score
       if (selfEvaluationScore + rating <= 6) {
         updateProficencyLevel(email, proficiencyLevel.Beginner);
         setUserLevel(
@@ -76,6 +81,7 @@ const ProficiencyQuiz: React.FC<userDetails> = ({ email }) => {
     }
   };
 
+  // Rendering ProficiencyQuiz component
   return (
     <>
       {quizComplete ? (

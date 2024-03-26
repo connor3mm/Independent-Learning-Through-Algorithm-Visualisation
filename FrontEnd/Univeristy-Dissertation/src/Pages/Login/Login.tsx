@@ -5,10 +5,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import "./Login.css";
 import Button from "@mui/material/Button";
 
+// Interface for LoginProps
 interface LoginProps {
   handleLogin: () => void;
 }
 
+// Login functional component
 const Login: React.FC<LoginProps> = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +26,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     }
   }, [navigate]);
 
+  // Function to validate email format
   const validateEmail = (input: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(input);
@@ -34,6 +37,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
 
     setError(null);
 
+    // Validate email format
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
       return;

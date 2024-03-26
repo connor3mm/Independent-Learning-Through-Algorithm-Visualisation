@@ -21,23 +21,27 @@ public class UserProfileRepository : IUserProfileRepository
         _context = context;
     }
 
+    //Add user profile to Db
     public void Add(UserProfile profile)
     {
         _context.UserProfiles.Add(profile);
         _context.SaveChanges();
     }
 
+    //Returns First user that makes the UUID provided 
     public UserProfile GetByUuid(string uuid)
     {
         return _context.UserProfiles.Include(q => q.UserQuizStatistics).SingleOrDefault(u => u.UserUUID == uuid) ?? throw new InvalidOperationException();
     }
 
+    //Saves Single user statistic to Db
     public void SaveUserStatistics(UserQuizStatistics userQuizStatistics)
     {
         _context.UserQuizStatistics.Add(userQuizStatistics);
         _context.SaveChanges();
     }
 
+    //Updates the user profile with any changes
     public void UpdateUserProfile(UserProfile user)
     {
         _context.UserProfiles.Update(user);

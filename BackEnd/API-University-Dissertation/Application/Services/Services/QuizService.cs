@@ -22,9 +22,11 @@ public class QuizService : IQuizService
 
     public List<QuizQuestionsDTO> GenerateQuiz(int[] quizTypeIds)
     {
+        //Quiz count of 5 right now, due to context size being small
         const int questionCount = 5;
         var quizQuestions = _quizRepository.GetQuizQuestions(quizTypeIds, questionCount);
 
+        //Map the DB return to the DTO
         return quizQuestions.Select(questions => _mapper.Map<QuizQuestionsDTO>(questions)).ToList();
     }
 }

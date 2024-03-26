@@ -9,6 +9,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import ProgressionBar from "../../components/ProgressionBar/ProgressionBar";
 import ProgressionChart from "../../components/ProgressionChart/ProgressionChart";
 
+// Interface for UserStatistics
 interface UserStatistics {
   totalScore: number;
   totalQuestions: number;
@@ -17,6 +18,7 @@ interface UserStatistics {
   proficiencyScore: number;
 }
 
+// Profile functional component
 const Profile: React.FC = () => {
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -54,6 +56,7 @@ const Profile: React.FC = () => {
     }
   }, []);
 
+  // Rendering Profile component
   return (
     <div>
       <h2>Profile</h2>

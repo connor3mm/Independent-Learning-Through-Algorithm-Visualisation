@@ -3,15 +3,18 @@ import Quiz from "../../components/Quiz/Quiz";
 import "../TestingZone/TestingZone.css";
 import { useState } from "react";
 
+// TestingZone functional component
 const TestingZone: React.FC = () => {
   const [quizActive, setQuizActive] = useState(false);
   const [quizIds, setQuizIds] = useState<number[]>([]);
 
+  // Function to start a quiz with given IDs
   const handleStartQuiz = (ids: number[]) => {
     setQuizIds(ids);
     setQuizActive(true);
   };
 
+  // Function to reset quiz states
   const handleResetQuiz = () => {
     setQuizActive(false);
     setQuizIds([]);

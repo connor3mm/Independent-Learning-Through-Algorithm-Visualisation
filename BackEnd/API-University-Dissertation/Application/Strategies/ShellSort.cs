@@ -3,10 +3,14 @@ using API_University_Dissertation.Core.Data.Entities;
 
 namespace API_University_Dissertation.Application.Strategies
 {
+    /// <summary>
+    /// Represents a sorting strategy using the Shell Sort algorithm.
+    /// </summary>
     public class ShellSort : ISortingStrategy
     {
         public IEnumerable<SortablePair> Sort(int[] unsortedList)
         {
+            //Initialise variables
             var arrayLength = unsortedList.Length;
             var currentArray = new int[arrayLength];
             Array.Copy(unsortedList, currentArray, arrayLength);

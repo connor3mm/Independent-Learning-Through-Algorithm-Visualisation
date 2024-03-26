@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AlgorithmInputBox.css";
 import ToolTip from "../ToolTip/ToolTip";
 
+// Declaring AlgorithmInputBox component
 function AlgorithmInputBox({
   setCustomInputArray,
   setIsPlaying,
@@ -9,13 +10,14 @@ function AlgorithmInputBox({
   setCustomInputArray: React.Dispatch<React.SetStateAction<number[]>>;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [customInput, setCustomInput] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [customInput, setCustomInput] = useState<string>(""); // State for custom input string
+  const [errorMessage, setErrorMessage] = useState<string>(""); // State for error message
 
+  // Function to handle change in custom input
   const handleCustomInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCustomInput(e.target.value);
   };
-
+  // Processing custom input string into an array of valid numbers
   const handleCustomInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -27,6 +29,7 @@ function AlgorithmInputBox({
       )
       .map((num) => Number(num));
 
+    // Validating the input array
     if (inputArray.length < 2) {
       setErrorMessage("Please enter one or more positive numbers.");
     } else {
@@ -36,6 +39,7 @@ function AlgorithmInputBox({
     setIsPlaying(false);
   };
 
+  // Rendering AlgorithmInputBox component
   return (
     <div className="customInputs">
       <h2

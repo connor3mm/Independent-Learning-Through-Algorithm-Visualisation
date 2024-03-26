@@ -19,6 +19,7 @@ public class AspNetUserRepository : IAspNetUserRepository
 
     public string GetByEmail(string email)
     {
+        //Find find user with the same email in Database, if not found throw exception
         var user = _context.Users.SingleOrDefault(u => u.Email == email);
         if (user == null) throw new InvalidOperationException();
         return user.Id;

@@ -42,6 +42,7 @@ const AlgorithmAnimation: React.FC<AlgorithmAnimationProps> = ({
     };
   }, [currentStep, speed, isPlaying]);
 
+  //CHART.JS bar char - Modified code to suit this project
   useEffect(() => {
     if (chartRef.current && currentState) {
       if (chartInstance.current) {

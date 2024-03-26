@@ -22,6 +22,7 @@ public class UserProfileController : ControllerBase
     [HttpGet, Authorize]
     public IActionResult Profile()
     {
+        //Takes user claims from auth token
         var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         if (userUuid == null || userEmail == null) return BadRequest();
@@ -73,6 +74,7 @@ public class UserProfileController : ControllerBase
     [HttpPost("saveuserstatistics", Name = "saveuserstatistics"), Authorize]
     public IActionResult SaveUserStatistics(UserQuizStatisticsDto userQuizStatistics)
     {
+        //Takes user claims from auth token
         var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         if (userUuid == null) return BadRequest();
 
@@ -92,6 +94,7 @@ public class UserProfileController : ControllerBase
     [HttpGet("userstatistics", Name = "userstatistics"), Authorize]
     public IActionResult UserStatistics()
     {
+        //Takes user claims from auth token
         var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         if (userUuid == null) return BadRequest();
 
@@ -109,6 +112,7 @@ public class UserProfileController : ControllerBase
     [HttpGet("lastfivegamestatistics", Name = "lastfivegamestatistics"), Authorize]
     public IActionResult LastFiveGamesStatistics()
     {
+        //Takes user claims from auth token
         var userUuid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         if (userUuid == null) return BadRequest();
 

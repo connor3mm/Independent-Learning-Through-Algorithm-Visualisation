@@ -3,6 +3,7 @@ import "./LearningZone.css";
 import SortingAlgorithm from "../../services/enums/SortingAlgorithms";
 import SearchingAlgorithms from "../../services/enums/SearchingAlgorithms";
 
+// Interface for Complexity Informatio
 interface ComplexityInfo {
   algorithmName: string;
   description: string;
@@ -12,6 +13,7 @@ interface ComplexityInfo {
   spaceComplexity: string;
 }
 
+// LearningZone functional component
 const LearningZone: React.FC = () => {
   const [infoFlag, setInfoFlag] = useState(false);
   const [complexityInfo, setComplexityInfo] = useState<ComplexityInfo>({
@@ -39,6 +41,7 @@ const LearningZone: React.FC = () => {
     fetchData();
   }, []);
 
+  // Function to fetch data
   const fetchData = () => {
     fetch(`src/components/AlgorithmDescriptions/Default Descriptions.txt`)
       .then((response) => response.text())
@@ -61,6 +64,7 @@ const LearningZone: React.FC = () => {
       .catch((err) => console.error(err));
   };
 
+  // Function to handle algorithm click
   const algorithmClickHandler = (algorithm: string) => {
     const filePath = `src/components/AlgorithmDescriptions/${algorithm}.txt`;
 

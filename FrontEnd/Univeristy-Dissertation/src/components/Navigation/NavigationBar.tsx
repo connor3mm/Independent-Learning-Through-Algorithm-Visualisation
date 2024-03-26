@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import "./NavigationBar.css";
 import LogoutAlerts from "../LogOutAlert/LogOutAlert";
 
+// Interface for NavigationBarProps
 interface NavigationBarProps {
   isLoggedIn: boolean;
   handleLogout: () => void;
 }
 
+// NavigationBar functional component
 const NavigationBar: React.FC<NavigationBarProps> = ({
   isLoggedIn,
   handleLogout,
 }) => {
+  // State for controlling logout alert dialog visibility
   const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
 
   const handleLogoutClick = () => {
@@ -27,6 +30,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     setIsLogoutAlertOpen(false);
   };
 
+  // Rendering NavigationBar component
   return (
     <nav>
       <ul className="navbar">

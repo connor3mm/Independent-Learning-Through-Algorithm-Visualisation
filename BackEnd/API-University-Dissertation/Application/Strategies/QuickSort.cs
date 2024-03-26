@@ -3,13 +3,17 @@ using API_University_Dissertation.Core.Data.Entities;
 
 namespace API_University_Dissertation.Application.Strategies
 {
+    /// <summary>
+    /// Represents a sorting strategy using the Quick Sort algorithm.
+    /// </summary>
     public class QuickSort : ISortingStrategy
     {
-        private static Random rand = new Random();
+        private static readonly Random Rand = new Random();
 
         public IEnumerable<SortablePair> Sort(int[] unsortedList)
         {
-            int[] arr = (int[])unsortedList.Clone();
+            //Initialise variables
+            var arr = (int[])unsortedList.Clone();
             var swaps = new List<SortablePair> { new SortablePair(0, 0, true) };
             QuickSortAlgorithm(arr, 0, arr.Length - 1, swaps);
 
@@ -20,10 +24,11 @@ namespace API_University_Dissertation.Application.Strategies
         {
             if (low < high)
             {
-                int randomIndex = rand.Next(low, high + 1);
+                // Choose a random pivot element
+                var randomIndex = Rand.Next(low, high + 1);
                 Swap(a, low, randomIndex, swaps);
 
-                int pivotIndex = Partition(a, low, high, swaps);
+                var pivotIndex = Partition(a, low, high, swaps);
 
                 QuickSortAlgorithm(a, low, pivotIndex - 1, swaps);
                 QuickSortAlgorithm(a, pivotIndex + 1, high, swaps);
@@ -32,10 +37,11 @@ namespace API_University_Dissertation.Application.Strategies
 
         private int Partition(int[] a, int low, int high, List<SortablePair> swaps)
         {
-            int pivot = a[low];
-            int k = low;
+            var pivot = a[low];
+            var k = low;
 
-            for (int i = low + 1; i <= high; i++)
+            // Rearrange elements around the pivot
+            for (var i = low + 1; i <= high; i++)
             {
                 if (a[i] < pivot)
                 {
@@ -51,17 +57,18 @@ namespace API_University_Dissertation.Application.Strategies
 
         private void Swap(int[] a, int i, int j, List<SortablePair> swaps)
         {
+            // Swap elements if they are not already in the correct position
             if (i != j)
             {
                 int temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
 
-                swaps.Add(new SortablePair(i, j, true));
+                swaps.Add(new SortablePair(i, j, true));// Indicate a swap
             }
             else
             {
-                swaps.Add(new SortablePair(i, j, false));
+                swaps.Add(new SortablePair(i, j, false));// Indicate a swap
             }
         }
     }

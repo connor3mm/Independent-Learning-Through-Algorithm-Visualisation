@@ -3,6 +3,7 @@ import "./ProgressionChart.css";
 import { useEffect, useState } from "react";
 import { lastFiveGamesStatistics } from "../../services/api/ApiEndpoints";
 
+// Interface defining the structure of LastFiveGames object
 interface LastFiveGames {
   id: number;
   score: number;
@@ -11,10 +12,12 @@ interface LastFiveGames {
 }
 
 const ProgressionChart = () => {
+  // State variable to store last five games data
   const [lastFiveGamesData, setLastFiveGamesData] = useState<LastFiveGames[]>(
     []
   );
 
+  // Fetching last five games data on component mount
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
 
@@ -30,6 +33,7 @@ const ProgressionChart = () => {
     }
   }, []);
 
+  // Extracting scores from lastFiveGamesData array
   const scoresArray = lastFiveGamesData.map((quiz) => quiz.score);
   const data = {
     labels: lastFiveGamesData.map(
@@ -49,6 +53,7 @@ const ProgressionChart = () => {
       },
     ],
   };
+  // Configuration object for chart options
   const options = {
     plugins: {
       legend: {
@@ -76,6 +81,7 @@ const ProgressionChart = () => {
       },
     },
   };
+  // Rendering the ProgressionChart component - Line chart From CHART.JS
   return (
     <div className="progressionLineChart">
       <Line data={data} options={options} />

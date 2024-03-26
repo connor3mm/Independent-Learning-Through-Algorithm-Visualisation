@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
+// Object containing available sorting algorithms
 const SortingAlgorithm = {
   bubbleSort: "Bubble Sort",
   selectionSort: "Selection Sort",
@@ -13,13 +14,16 @@ const SortingAlgorithm = {
   shellSort: "Shell Sort",
 };
 
+// AlgorithmSelectionMenu functional component
 const AlgorithmSelectionMenu = () => {
   const [selectedAlgorithm, setSelectedAlgorithm] = React.useState("");
 
+  // Function to handle change in selected algorithm
   const handleAlgorithmChange = (event: SelectChangeEvent) => {
     setSelectedAlgorithm(event.target.value as string);
   };
 
+  // Rendering AlgorithmSelectionMenu component
   return (
     <div>
       <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
